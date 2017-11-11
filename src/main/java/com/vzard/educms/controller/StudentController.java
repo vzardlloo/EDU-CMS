@@ -39,7 +39,7 @@ public ResponesModel<Student> getStudentByNumber(@ApiParam(name = "number")@Path
 
     Student student = studentService.getStudentByNumber(number);
 
-    return ResponesModel.builder().code().data(student).build();
+    return ResponesModel.builder().data(student).build();
 
 }
 
