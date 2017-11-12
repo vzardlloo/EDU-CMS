@@ -28,12 +28,13 @@ public class ErrorConstant {
     public static final int ERROR_CODE_FILE_SIZE_ERROR = 10014;
     public static final int ERROR_CODE_SERVER_ERROR = 10015;
     public static final int ERROR_CODE_TOKEN_ERROR = 10016;
-    public static final int ERROR_CODE_USER_REGISTER_ERROR = 10017;
+    public static final int ERROR_CODE_USER_EXIST_ERROR = 10017;
     public static final int ERROR_CODE_USER_PASSWORD_SHORT_ERROR = 10018;
     public static final int ERROR_CODE_NUMBER_FORMAT_ERROR = 10019;
     public static final int ERROR_CODE_COMMENT_EVENT_ERROR = 10020;
     public static final int ERROR_CODE_ARGUMENT_NOT_NULL = 10021;
     public static final int ERROR_CODE_POST_NOT_FOUND = 10022;
+    public static final int ERROR_CODE_USER_NAME_NOT_NULL = 10023;
     //错误消息
     public static final String ERROR_MSG_USER_NOT_FOUND = "找不到此用户.";
     public static final String ERROR_MSG_USER_INFO_NOT_NULL = "用户信息不能为空.";
@@ -57,8 +58,9 @@ public class ErrorConstant {
     public static final String ERROR_MSG_FILE_SIZE_ERROR = "单个文件大小不能超过2MB(多个文件总大小不能超过20MB).";
     public static final String ERROR_MSG_SERVER_ERROR = "服务出错.";
     public static final String ERROR_MSG_TOKEN_ERROR = "验证失败,请重新登录后执行此操作.";
-    public static final String ERROR_MSG_USER_REGISTER_ERROR = "用户名已被注册,请更换用户名后重新注册.";
+    public static final String ERROR_MSG_USER_EXIST_ERROR = "该用户已存在.";
     public static final String ERROR_MSG_USER_PASSWORD_SHORT_ERROR = "用户密码长度不能小于8位";
+    public static final String ERROR_MSG_USER_NAME_NOT_NULL = "用户名不能为空";
 
 
 

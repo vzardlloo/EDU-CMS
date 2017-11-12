@@ -28,6 +28,32 @@ public class StudentService {
         return StudentMapper.mapToDao(iStudent);
     }
 
+    public Student addStudentInfo(Student student){
+
+        IStudent s = studentRepository.addStudentInfo(student);
+        return StudentMapper.mapToDao(s);
+
+    }
+
+
+    public Student updataStudentInfo(Student student){
+
+        IStudent s = studentRepository.updateStudentInfo(student);
+
+        return StudentMapper.mapToDao(s);
+    }
+
+
+    public void deleteStudentInfo(String number){
+        studentRepository.deleteStudentInfo(number);
+    }
+
+
+    public Boolean isStudentExist(String number){
+        return studentRepository.isStudentExist(number);
+    }
+
+
 
 
 
