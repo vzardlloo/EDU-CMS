@@ -2,7 +2,10 @@ package com.vzard.educms.controller;
 
 import com.sun.deploy.net.HttpResponse;
 import com.sun.xml.internal.ws.client.ResponseContext;
+import com.vzard.educms.constant.ErrorConstant;
+import com.vzard.educms.constant.StatusConstant;
 import com.vzard.educms.database.tables.pojos.Student;
+import com.vzard.educms.error.EduErrorException;
 import com.vzard.educms.model.ResponesModel;
 import com.vzard.educms.service.StudentService;
 import io.swagger.annotations.Api;
@@ -38,8 +41,10 @@ public class StudentController {
 public ResponesModel<Student> getStudentByNumber(@ApiParam(name = "number")@PathVariable String number){
 
     Student student = studentService.getStudentByNumber(number);
+    if (null == student)
+        throw new EduErrorException(ErrorConstant.ERROR_MSG_USER_NOT_FOUND,ErrorConstant.ERROR_CODE_USER_NOT_FOUND);
 
-    return ResponesModel.builder().data(student).build();
+    return ResponesModel.builder().code(StatusConstant.STATUS_CODE_SUCCESS).message(StatusConstant.STATUS_INFO_SUCCESS).data(student).build();
 
 }
 

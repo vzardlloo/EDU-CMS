@@ -18,6 +18,10 @@ public class StudentMapper {
 
     public static Student mapToDao(IStudent iStudent){
 
+        if (null == iStudent){
+            return null;
+        }
+
         Student student = new Student();
 
         student.setName(iStudent.getName());
