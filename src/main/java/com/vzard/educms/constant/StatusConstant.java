@@ -1,6 +1,6 @@
 package com.vzard.educms.constant;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,15 +30,6 @@ public class StatusConstant {
     public static final String STATUS_INFO_FORBIDDEN = "禁止访问";
     public static final String STATUS_INFO_NOT_FOUND = "资源不存在";
     public static final String STATUS_INFO_SERVER_ERROR = "服务器内部错误";
-
-
-
-
-
-
-
-
-
 
 
 }

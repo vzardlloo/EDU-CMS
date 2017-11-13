@@ -63,6 +63,4 @@ public class ErrorConstant {
     public static final String ERROR_MSG_USER_NAME_NOT_NULL = "用户名不能为空";
 
 
-
-
 }

@@ -29,7 +29,4 @@ public class EnvironmentVariables {
     public String databasePassword;
 
 
-
-
-
 }
