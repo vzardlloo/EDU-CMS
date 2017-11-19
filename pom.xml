@@ -18,6 +18,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -32,6 +35,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-freemarker -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
+			<version>1.1.7.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -59,6 +69,15 @@
 			<version>2.0.2</version>
 		</dependency>
 
+		<!--jstl-->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
 		<!--database-->
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
@@ -72,16 +91,20 @@
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq-codegen</artifactId>
 			<version>3.8.2</version>
-		</dependency><dependency>
+		</dependency>
+
+		<dependency>
 		<groupId>mysql</groupId>
 		<artifactId>mysql-connector-java</artifactId>
 		<version>${mysql.version}</version>
 	</dependency>
+
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
 			<version>${jooq.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq-meta</artifactId>
