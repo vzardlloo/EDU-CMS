@@ -243,7 +243,7 @@
 <div id="myCarousel" class="carousel slide" style="margin-bottom: 0px">
     <div class="carousel-inner">
         <div class="item active">
-            <img src="../static/banner1.jpg" alt="">
+            <img src="/banner1.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Example headline.</h1>
@@ -253,7 +253,7 @@
             </div>
         </div>
         <div class="item">
-            <img src="../static/banner2.jpg" alt="">
+            <img src="/banner2.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Another example headline.</h1>
@@ -263,7 +263,7 @@
             </div>
         </div>
         <div class="item">
-            <img src="../static/banner3.jpg" alt="">
+            <img src="/banner3.jpg" alt="">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>One more for good measure.</h1>
@@ -279,7 +279,7 @@
 
 <div class="container" style="margin: 0px;margin-right: 0px;max-width: none">
     <div class="col-md-5 " style="padding: 0px">
-        <img src="../static/airplane.svg">
+        <img src="/airplane.svg">
     </div>
     <div class="col-md-7" style="padding: 0px">
         <div class="col-md-2"></div>
