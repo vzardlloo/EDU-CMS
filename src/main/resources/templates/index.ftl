@@ -276,7 +276,8 @@
     <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a-->
 </div><!-- /.carousel -->
 
-<div class="container" style="margin: 0px;margin-right: 0px;max-width: none">
+<div class="container-fluid" style="margin: 0px;margin-right: 0px;max-width: none">
+    <div class="row">
     <div class="col-md-5 " style="padding: 0px">
         <img src="/airplane.svg">
     </div>
@@ -287,6 +288,7 @@
             <p>welcome to my-cms,this a tiny cms which build by springboot/joop/bootstrap</p>
             <p>hava fun,I will make it prefect it soon :-)</p>
         </div>
+    </div>
     </div>
 </div>
 
