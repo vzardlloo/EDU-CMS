@@ -199,7 +199,6 @@
 
         }
 
-
     </style>
 
 
@@ -220,7 +219,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;EDU-CMS</a>
+                <a class="navbar-brand" href="#">&nbsp;&nbsp;&nbsp;MY-CMS</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -284,9 +283,9 @@
     <div class="col-md-7" style="padding: 0px">
         <div class="col-md-2"></div>
         <div class="col-md-10" style="padding: 25px">
-            <h1>ytryuetwtruewr</h1>
-            <p>sgadsajdjahdjhdjkdfdsf</p>
-            <p>sahdsjkhasjkdhasjkdhasjk</p>
+            <h1>MY-CMS</h1>
+            <p>welcome to my-cms,this a tiny cms which build by springboot/joop/bootstrap</p>
+            <p>hava fun,I will make it prefect it soon :-)</p>
         </div>
     </div>
 </div>
