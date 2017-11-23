@@ -13,6 +13,8 @@ public class EduErrorException extends RuntimeException{
 
     private Integer code;
 
+    public EduErrorException(String msg){}
+
     public EduErrorException(String msg,Integer code){
 
         super(msg);

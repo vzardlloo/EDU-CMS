@@ -88,6 +88,22 @@ public class StudentRepository {
 
     }
 
+    //根据学号和密码来查询学生是否存在
+    public IStudent findStudentByNumberAndPassWord(String num,String pwd){
+
+        return dsl.select()
+                .from(Tables.STUDENT)
+                .where(Tables.STUDENT.NUMBER.eq(num))
+                .and(Tables.STUDENT.PASSWORD.eq(pwd))
+                .fetchOneInto(IStudent.class);
+
+
+
+    }
+
+
+
+
 
 
     //判断学生是否存在

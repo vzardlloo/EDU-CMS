@@ -2,6 +2,10 @@ package com.vzard.educms.controller;
 
 
 import com.sun.org.apache.regexp.internal.RE;
+import com.vzard.educms.database.tables.pojos.Student;
+import com.vzard.educms.model.dto.LoginParam;
+import com.vzard.educms.model.dto.RegisterParam;
+import com.vzard.educms.service.AccountService;
 import com.vzard.educms.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -19,21 +24,48 @@ import java.util.Date;
 public class IndexController {
 
     @Autowired
-    StudentService studentService;
+    AccountService accountService;
 
-    @RequestMapping(value = "/home",method = RequestMethod.GET)
-    public String home(){
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public String home(RegisterParam param){
 
         return "home";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login(){
+    @RequestMapping(value = "login",method = RequestMethod.POST)
+    public ModelAndView login(LoginParam param){
+        ModelAndView modelAndView = new ModelAndView();
+        if (accountService.login(param)){
+            modelAndView.setViewName("home");
+            modelAndView.addObject("student",param);
+        }else {
+            modelAndView.setViewName("login");
+        }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "register",method = RequestMethod.POST)
+    public ModelAndView register(Student student){
+        ModelAndView modelAndView = new ModelAndView();
+        accountService.register(student);
+        if (accountService.isRegister(student.getNumber())){
+            modelAndView.setViewName("home");
+            modelAndView.addObject("student",student);
+        }else {
+            modelAndView.setViewName("login");
+        }
+
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/to-login",method = RequestMethod.GET)
+    public String toLogin(){
         return "login";
     }
 
-    @RequestMapping(value = "/register",method = RequestMethod.GET)
-    public String register(){
+    @RequestMapping(value = "/to-register",method = RequestMethod.GET)
+    public String toRegister(){
         return "register";
     }
 
@@ -43,6 +75,8 @@ public class IndexController {
 
         return "index";
     }
+
+
 
 
 

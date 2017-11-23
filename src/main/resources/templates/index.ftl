@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>AHUT</title>
+    <title>Index</title>
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -226,8 +226,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <div class="col-md-10">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/login">登录</a></li>
-                        <li><a href="/register">注册</a></li>
+                        <li><a href="/to-login">登录</a></li>
+                        <li><a href="/to-register">注册</a></li>
                     </ul>
                 </div>
                 <div class="col-md-2"></div>
