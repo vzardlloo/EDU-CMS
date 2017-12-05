@@ -6,11 +6,15 @@ import com.vzard.educms.database.tables.interfaces.ITeacher;
 import com.vzard.educms.database.tables.pojos.Teacher;
 import com.vzard.educms.error.EduErrorException;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.SelectConditionStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,11 +35,25 @@ public class TeacherRepository {
 
     Logger logger = LoggerFactory.getLogger(TeacherRepository.class);
 
-    public ITeacher findTeacherInfoByNumber(String number){
+    public ITeacher getTeacherInfoByNumber(String number){
 
         return dsl.select()
                 .from(Tables.TEACHER)
                 .where(Tables.TEACHER.NUMBER.eq(number)).fetchOneInto(ITeacher.class);
+
+    }
+
+
+    public List<ITeacher> getTeacherInfoByCourseNumber(String number,int limit){
+        SelectConditionStep<Record> step  = dsl.select()
+                .from(Tables.TEACHER)
+                .where(Tables.TEACHER.NUMBER.in(
+                        dsl.select(Tables.TEACHER_COURSE.TEACHER_NUMBER)
+                        .from(Tables.TEACHER_COURSE)
+                        .where(Tables.TEACHER_COURSE.COURSE_NUMBER.eq(number))
+                ));
+
+        return step.orderBy(Tables.TEACHER.NUMBER.desc()).limit(limit).fetchInto(ITeacher.class);
 
     }
 
@@ -53,7 +71,7 @@ public class TeacherRepository {
                         teacher.getPhoneNumber(),teacher.getTitle())
                 .execute();
 
-        return findTeacherInfoByNumber(teacher.getNumber());
+        return getTeacherInfoByNumber(teacher.getNumber());
 
     }
 
@@ -73,7 +91,7 @@ public class TeacherRepository {
                 .where(Tables.TEACHER.NUMBER.eq(teacher.getNumber()))
                 .execute();
 
-        return findTeacherInfoByNumber(teacher.getNumber());
+        return getTeacherInfoByNumber(teacher.getNumber());
 
     }
 
@@ -94,7 +112,7 @@ public class TeacherRepository {
 
 
     public Boolean isTeacherExist(String number){
-        if (null != findTeacherInfoByNumber(number)){
+        if (null != getTeacherInfoByNumber(number)){
             return true;
         }
 

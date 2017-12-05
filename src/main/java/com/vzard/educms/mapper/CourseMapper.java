@@ -25,6 +25,7 @@ public class CourseMapper {
         course.setName(iCourse.getName());
         course.setCredit(iCourse.getCredit());
         course.setPeried(iCourse.getPeried());
+        course.setTeacher(iCourse.getTeacher());
         course.setClassroom(iCourse.getClassroom());
         course.setCourseTime(iCourse.getCourseTime());
         course.setMaxChoosed(iCourse.getMaxChoosed());

@@ -1,11 +1,19 @@
 package com.vzard.educms.service;
 
+import com.vzard.educms.database.tables.interfaces.ICourse;
 import com.vzard.educms.database.tables.interfaces.IStudent;
+import com.vzard.educms.database.tables.pojos.Course;
 import com.vzard.educms.database.tables.pojos.Student;
+import com.vzard.educms.error.EduErrorException;
+import com.vzard.educms.mapper.CourseMapper;
 import com.vzard.educms.mapper.StudentMapper;
+import com.vzard.educms.repository.CourseRepository;
 import com.vzard.educms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +29,9 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    CourseRepository courseRepository;
+
 
     public Student getStudentByNumber(String number) {
 
@@ -33,6 +44,18 @@ public class StudentService {
         IStudent s = studentRepository.addStudentInfo(student);
         return StudentMapper.mapToDao(s);
 
+    }
+
+
+    public List<Course> getCourseRecordByStudentNumber(String number,int limit){
+
+        List<Course> courses = courseRepository.getCourseInfoByStudentNumber(number,limit)
+                .stream().map(t-> CourseMapper.mapToDao(t)).collect(Collectors.toList());
+        if (null != courses){
+            throw new EduErrorException("find nothing",400);
+        }
+
+        return courses;
     }
 
 

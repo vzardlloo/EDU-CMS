@@ -6,7 +6,9 @@ package com.vzard.educms.database;
 
 import com.vzard.educms.database.tables.Course;
 import com.vzard.educms.database.tables.Student;
+import com.vzard.educms.database.tables.StudentCourse;
 import com.vzard.educms.database.tables.Teacher;
+import com.vzard.educms.database.tables.TeacherCourse;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +34,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EduCms extends SchemaImpl {
 
-    private static final long serialVersionUID = 1383271970;
+    private static final long serialVersionUID = -1992041564;
 
     /**
      * The reference instance of <code>edu-cms</code>
@@ -50,9 +52,19 @@ public class EduCms extends SchemaImpl {
     public final Student STUDENT = com.vzard.educms.database.tables.Student.STUDENT;
 
     /**
+     * The table <code>edu-cms.student_course</code>.
+     */
+    public final StudentCourse STUDENT_COURSE = com.vzard.educms.database.tables.StudentCourse.STUDENT_COURSE;
+
+    /**
      * The table <code>edu-cms.teacher</code>.
      */
     public final Teacher TEACHER = com.vzard.educms.database.tables.Teacher.TEACHER;
+
+    /**
+     * The table <code>edu-cms.teacher_course</code>.
+     */
+    public final TeacherCourse TEACHER_COURSE = com.vzard.educms.database.tables.TeacherCourse.TEACHER_COURSE;
 
     /**
      * No further instances allowed
@@ -81,6 +93,8 @@ public class EduCms extends SchemaImpl {
         return Arrays.<Table<?>>asList(
             Course.COURSE,
             Student.STUDENT,
-            Teacher.TEACHER);
+            StudentCourse.STUDENT_COURSE,
+            Teacher.TEACHER,
+            TeacherCourse.TEACHER_COURSE);
     }
 }

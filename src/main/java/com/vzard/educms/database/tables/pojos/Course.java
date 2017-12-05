@@ -22,13 +22,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Course implements ICourse {
 
-    private static final long serialVersionUID = -542175226;
+    private static final long serialVersionUID = -1247258249;
 
     private String number;
     private String name;
     private String credit;
     private String peried;
     private String classroom;
+    private String teacher;
     private String courseTime;
     private String maxChoosed;
     private String hasChoosed;
@@ -44,6 +45,7 @@ public class Course implements ICourse {
         this.credit = value.credit;
         this.peried = value.peried;
         this.classroom = value.classroom;
+        this.teacher = value.teacher;
         this.courseTime = value.courseTime;
         this.maxChoosed = value.maxChoosed;
         this.hasChoosed = value.hasChoosed;
@@ -58,6 +60,7 @@ public class Course implements ICourse {
         String credit,
         String peried,
         String classroom,
+        String teacher,
         String courseTime,
         String maxChoosed,
         String hasChoosed,
@@ -70,6 +73,7 @@ public class Course implements ICourse {
         this.credit = credit;
         this.peried = peried;
         this.classroom = classroom;
+        this.teacher = teacher;
         this.courseTime = courseTime;
         this.maxChoosed = maxChoosed;
         this.hasChoosed = hasChoosed;
@@ -130,6 +134,17 @@ public class Course implements ICourse {
     @Override
     public Course setClassroom(String classroom) {
         this.classroom = classroom;
+        return this;
+    }
+
+    @Override
+    public String getTeacher() {
+        return this.teacher;
+    }
+
+    @Override
+    public Course setTeacher(String teacher) {
+        this.teacher = teacher;
         return this;
     }
 
@@ -208,6 +223,7 @@ public class Course implements ICourse {
         sb.append(", ").append(credit);
         sb.append(", ").append(peried);
         sb.append(", ").append(classroom);
+        sb.append(", ").append(teacher);
         sb.append(", ").append(courseTime);
         sb.append(", ").append(maxChoosed);
         sb.append(", ").append(hasChoosed);
@@ -233,6 +249,7 @@ public class Course implements ICourse {
         setCredit(from.getCredit());
         setPeried(from.getPeried());
         setClassroom(from.getClassroom());
+        setTeacher(from.getTeacher());
         setCourseTime(from.getCourseTime());
         setMaxChoosed(from.getMaxChoosed());
         setHasChoosed(from.getHasChoosed());

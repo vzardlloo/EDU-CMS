@@ -5,7 +5,11 @@ package com.vzard.educms.database.tables;
 
 
 import com.vzard.educms.database.EduCms;
+import com.vzard.educms.database.Keys;
 import com.vzard.educms.database.tables.records.CourseRecord;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Generated;
 
@@ -13,6 +17,7 @@ import org.jooq.Field;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
 
 
@@ -29,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Course extends TableImpl<CourseRecord> {
 
-    private static final long serialVersionUID = -610706695;
+    private static final long serialVersionUID = 2081205238;
 
     /**
      * The reference instance of <code>edu-cms.course</code>
@@ -47,7 +52,7 @@ public class Course extends TableImpl<CourseRecord> {
     /**
      * The column <code>edu-cms.course.number</code>. 课程号
      */
-    public final TableField<CourseRecord, String> NUMBER = createField("number", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "课程号");
+    public final TableField<CourseRecord, String> NUMBER = createField("number", org.jooq.impl.SQLDataType.VARCHAR.length(255).nullable(false), this, "课程号");
 
     /**
      * The column <code>edu-cms.course.name</code>. 课程名称
@@ -68,6 +73,11 @@ public class Course extends TableImpl<CourseRecord> {
      * The column <code>edu-cms.course.classroom</code>. 教室
      */
     public final TableField<CourseRecord, String> CLASSROOM = createField("classroom", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "教室");
+
+    /**
+     * The column <code>edu-cms.course.teacher</code>.
+     */
+    public final TableField<CourseRecord, String> TEACHER = createField("teacher", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "");
 
     /**
      * The column <code>edu-cms.course.course_time</code>. 上课时间
@@ -127,6 +137,22 @@ public class Course extends TableImpl<CourseRecord> {
     @Override
     public Schema getSchema() {
         return EduCms.EDU_CMS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UniqueKey<CourseRecord> getPrimaryKey() {
+        return Keys.KEY_COURSE_PRIMARY;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<UniqueKey<CourseRecord>> getKeys() {
+        return Arrays.<UniqueKey<CourseRecord>>asList(Keys.KEY_COURSE_PRIMARY);
     }
 
     /**

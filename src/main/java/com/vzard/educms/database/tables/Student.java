@@ -5,7 +5,11 @@ package com.vzard.educms.database.tables;
 
 
 import com.vzard.educms.database.EduCms;
+import com.vzard.educms.database.Keys;
 import com.vzard.educms.database.tables.records.StudentRecord;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Generated;
 
@@ -13,6 +17,7 @@ import org.jooq.Field;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.TableImpl;
 
 
@@ -29,7 +34,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = 1643797524;
+    private static final long serialVersionUID = 2035137366;
 
     /**
      * The reference instance of <code>edu-cms.student</code>
@@ -47,7 +52,7 @@ public class Student extends TableImpl<StudentRecord> {
     /**
      * The column <code>edu-cms.student.number</code>. 学号
      */
-    public final TableField<StudentRecord, String> NUMBER = createField("number", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "学号");
+    public final TableField<StudentRecord, String> NUMBER = createField("number", org.jooq.impl.SQLDataType.VARCHAR.length(255).nullable(false), this, "学号");
 
     /**
      * The column <code>edu-cms.student.name</code>. 姓名
@@ -107,6 +112,22 @@ public class Student extends TableImpl<StudentRecord> {
     @Override
     public Schema getSchema() {
         return EduCms.EDU_CMS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UniqueKey<StudentRecord> getPrimaryKey() {
+        return Keys.KEY_STUDENT_PRIMARY;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<UniqueKey<StudentRecord>> getKeys() {
+        return Arrays.<UniqueKey<StudentRecord>>asList(Keys.KEY_STUDENT_PRIMARY);
     }
 
     /**

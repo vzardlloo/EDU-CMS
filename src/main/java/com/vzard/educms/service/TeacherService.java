@@ -23,7 +23,7 @@ public class TeacherService {
 
     public Teacher getTeacherInfoByNumber(String number){
 
-        ITeacher iTeacher = teacherRepository.findTeacherInfoByNumber(number);
+        ITeacher iTeacher = teacherRepository.getTeacherInfoByNumber(number);
 
         return TeacherMapper.mapToDao(iTeacher);
     }

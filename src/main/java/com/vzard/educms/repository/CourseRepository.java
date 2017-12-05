@@ -5,16 +5,19 @@ import com.vzard.educms.database.Tables;
 
 
 import com.vzard.educms.database.tables.interfaces.ICourse;
-import com.vzard.educms.database.tables.interfaces.ITeacher;
 
 import com.vzard.educms.database.tables.pojos.Course;
 import com.vzard.educms.error.EduErrorException;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.SelectConditionStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,12 +37,22 @@ public class CourseRepository {
 
     Logger logger = LoggerFactory.getLogger(CourseRepository.class);
 
-    public ICourse findCourseInfoByNumber(String number){
+    public ICourse getCourseInfoByNumber(String number){
 
         return dsl.select()
                 .from(Tables.COURSE)
                 .where(Tables.COURSE.NUMBER.eq(number)).fetchOneInto(ICourse.class);
 
+    }
+
+    public List<ICourse> getCourseInfoByStudentNumber(String number,int limit){
+
+        SelectConditionStep<Record> step =  dsl.select()
+                .from(Tables.COURSE)
+                .where(Tables.COURSE.NUMBER.in(
+                        dsl.select(Tables.STUDENT_COURSE.COURSE_NUMBER).from(Tables.STUDENT)
+                            .where(Tables.STUDENT.NUMBER.eq(number))));
+        return step.orderBy(Tables.COURSE.NUMBER.desc()).limit(limit).fetchInto(ICourse.class);
     }
 
 
@@ -60,7 +73,7 @@ public class CourseRepository {
                         course.getPacificGrade(),course.getGeneralGrade())
                 .execute();
 
-        return findCourseInfoByNumber(course.getNumber());
+        return getCourseInfoByNumber(course.getNumber());
 
     }
 
@@ -85,7 +98,7 @@ public class CourseRepository {
                 .where(Tables.TEACHER.NUMBER.eq(course.getNumber()))
                 .execute();
 
-        return findCourseInfoByNumber(course.getNumber());
+        return getCourseInfoByNumber(course.getNumber());
 
     }
 
@@ -106,7 +119,7 @@ public class CourseRepository {
 
 
     public Boolean isCourseExist(String number){
-        if (null != findCourseInfoByNumber(number)){
+        if (null != getCourseInfoByNumber(number)){
             return true;
         }
 

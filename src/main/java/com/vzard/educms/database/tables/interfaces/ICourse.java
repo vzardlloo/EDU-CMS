@@ -73,6 +73,16 @@ public interface ICourse extends Serializable {
     public String getClassroom();
 
     /**
+     * Setter for <code>edu-cms.course.teacher</code>.
+     */
+    public ICourse setTeacher(String value);
+
+    /**
+     * Getter for <code>edu-cms.course.teacher</code>.
+     */
+    public String getTeacher();
+
+    /**
      * Setter for <code>edu-cms.course.course_time</code>. 上课时间
      */
     public ICourse setCourseTime(String value);

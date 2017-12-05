@@ -37,16 +37,22 @@
         function check() {
            var password = document.getElementById("password");
            var passwordAg = document.getElementById("passwordagain");
+           var userName = document.getElementById("userName");
+           var number = document.getElementById("number");
            if (password != passwordAg) {
-                alert("两次密码输入不一致!")
+                alert("两次密码输入不一致!");
            }
+           if (password.length < 6){
+               alert("密码长度至少六位!");
+           }
+           if(userName.length < 4){
+               alert("用户名长度至少4位！");
+           }
+           if(number.length < 6){
+               alert("学号输入有误！");
+           }
+
         }
-
-
-
-
-
-
 
 
     </script>
@@ -85,11 +91,11 @@
                         <form role="form" id="register-form" action="register" method="post" class="login-form">
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Number</label>
-                                <input name="number" type="text"  placeholder="Number..." class="form-username form-control" id="form-username">
+                                <input name="number" type="text" id="number" placeholder="Number..." class="form-username form-control" id="form-username">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Username</label>
-                                <input name="name" type="text"  placeholder="Name..." class="form-username form-control" id="form-username">
+                                <input name="name" type="text" id="userName" placeholder="Name..." class="form-username form-control" id="form-username">
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-password">Password</label>

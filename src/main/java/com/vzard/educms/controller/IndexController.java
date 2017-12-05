@@ -7,6 +7,7 @@ import com.vzard.educms.model.dto.LoginParam;
 import com.vzard.educms.model.dto.RegisterParam;
 import com.vzard.educms.service.AccountService;
 import com.vzard.educms.service.StudentService;
+import com.vzard.educms.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -33,11 +35,12 @@ public class IndexController {
     }
 
     @RequestMapping(value = "login",method = RequestMethod.POST)
-    public ModelAndView login(LoginParam param){
+    public ModelAndView login(HttpServletRequest request,LoginParam param){
         ModelAndView modelAndView = new ModelAndView();
         if (accountService.login(param)){
             modelAndView.setViewName("home");
             modelAndView.addObject("student",param);
+            SessionUtil.setSession(request,param);
         }else {
             modelAndView.setViewName("login");
         }
@@ -45,12 +48,13 @@ public class IndexController {
     }
 
     @RequestMapping(value = "register",method = RequestMethod.POST)
-    public ModelAndView register(Student student){
+    public ModelAndView register(HttpServletRequest request,Student student){
         ModelAndView modelAndView = new ModelAndView();
         accountService.register(student);
         if (accountService.isRegister(student.getNumber())){
             modelAndView.setViewName("home");
             modelAndView.addObject("student",student);
+            SessionUtil.setSession(request,student);
         }else {
             modelAndView.setViewName("login");
         }

@@ -6,7 +6,9 @@ package com.vzard.educms.database;
 
 import com.vzard.educms.database.tables.Course;
 import com.vzard.educms.database.tables.Student;
+import com.vzard.educms.database.tables.StudentCourse;
 import com.vzard.educms.database.tables.Teacher;
+import com.vzard.educms.database.tables.TeacherCourse;
 
 import javax.annotation.Generated;
 
@@ -35,7 +37,17 @@ public class Tables {
     public static final Student STUDENT = com.vzard.educms.database.tables.Student.STUDENT;
 
     /**
+     * The table <code>edu-cms.student_course</code>.
+     */
+    public static final StudentCourse STUDENT_COURSE = com.vzard.educms.database.tables.StudentCourse.STUDENT_COURSE;
+
+    /**
      * The table <code>edu-cms.teacher</code>.
      */
     public static final Teacher TEACHER = com.vzard.educms.database.tables.Teacher.TEACHER;
+
+    /**
+     * The table <code>edu-cms.teacher_course</code>.
+     */
+    public static final TeacherCourse TEACHER_COURSE = com.vzard.educms.database.tables.TeacherCourse.TEACHER_COURSE;
 }

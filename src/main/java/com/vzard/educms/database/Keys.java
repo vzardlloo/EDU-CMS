@@ -4,7 +4,19 @@
 package com.vzard.educms.database;
 
 
+import com.vzard.educms.database.tables.Course;
+import com.vzard.educms.database.tables.Student;
+import com.vzard.educms.database.tables.StudentCourse;
+import com.vzard.educms.database.tables.TeacherCourse;
+import com.vzard.educms.database.tables.records.CourseRecord;
+import com.vzard.educms.database.tables.records.StudentCourseRecord;
+import com.vzard.educms.database.tables.records.StudentRecord;
+import com.vzard.educms.database.tables.records.TeacherCourseRecord;
+
 import javax.annotation.Generated;
+
+import org.jooq.UniqueKey;
+import org.jooq.impl.AbstractKeys;
 
 
 /**
@@ -30,6 +42,10 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = UniqueKeys0.KEY_COURSE_PRIMARY;
+    public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
+    public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = UniqueKeys0.KEY_STUDENT_COURSE_PRIMARY;
+    public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_PRIMARY = UniqueKeys0.KEY_TEACHER_COURSE_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -39,4 +55,11 @@ public class Keys {
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
+
+    private static class UniqueKeys0 extends AbstractKeys {
+        public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = createUniqueKey(Course.COURSE, "KEY_course_PRIMARY", Course.COURSE.NUMBER);
+        public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.NUMBER);
+        public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = createUniqueKey(StudentCourse.STUDENT_COURSE, "KEY_student_course_PRIMARY", StudentCourse.STUDENT_COURSE.ID);
+        public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_PRIMARY = createUniqueKey(TeacherCourse.TEACHER_COURSE, "KEY_teacher_course_PRIMARY", TeacherCourse.TEACHER_COURSE.ID);
+    }
 }
