@@ -141,8 +141,8 @@
             </div>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                你的账号
+            <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown" id="userName">
+                ${student.name}
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
@@ -267,7 +267,10 @@
 
     <script type="text/javascript">
 
+
+
         $(document).ready(function() {
+
             $('#example').DataTable({
                 "ajax": {
                     "url":"http://localhost:8009/student/${student.number}/course",

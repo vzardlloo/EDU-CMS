@@ -27,15 +27,18 @@ public class IndexController {
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    StudentService studentService;
 
 
 
     @RequestMapping(value = "login",method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request,LoginParam param){
         ModelAndView modelAndView = new ModelAndView();
+        Student student = studentService.getStudentByNumber(param.getNumber());
         if (accountService.login(param)){
             modelAndView.setViewName("home");
-            modelAndView.addObject("student",param);
+            modelAndView.addObject("student",student);
             SessionUtil.setSession(request,param);
         }else {
             modelAndView.setViewName("login");
