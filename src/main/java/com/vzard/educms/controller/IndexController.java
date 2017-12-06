@@ -28,11 +28,7 @@ public class IndexController {
     @Autowired
     AccountService accountService;
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
-    public String home(RegisterParam param){
 
-        return "home";
-    }
 
     @RequestMapping(value = "login",method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request,LoginParam param){

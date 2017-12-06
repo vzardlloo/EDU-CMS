@@ -3,6 +3,7 @@ package com.vzard.educms.controller;
 
 import com.vzard.educms.constant.ErrorConstant;
 import com.vzard.educms.constant.StatusConstant;
+import com.vzard.educms.database.tables.pojos.Course;
 import com.vzard.educms.database.tables.pojos.Student;
 import com.vzard.educms.error.EduErrorException;
 import com.vzard.educms.model.ResponesModel;
@@ -15,6 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -33,6 +36,18 @@ public class StudentController {
     StudentService studentService;
 
     Logger logger = LoggerFactory.getLogger(StudentController.class);
+
+    @ApiOperation(value = "根据学号获取课程信息")
+    @RequestMapping(value = "student/{number}/course",method = RequestMethod.GET)
+    public ResponesModel<List<Course>> getCourseRecordByStudentNumber(@PathVariable(value = "number") String number){
+        List<Course> courseList = studentService.getCourseRecordByStudentNumber(number);
+        if (null == courseList){
+            throw new EduErrorException(ErrorConstant.ERROR_MSG_USER_NOT_FOUND, ErrorConstant.ERROR_CODE_USER_NOT_FOUND);
+        }
+
+        return ResponesModel.builder().code(StatusConstant.STATUS_CODE_SUCCESS).message(StatusConstant.STATUS_INFO_SUCCESS).data(courseList).build();
+
+    }
 
     @ApiOperation(value = "根据学号获取学生信息")
     @RequestMapping(value = "student/{number}", method = RequestMethod.GET)

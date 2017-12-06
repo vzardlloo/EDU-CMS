@@ -45,14 +45,15 @@ public class CourseRepository {
 
     }
 
-    public List<ICourse> getCourseInfoByStudentNumber(String number,int limit){
+    public List<ICourse> getCourseInfoByStudentNumber(String number){
+        logger.info("repository...");
 
         SelectConditionStep<Record> step =  dsl.select()
                 .from(Tables.COURSE)
                 .where(Tables.COURSE.NUMBER.in(
-                        dsl.select(Tables.STUDENT_COURSE.COURSE_NUMBER).from(Tables.STUDENT)
-                            .where(Tables.STUDENT.NUMBER.eq(number))));
-        return step.orderBy(Tables.COURSE.NUMBER.desc()).limit(limit).fetchInto(ICourse.class);
+                        dsl.select(Tables.STUDENT_COURSE.COURSE_NUMBER).from(Tables.STUDENT_COURSE)
+                            .where(Tables.STUDENT_COURSE.STUDENT_NUMBER.eq(number))));
+        return step.orderBy(Tables.COURSE.NUMBER.desc()).fetchInto(ICourse.class);
     }
 
 
@@ -125,6 +126,9 @@ public class CourseRepository {
 
         return false;
     }
+
+
+
 
 
 }

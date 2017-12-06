@@ -30,7 +30,7 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -198,70 +198,7 @@
                 <li><a href="user-profile.html">用户资料</a></li>
             </ul>
         </li>
-        <!--li>
-            <a class="dropdown-toggle" href="#">
-                <i class="icon-edit"></i>
-                <span>表单</span>
-                <i class="icon-chevron-down"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="form-showcase.html">表单应用</a></li>
-                <li><a href="form-wizard.html">表单验证</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="gallery.html">
-                <i class="icon-picture"></i>
-                <span>相册</span>
-            </a>
-        </li>
-        <li>
-            <a href="calendar.html">
-                <i class="icon-calendar-empty"></i>
-                <span>日历</span>
-            </a>
-        </li-->
-        <!--li>
-            <a class="dropdown-toggle" href="tables.html">
-                <i class="icon-th-large"></i>
-                <span>表格</span>
-                <i class="icon-chevron-down"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="tables.html">常用表格</a></li>
-                <li><a href="datatables.html">数据表格</a></li>
-            </ul>
-        </li>
-        <li>
-            <a class="dropdown-toggle ui-elements" href="#">
-                <i class="icon-code-fork"></i>
-                <span>UI 组件</span>
-                <i class="icon-chevron-down"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="ui-elements.html">UI 组件</a></li>
-                <li><a href="icons.html">Icons图标</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="personal-info.html">
-                <i class="icon-cog"></i>
-                <span>我的信息</span>
-            </a>
-        </li>
-        <li>
-            <a class="dropdown-toggle" href="#">
-                <i class="icon-share-alt"></i>
-                <span>其他</span>
-                <i class="icon-chevron-down"></i>
-            </a>
-            <ul class="submenu">
-                <li><a href="code-editor.html">代码编辑器</a></li>
-                <li><a href="grids.html">网格</a></li>
-                <li><a href="signin.html">登录</a></li>
-                <li><a href="signup.html">注册</a></li>
-            </ul>
-        </li-->
+
     </ul>
 </div>
 <!-- end sidebar -->
@@ -283,353 +220,30 @@
     <div class="container">
         <h2>我的课程信息</h2>
         <p></p>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Age</th>
-                    <th>City</th>
-                    <th>Country</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Anna</td>
-                    <td>Pitt</td>
-                    <td>35</td>
-                    <td>New York</td>
-                    <td>USA</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
     </div>
 
 
     <div  class="container">
-        <button id="ajax" class="btn btn-info" onclick="test()">获取</button>
-    </div>
-    <p id="test"></p>
-    <p id="test2"></p>
-    <p id="test3"></p>
-
-    <table id="tb_report">
+        <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th colspan="4" data-valign="middle" data-align="center">第一季度</th>
-            <th colspan="4" data-valign="middle" data-align="center">第二季度</th>
-            <th colspan="4" data-valign="middle" data-align="center">第三季度</th>
-            <th colspan="4" data-valign="middle" data-align="center">第四季度</th>
-            <th data-field="TotalCount" rowspan="2" data-valign="middle" data-align="center">年度汇总</th>
-        </tr>
-        <tr>
-            <th data-field="JanCount" data-align="center">一月</th>
-            <th data-field="FebCount" data-align="center">二月</th>
-            <th data-field="MarCount" data-align="center">三月</th>
-            <th data-field="FirstQuarter" data-align="center">第一季度</th>
-
-            <th data-field="AprCount" data-align="center">四月</th>
-            <th data-field="MayCount" data-align="center">五月</th>
-            <th data-field="JunCount" data-align="center">六月</th>
-            <th data-field="SecondQuarter" data-align="center">第二季度</th>
-
-            <th data-field="JulCount" data-align="center">七月</th>
-            <th data-field="AguCount" data-align="center">八月</th>
-            <th data-field="SepCount" data-align="center">九月</th>
-            <th data-field="ThirdQuarter" data-align="center">第三季度</th>
-
-            <th data-field="OctCount" data-align="center">十月</th>
-            <th data-field="NovCount" data-align="center">十一月</th>
-            <th data-field="DecCount" data-align="center">十二月</th>
-            <th data-field="ForthQuarter" data-align="center">第四季度</th>
-
+            <th>课程号</th>
+            <th>课程名称</th>
+            <th>学分</th>
+            <th>结课时间</th>
+            <th>上课教室</th>
+            <th>任课教师</th>
+            <th>上课时间</th>
+            <th>卷面成绩</th>
+            <th>平时成绩</th>
+            <th>总评成绩</th>
         </tr>
         </thead>
+
     </table>
-
-    <!-- upper main stats -->
-    <!--div id="main-stats">
-        <div class="row stats-row">
-            <div class="col-md-3 col-sm-3 stat">
-                <div class="data">
-                    <span class="number">2457</span>
-                    访问
-                </div>
-                <span class="date">今天</span>
-            </div>
-            <div class="col-md-3 col-sm-3 stat">
-                <div class="data">
-                    <span class="number">3240</span>
-                    用户
-                </div>
-                <span class="date">2013年11月</span>
-            </div>
-            <div class="col-md-3 col-sm-3 stat">
-                <div class="data">
-                    <span class="number">322</span>
-                    订单
-                </div>
-                <span class="date">本周</span>
-            </div>
-            <div class="col-md-3 col-sm-3 stat last">
-                <div class="data">
-                    <span class="number">$2,340</span>
-                    销售金额
-                </div>
-                <span class="date">最近30天</span>
-            </div>
-        </div>
     </div>
-    <!-- end upper main stats -->
 
-    <div id="pad-wrapper">
-
-        <!-- statistics chart built with jQuery Flot -->
-        <!--div class="row chart">
-            <div class="col-md-12">
-                <h4 class="clearfix">
-                    Statistics
-                    <div class="btn-group pull-right">
-                        <button class="glow left">日</button>
-                        <button class="glow middle active">月</button>
-                        <button class="glow right">年</button>
-                    </div>
-                </h4>
-            </div>
-            <div class="col-md-12">
-                <div id="statsChart"></div>
-            </div>
-        </div>
-        <!-- end statistics chart -->
-
-        <!-- UI Elements section -->
-        <!-div class="row section ui-elements">
-            <!--div class="col-md-12">
-                <h4>UI Elements</h4>
-            </div>
-            <div class="col-md-5 knobs">
-                <div class="knob-wrapper">
-                    <input type="text" value="50" class="knob" data-thickness=".3" data-inputColor="#333" data-fgColor="#30a1ec" data-bgColor="#d4ecfd" data-width="150">
-                    <div class="info">
-                        <div class="param">
-                            <span class="line blue"></span>
-                            Active users
-                        </div>
-                    </div>
-                </div>
-                <div class="knob-wrapper">
-                    <input type="text" value="75" class="knob second" data-thickness=".3" data-inputColor="#333" data-fgColor="#3d88ba" data-bgColor="#d4ecfd" data-width="150">
-                    <div class="info">
-                        <div class="param">
-                            <span class="line blue"></span>
-                            % disk space usage
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 showcase">
-                <div class="ui-sliders">
-                    <div class="slider slider-sample1 vertical-handler"></div>
-                    <div class="slider slider-sample2"></div>
-                    <div class="slider slider-sample3"></div>
-                </div>
-                <div class="ui-group">
-                    <a class="btn-flat inverse">Large Button</a>
-                    <a class="btn-flat gray">Large Button</a>
-                    <a class="btn-flat default">Large Button</a>
-                    <a class="btn-flat primary">Large Button</a>
-                </div>
-
-                <div class="ui-group">
-                    <a class="btn-flat icon">
-                        <i class="tool"></i> Icon button
-                    </a>
-                    <a class="btn-glow small inverse">
-                        <i class="shuffle"></i>
-                    </a>
-                    <a class="btn-glow small primary">
-                        <i class="setting"></i>
-                    </a>
-                    <a class="btn-glow small default">
-                        <i class="attach"></i>
-                    </a>
-                    <div class="ui-select">
-                        <select>
-                            <option selected>Dropdown</option>
-                            <option>Custom selects</option>
-                            <option>Pure css styles</option>
-                        </select>
-                    </div>
-
-                    <div class="btn-group">
-                        <button class="glow left">LEFT</button>
-                        <button class="glow right">RIGHT</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end UI elements section -->
-
-        <!-- table sample -->
-        <!-- the script for the toggle all checkboxes from header is located in js/theme.js -->
-        <!--div class="table-products section">
-            <div class="row head">
-                <div class="col-md-12">
-                    <h4>Products <small>Table sample</small></h4>
-                </div>
-            </div>
-
-            <div class="row filter-block">
-                <div class="col-md-8 col-md-offset-5">
-                    <div class="ui-select">
-                        <select>
-                            <option>Filter users</option>
-                            <option>Signed last 30 days</option>
-                            <option>Active users</option>
-                        </select>
-                    </div>
-                    <input type="text" class="search">
-                    <a class="btn-flat new-product">+ Add product</a>
-                </div>
-            </div>
-
-            <div class="row">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th class="col-md-3">
-                            <input type="checkbox">
-                            Product
-                        </th>
-                        <th class="col-md-3">
-                            <span class="line"></span>Description
-                        </th>
-                        <th class="col-md-3">
-                            <span class="line"></span>Status
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- row -->
-                    <!--tr class="first">
-                        <td>
-                            <input type="checkbox">
-                            <div class="img">
-                                <img src="img/table-img.png">
-                            </div>
-                            <a href="#">There are many variations </a>
-                        </td>
-                        <td class="description">
-                            if you are going to use a passage of Lorem Ipsum.
-                        </td>
-                        <td>
-                            <span class="label label-success">Active</span>
-                            <ul class="actions">
-                                <li><i class="table-edit"></i></span></li>
-                                <li><i class="table-settings"></i></li>
-                                <li class="last"><i class="table-delete"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <!-- row -->
-                    <!--tr>
-                        <td>
-                            <input type="checkbox">
-                            <div class="img">
-                                <img src="img/main/table-img.png">
-                            </div>
-                            <a href="#">Internet tend</a>
-                        </td>
-                        <td class="description">
-                            There are many variations of passages.
-                        </td>
-                        <td>
-                            <ul class="actions">
-                                <li><i class="table-edit"></i></span></li>
-                                <li><i class="table-settings"></i></li>
-                                <li class="last"><i class="table-delete"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <!-- row -->
-                    <!--tr>
-                        <td>
-                            <input type="checkbox">
-                            <div class="img">
-                                <img src="img/main/table-img.png">
-                            </div>
-                            <a href="#">Many desktop publishing </a>
-                        </td>
-                        <td class="description">
-                            if you are going to use a passage of Lorem Ipsum.
-                        </td>
-                        <td>
-                            <ul class="actions">
-                                <li><i class="table-edit"></i></span></li>
-                                <li><i class="table-settings"></i></li>
-                                <li class="last"><i class="table-delete"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <!-- row -->
-                    <!--tr>
-                        <td>
-                            <input type="checkbox">
-                            <div class="img">
-                                <img src="img/main/table-img.png">
-                            </div>
-                            <a href="#">Generate Lorem </a>
-                        </td>
-                        <td class="description">
-                            There are many variations of passages.
-                        </td>
-                        <td>
-                            <span class="label label-info">Standby</span>
-                            <ul class="actions">
-                                <li><i class="table-edit"></i></span></li>
-                                <li><i class="table-settings"></i></li>
-                                <li class="last"><i class="table-delete"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <!-- row -->
-                    <!--tr>
-                        <td>
-                            <input type="checkbox">
-                            <div class="img">
-                                <img src="img/main/table-img.png">
-                            </div>
-                            <a href="#">Internet tend</a>
-                        </td>
-                        <td class="description">
-                            There are many variations of passages.
-                        </td>
-                        <td>
-                            <ul class="actions">
-                                <li><i class="table-edit"></i></span></li>
-                                <li><i class="table-settings"></i></li>
-                                <li class="last"><i class="table-delete"></i></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <ul class="pagination">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">&raquo;</a></li>
-            </ul>
-        </div>
-        <!-- end table sample -->
-    </div>
 </div>
 
 
@@ -637,7 +251,6 @@
 
     <!-- scripts -->
 <!-- Latest compiled and minified JavaScript -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
 <!-- Latest compiled and minified Locales -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -650,24 +263,33 @@
     <script src="/js/main/jquery.flot.js"></script>
     <script src="/js/main/jquery.flot.stack.js"></script>
     <script src="/js/main/jquery.flot.resize.js"></script>
-
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
 
-        $('#tb_report').bootstrapTable({
-            url: '/GroupColumns/GetReport',         //请求后台的URL（*）
-            method: 'get',                      //请求方式（*）
-            toolbar: '#toolbar',                //工具按钮用哪个容器
-            striped: true,                      //是否显示行间隔色
-            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-            pagination: true,                   //是否显示分页（*）
-            sortOrder: "asc",                   //排序方式
-            queryParams: oTableInit.queryParams,//传递参数（*）
-            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
-            pageNumber: 1,                       //初始化加载第一页，默认第一页
-            pageSize: 10,                       //每页的记录行数（*）
-            pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+        $(document).ready(function() {
+            $('#example').DataTable({
+                "ajax": {
+                    "url":"http://localhost:8009/student/${student.number}/course",
+                    "type":"GET"
+                },
+                "columns": [
+                    { "data": "number" },
+                    { "data": "name" },
+                    { "data": "credit" },
+                    { "data": "peried" },
+                    { "data": "classroom" },
+                    { "data": "teacher" },
+                    { "data": "courseTime" },
+                    { "data": "grade" },
+                    { "data": "pacificGrade" },
+                    { "data": "generalGrade" }
+
+                ]
+            });
         });
+
+
 
         function test() {
             $.ajax({

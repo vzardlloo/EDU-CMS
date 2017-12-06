@@ -47,11 +47,11 @@ public class StudentService {
     }
 
 
-    public List<Course> getCourseRecordByStudentNumber(String number,int limit){
+    public List<Course> getCourseRecordByStudentNumber(String number){
 
-        List<Course> courses = courseRepository.getCourseInfoByStudentNumber(number,limit)
+        List<Course> courses = courseRepository.getCourseInfoByStudentNumber(number)
                 .stream().map(t-> CourseMapper.mapToDao(t)).collect(Collectors.toList());
-        if (null != courses){
+        if (null == courses){
             throw new EduErrorException("find nothing",400);
         }
 
