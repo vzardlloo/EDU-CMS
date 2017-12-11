@@ -24,14 +24,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements IStudent {
 
-    private static final long serialVersionUID = 1020979536;
+    private static final long serialVersionUID = 1488324672;
 
     private Long      number;
     private String    name;
     private String    password;
     private String    gender;
     private Timestamp birthday;
-    private String    class_;
+    private String    clbum;
     private String    academy;
     private Timestamp createdAt;
     private Timestamp updatedAt;
@@ -44,7 +44,7 @@ public class Student implements IStudent {
         this.password = value.password;
         this.gender = value.gender;
         this.birthday = value.birthday;
-        this.class_ = value.class_;
+        this.clbum = value.clbum;
         this.academy = value.academy;
         this.createdAt = value.createdAt;
         this.updatedAt = value.updatedAt;
@@ -56,7 +56,7 @@ public class Student implements IStudent {
         String    password,
         String    gender,
         Timestamp birthday,
-        String    class_,
+        String    clbum,
         String    academy,
         Timestamp createdAt,
         Timestamp updatedAt
@@ -66,7 +66,7 @@ public class Student implements IStudent {
         this.password = password;
         this.gender = gender;
         this.birthday = birthday;
-        this.class_ = class_;
+        this.clbum = clbum;
         this.academy = academy;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -128,13 +128,13 @@ public class Student implements IStudent {
     }
 
     @Override
-    public String getClass_() {
-        return this.class_;
+    public String getClbum() {
+        return this.clbum;
     }
 
     @Override
-    public Student setClass_(String class_) {
-        this.class_ = class_;
+    public Student setClbum(String clbum) {
+        this.clbum = clbum;
         return this;
     }
 
@@ -180,7 +180,7 @@ public class Student implements IStudent {
         sb.append(", ").append(password);
         sb.append(", ").append(gender);
         sb.append(", ").append(birthday);
-        sb.append(", ").append(class_);
+        sb.append(", ").append(clbum);
         sb.append(", ").append(academy);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(updatedAt);
@@ -203,7 +203,7 @@ public class Student implements IStudent {
         setPassword(from.getPassword());
         setGender(from.getGender());
         setBirthday(from.getBirthday());
-        setClass_(from.getClass_());
+        setClbum(from.getClbum());
         setAcademy(from.getAcademy());
         setCreatedAt(from.getCreatedAt());
         setUpdatedAt(from.getUpdatedAt());

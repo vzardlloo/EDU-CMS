@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements Record9<Long, String, String, String, Timestamp, String, String, Timestamp, Timestamp>, IStudent {
 
-    private static final long serialVersionUID = -1799531526;
+    private static final long serialVersionUID = -854959875;
 
     /**
      * Setter for <code>my-cms.student.number</code>. 学号
@@ -119,19 +119,19 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
     }
 
     /**
-     * Setter for <code>my-cms.student.class</code>. 所在班级
+     * Setter for <code>my-cms.student.clbum</code>. 所在班级
      */
     @Override
-    public StudentRecord setClass_(String value) {
+    public StudentRecord setClbum(String value) {
         set(5, value);
         return this;
     }
 
     /**
-     * Getter for <code>my-cms.student.class</code>. 所在班级
+     * Getter for <code>my-cms.student.clbum</code>. 所在班级
      */
     @Override
-    public String getClass_() {
+    public String getClbum() {
         return (String) get(5);
     }
 
@@ -263,7 +263,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
      */
     @Override
     public Field<String> field6() {
-        return Student.STUDENT.CLASS;
+        return Student.STUDENT.CLBUM;
     }
 
     /**
@@ -335,7 +335,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
      */
     @Override
     public String value6() {
-        return getClass_();
+        return getClbum();
     }
 
     /**
@@ -412,7 +412,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
      */
     @Override
     public StudentRecord value6(String value) {
-        setClass_(value);
+        setClbum(value);
         return this;
     }
 
@@ -474,7 +474,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
         setPassword(from.getPassword());
         setGender(from.getGender());
         setBirthday(from.getBirthday());
-        setClass_(from.getClass_());
+        setClbum(from.getClbum());
         setAcademy(from.getAcademy());
         setCreatedAt(from.getCreatedAt());
         setUpdatedAt(from.getUpdatedAt());
@@ -503,7 +503,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
     /**
      * Create a detached, initialised StudentRecord
      */
-    public StudentRecord(Long number, String name, String password, String gender, Timestamp birthday, String class_, String academy, Timestamp createdAt, Timestamp updatedAt) {
+    public StudentRecord(Long number, String name, String password, String gender, Timestamp birthday, String clbum, String academy, Timestamp createdAt, Timestamp updatedAt) {
         super(Student.STUDENT);
 
         set(0, number);
@@ -511,7 +511,7 @@ public class StudentRecord extends UpdatableRecordImpl<StudentRecord> implements
         set(2, password);
         set(3, gender);
         set(4, birthday);
-        set(5, class_);
+        set(5, clbum);
         set(6, academy);
         set(7, createdAt);
         set(8, updatedAt);

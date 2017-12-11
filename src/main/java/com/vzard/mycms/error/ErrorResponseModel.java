@@ -9,7 +9,7 @@ import lombok.Data;
 public class ErrorResponseModel<T> {
 
     private int code;
-    private String mesage;
+    private String message;
     private T data;
     private String url;
 

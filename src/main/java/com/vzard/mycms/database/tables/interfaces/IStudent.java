@@ -74,14 +74,14 @@ public interface IStudent extends Serializable {
     public Timestamp getBirthday();
 
     /**
-     * Setter for <code>my-cms.student.class</code>. 所在班级
+     * Setter for <code>my-cms.student.clbum</code>. 所在班级
      */
-    public IStudent setClass_(String value);
+    public IStudent setClbum(String value);
 
     /**
-     * Getter for <code>my-cms.student.class</code>. 所在班级
+     * Getter for <code>my-cms.student.clbum</code>. 所在班级
      */
-    public String getClass_();
+    public String getClbum();
 
     /**
      * Setter for <code>my-cms.student.academy</code>. 所在学院
