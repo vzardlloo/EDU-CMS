@@ -32,7 +32,7 @@ public class StudentRepository {
 
 
     public IStudent addStudentInfo(Student student){
-        if(null != student.getName()){
+        if(null == student){
             throw new ErrorException("param error",500);
         }else if (isStudentExist(student.getNumber())){
             throw new ErrorException("already exist!",500);
@@ -50,14 +50,14 @@ public class StudentRepository {
 
         IStudent iStudent = getStudentByNumber(student.getNumber());
         if (null == iStudent){
-            throw new ErrorException("not found",404);
+            throw new ErrorException("insert failed",404);
         }
 
         return iStudent;
     }
 
     public IStudent updateStudentInfo(Student student){
-        if (null != student.getNumber()) {
+        if (null == student) {
             throw new ErrorException("param error", 500);
         }else if(!isStudentExist(student.getNumber())){
             throw new ErrorException("not exist!",404);
@@ -87,7 +87,7 @@ public class StudentRepository {
                 .where(Tables.STUDENT.NUMBER.eq(num));
 
         if (isStudentExist(num)){
-            throw new ErrorException("delete fail",500);
+            throw new ErrorException("delete failed",500);
         }
 
     }
