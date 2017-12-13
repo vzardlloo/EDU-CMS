@@ -31,7 +31,7 @@ public class DatabaseConfiguration {
     //private DruidDataSource druidDataSource;
     @Primary
     @Bean
-    @Qualifier("eduDataSource")
+    @Qualifier("myCmsDataSource")
     public DataSource durid() {
 
 //     if (null != druidDataSource){
@@ -56,8 +56,8 @@ public class DatabaseConfiguration {
 
 
     @Bean
-    @Qualifier("edu")
-    public DSLContext dsl(@Qualifier("eduDataSource") DataSource dataSource) {
+    @Qualifier("mycms")
+    public DSLContext dsl(@Qualifier("myCmsDataSource") DataSource dataSource) {
 //        if (null == dataSource){
 //            durid();
 //        }

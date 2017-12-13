@@ -7,6 +7,7 @@ import com.vzard.mycms.database.tables.pojos.Teacher;
 import com.vzard.mycms.error.ErrorException;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -15,6 +16,7 @@ import java.sql.Timestamp;
 public class TeacherRepository {
 
     @Autowired
+    @Qualifier("mycms")
     DSLContext dsl;
 
 

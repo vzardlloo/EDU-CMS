@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 public class StudentRepository {
 
     @Autowired
-    @Qualifier("edu")
+    @Qualifier("mycms")
     DSLContext dsl;
 
     public IStudent getStudentByNumber(Long number){
@@ -91,12 +91,6 @@ public class StudentRepository {
         }
 
     }
-
-
-
-
-
-
 
 
     //=======util=======
