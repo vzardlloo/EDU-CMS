@@ -57,8 +57,10 @@ public class Keys {
     public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = UniqueKeys0.KEY_GRADE_PRIMARY;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
     public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = UniqueKeys0.KEY_STUDENT_COURSE_PRIMARY;
+    public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_STU_COURSE = UniqueKeys0.KEY_STUDENT_COURSE_STU_COURSE;
     public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = UniqueKeys0.KEY_TEACHER_PRIMARY;
     public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_PRIMARY = UniqueKeys0.KEY_TEACHER_COURSE_PRIMARY;
+    public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_TEACHER_COURSE = UniqueKeys0.KEY_TEACHER_COURSE_TEACHER_COURSE;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -81,7 +83,9 @@ public class Keys {
         public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = createUniqueKey(Grade.GRADE, "KEY_grade_PRIMARY", Grade.GRADE.ID);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.NUMBER);
         public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = createUniqueKey(StudentCourse.STUDENT_COURSE, "KEY_student_course_PRIMARY", StudentCourse.STUDENT_COURSE.ID);
+        public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_STU_COURSE = createUniqueKey(StudentCourse.STUDENT_COURSE, "KEY_student_course_stu_course", StudentCourse.STUDENT_COURSE.STUDENT_NUM, StudentCourse.STUDENT_COURSE.COURSE_NUM);
         public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.NUMBER);
         public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_PRIMARY = createUniqueKey(TeacherCourse.TEACHER_COURSE, "KEY_teacher_course_PRIMARY", TeacherCourse.TEACHER_COURSE.ID);
+        public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_TEACHER_COURSE = createUniqueKey(TeacherCourse.TEACHER_COURSE, "KEY_teacher_course_teacher_course", TeacherCourse.TEACHER_COURSE.TEACHER_NUM, TeacherCourse.TEACHER_COURSE.COURSE_NUM);
     }
 }

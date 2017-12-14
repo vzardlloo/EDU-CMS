@@ -5,13 +5,21 @@ import com.vzard.mycms.database.Tables;
 import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.error.ErrorException;
+import com.vzard.mycms.model.dto.CourseWithGradeDto;
 import javafx.scene.control.Tab;
 import org.jooq.DSLContext;
+import org.jooq.Record10;
+import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.vzard.mycms.database.Tables.COURSE;
+import static com.vzard.mycms.database.Tables.GRADE;
 
 @Service
 public class StudentRepository {
@@ -89,6 +97,53 @@ public class StudentRepository {
         if (isStudentExist(num)){
             throw new ErrorException("delete failed",500);
         }
+
+    }
+
+
+    /**
+     * 分页获取课程信息
+     * @param studentNum
+     * @param start
+     * @param offset
+     * @return
+     */
+    public List<CourseWithGradeDto> getChoosedCourse(Long studentNum,int start,int offset){
+
+
+        Result<Record10<Long,String,String,String,String,String,String,String,String,String>> results = dsl.select(COURSE.NUMBER, COURSE.NAME, COURSE.CREDIT
+                , COURSE.PERIOD, COURSE.TEACHER, COURSE.TIME
+                , COURSE.CLASSROOM,Tables.GRADE.PAPER_GRADE,Tables.GRADE.PACIFIC_GRADE
+                ,Tables.GRADE.OVERALL_GRADE)
+                .from(COURSE)
+                .leftJoin(Tables.GRADE)
+                .on(COURSE.NUMBER.eq(Tables.STUDENT_COURSE.COURSE_NUM))
+                .where(COURSE.NUMBER.in(
+                        dsl.select(Tables.STUDENT_COURSE.COURSE_NUM)
+                        .from(Tables.STUDENT_COURSE)
+                        .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
+
+                )).limit(start,offset).fetch();
+        List<CourseWithGradeDto> courseWithGradeDtoList = new ArrayList<>();
+        for (Record10<Long,String,String,String,String,String,String,String,String,String> result : results){
+            CourseWithGradeDto course = new CourseWithGradeDto();
+            course.setNumber(result.getValue(COURSE.NUMBER));
+            course.setName(result.getValue(COURSE.NAME));
+            course.setCredit(result.getValue(COURSE.CREDIT));
+            course.setTime(result.getValue(COURSE.TIME));
+            course.setClassroom(result.getValue(COURSE.CLASSROOM));
+            course.setTeacher(result.getValue(COURSE.TEACHER));
+            course.setPeriod(result.getValue(COURSE.PERIOD));
+            course.setPaperGrade(result.getValue(GRADE.PAPER_GRADE));
+            course.setPacificGrade(result.getValue(GRADE.PACIFIC_GRADE));
+            course.setOverallGrade(result.getValue(GRADE.OVERALL_GRADE));
+
+            courseWithGradeDtoList.add(course);
+
+        }
+
+
+        return courseWithGradeDtoList;
 
     }
 

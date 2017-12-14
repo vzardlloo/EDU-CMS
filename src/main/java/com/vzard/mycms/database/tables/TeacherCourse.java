@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TeacherCourse extends TableImpl<TeacherCourseRecord> {
 
-    private static final long serialVersionUID = -1270695873;
+    private static final long serialVersionUID = 410489190;
 
     /**
      * The reference instance of <code>my-cms.teacher_course</code>
@@ -127,7 +127,7 @@ public class TeacherCourse extends TableImpl<TeacherCourseRecord> {
      */
     @Override
     public List<UniqueKey<TeacherCourseRecord>> getKeys() {
-        return Arrays.<UniqueKey<TeacherCourseRecord>>asList(Keys.KEY_TEACHER_COURSE_PRIMARY);
+        return Arrays.<UniqueKey<TeacherCourseRecord>>asList(Keys.KEY_TEACHER_COURSE_PRIMARY, Keys.KEY_TEACHER_COURSE_TEACHER_COURSE);
     }
 
     /**

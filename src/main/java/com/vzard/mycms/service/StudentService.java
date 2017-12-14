@@ -6,9 +6,12 @@ import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.mapper.StudentCourseMapper;
 import com.vzard.mycms.mapper.StudentMapper;
+import com.vzard.mycms.model.dto.CourseWithGradeDto;
 import com.vzard.mycms.repository.StudentCourseRepository;
 import com.vzard.mycms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class StudentService {
 
@@ -26,6 +29,12 @@ public class StudentService {
 
         IStudentCourse iStudentCourse = studentCourseRepository.addStudentCourseMap(studentCourse);
         return StudentCourseMapper.mapToVo(iStudentCourse);
+    }
+
+    public List<CourseWithGradeDto> getChoosedCourse(Long studentNum, int start, int offset){
+
+      return studentRepository.getChoosedCourse(studentNum,start,offset);
+
     }
 
 
