@@ -42,7 +42,8 @@ public class TeacherRepository {
                 .columns(Tables.TEACHER.NUMBER,Tables.TEACHER.NAME,Tables.TEACHER.PASSWORD,Tables.TEACHER.GENDER
                 ,Tables.TEACHER.OFFICE,Tables.TEACHER.ACADEMY,Tables.TEACHER.CREATED_AT,Tables.TEACHER.UPDATE_AT)
                 .values(teacher.getNumber(),teacher.getName(),teacher.getPassword(),teacher.getGender()
-                ,teacher.getOffice(),teacher.getAcademy(),new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()));
+                ,teacher.getOffice(),teacher.getAcademy(),new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()))
+                .execute();
 
         ITeacher iTeacher = getTeacherByNumber(teacher.getNumber());
         if (null == iTeacher){
@@ -65,12 +66,17 @@ public class TeacherRepository {
                 .set(Tables.TEACHER.PASSWORD,teacher.getPassword())
                 .set(Tables.TEACHER.OFFICE,teacher.getOffice())
                 .set(Tables.TEACHER.ACADEMY,teacher.getAcademy())
-                .set(Tables.TEACHER.UPDATE_AT,new Timestamp(System.currentTimeMillis()));
+                .set(Tables.TEACHER.UPDATE_AT,new Timestamp(System.currentTimeMillis()))
+                .execute();
 
 
         return getTeacherByNumber(teacher.getNumber());
 
     }
+
+
+
+
 
 
     public void deleteTeacherInfo(Long num){
@@ -80,7 +86,11 @@ public class TeacherRepository {
             throw new ErrorException(" not exist",404);
         }
         dsl.delete(Tables.TEACHER)
-                .where(Tables.TEACHER.NUMBER.eq(num));
+                .where(Tables.TEACHER.NUMBER.eq(num))
+                .execute();
+        if (isTeacherExist(num)){
+            throw new ErrorException("delete error",500);
+        }
     }
 
 

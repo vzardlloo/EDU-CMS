@@ -77,7 +77,8 @@ public class StudentRepository {
                 .set(Tables.STUDENT.CLBUM,student.getClbum())
                 .set(Tables.STUDENT.ACADEMY,student.getAcademy())
                 .set(Tables.STUDENT.GENDER,student.getGender())
-                .set(Tables.STUDENT.UPDATED_AT,new Timestamp(System.currentTimeMillis()));
+                .set(Tables.STUDENT.UPDATED_AT,new Timestamp(System.currentTimeMillis()))
+                .execute();
 
         return getStudentByNumber(student.getNumber());
 
@@ -92,7 +93,8 @@ public class StudentRepository {
         }
 
         dsl.delete(Tables.STUDENT)
-                .where(Tables.STUDENT.NUMBER.eq(num));
+                .where(Tables.STUDENT.NUMBER.eq(num))
+                .execute();
 
         if (isStudentExist(num)){
             throw new ErrorException("delete failed",500);

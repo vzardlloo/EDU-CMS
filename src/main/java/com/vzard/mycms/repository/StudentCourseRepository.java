@@ -41,8 +41,10 @@ public class StudentCourseRepository {
         dsl.insertInto(Tables.STUDENT_COURSE)
                 .columns(Tables.STUDENT_COURSE.STUDENT_NUM,Tables.STUDENT_COURSE.COURSE_NUM,
                         Tables.STUDENT_COURSE.CREATED_AT,Tables.STUDENT_COURSE.UPDATED_AT)
-                .values(studentCourse.getStudentNum(),studentCourse.getCourseNum()
-                ,new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()));
+                .values(studentCourse.getStudentNum(),studentCourse.getCourseNum(),
+                        new Timestamp(System.currentTimeMillis()),
+                        new Timestamp(System.currentTimeMillis()))
+                .execute();
         IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum());
         if (null == iStudentCourse){
             throw new ErrorException("insert error",500);
@@ -62,7 +64,8 @@ public class StudentCourseRepository {
         dsl.update(Tables.STUDENT_COURSE)
                 .set(Tables.STUDENT_COURSE.STUDENT_NUM,studentCourse.getStudentNum())
                 .set(Tables.STUDENT_COURSE.COURSE_NUM,studentCourse.getCourseNum())
-                .set(Tables.STUDENT_COURSE.UPDATED_AT,new Timestamp(System.currentTimeMillis()));
+                .set(Tables.STUDENT_COURSE.UPDATED_AT,new Timestamp(System.currentTimeMillis()))
+                .execute();
 
         IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum());
 
@@ -77,7 +80,8 @@ public class StudentCourseRepository {
         }
         dsl.delete(Tables.STUDENT_COURSE)
                 .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum)
-                .and(Tables.STUDENT_COURSE.COURSE_NUM.eq(couserNum)));
+                .and(Tables.STUDENT_COURSE.COURSE_NUM.eq(couserNum)))
+                .execute();
         if (isStudentCourseMapExist(studentNum,couserNum)){
             throw new ErrorException("delete error",500);
         }
