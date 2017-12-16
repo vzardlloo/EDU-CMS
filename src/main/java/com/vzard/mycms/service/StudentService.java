@@ -42,6 +42,15 @@ public class StudentService {
     }
 
     /**
+     * 退课
+     * @param studentNum
+     * @param courseNum
+     */
+    public void deleteCourse(Long studentNum,Long courseNum){
+        studentCourseRepository.deleteStudentCourseMap(studentNum,courseNum);
+    }
+
+    /**
      * 获得已选课程
      * @param studentNum
      * @param start

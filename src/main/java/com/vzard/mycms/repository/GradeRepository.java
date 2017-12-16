@@ -42,11 +42,11 @@ public class GradeRepository {
         return iGrade;
     }
 
-    public List<IGrade> getGradeList(){
+    public List<IGrade> getGradeList(Long courseNum){
 
         return dsl.select()
                 .from(GRADE)
-                //.where(Tables.GRADE.ID.eq(id))
+                .where(Tables.GRADE.ID.eq(courseNum))
                 .fetchInto(IGrade.class);
     }
 

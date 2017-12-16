@@ -30,11 +30,11 @@ public class CourseRepository {
                 .fetchOneInto(ICourse.class);
     }
 
-    public List<ICourse> getCourseByNum(){
+    public List<ICourse> getCourseByTeacher(String name){
 
         return dsl.select()
                 .from(COURSE)
-                //.where(COURSE.NUMBER.eq(num))
+                .where(COURSE.TEACHER.eq(name))
                 .fetchInto(ICourse.class);
     }
 
