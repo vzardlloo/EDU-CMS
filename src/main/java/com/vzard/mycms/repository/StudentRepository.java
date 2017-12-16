@@ -38,6 +38,14 @@ public class StudentRepository {
                 .fetchOneInto(IStudent.class);
     }
 
+    public List<IStudent> getStudentList(){
+
+        return dsl.select().from(Tables.STUDENT)
+                //.where(Tables.STUDENT.NUMBER)
+                .fetchInto(IStudent.class);
+    }
+
+
 
     public IStudent addStudentInfo(Student student){
         if(null == student){

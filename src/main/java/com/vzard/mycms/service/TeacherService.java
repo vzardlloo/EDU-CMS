@@ -20,6 +20,16 @@ public class TeacherService {
        return CourseMapper.mapToVo(course);
    }
 
+   public Course alertCourse(Course course){
+       return CourseMapper.mapToVo(courseRepository.updateCourse(course));
+   }
+
+   public void deleteCourse(Long num){
+       courseRepository.deleteCourse(num);
+   }
+
+
+
 
 
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class TeacherRepository {
@@ -28,6 +29,14 @@ public class TeacherRepository {
         return dsl.select().from(Tables.TEACHER)
                 .where(Tables.TEACHER.NUMBER.eq(num))
                 .fetchOneInto(ITeacher.class);
+    }
+
+
+    public List<ITeacher> getTeacherList(){
+
+        return dsl.select().from(Tables.TEACHER)
+                //.where(Tables.TEACHER.NUMBER.eq(num))
+                .fetchInto(ITeacher.class);
     }
 
 

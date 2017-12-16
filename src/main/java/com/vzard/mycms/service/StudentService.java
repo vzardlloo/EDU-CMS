@@ -20,17 +20,34 @@ public class StudentService {
     @Autowired
     StudentCourseRepository studentCourseRepository;
 
+    /**
+     * 修改个人信息
+     * @param student
+     * @return
+     */
     public Student modifyPersonInfo(Student student){
-
 
         return StudentMapper.mapToVo(studentRepository.updateStudentInfo(student));
     }
+
+    /**
+     * 选课
+     * @param studentCourse
+     * @return
+     */
     public StudentCourse chooseCourse(StudentCourse studentCourse){
 
         IStudentCourse iStudentCourse = studentCourseRepository.addStudentCourseMap(studentCourse);
         return StudentCourseMapper.mapToVo(iStudentCourse);
     }
 
+    /**
+     * 获得已选课程
+     * @param studentNum
+     * @param start
+     * @param offset
+     * @return
+     */
     public List<CourseWithGradeDto> getChoosedCourse(Long studentNum, int start, int offset){
 
       return studentRepository.getChoosedCourse(studentNum,start,offset);

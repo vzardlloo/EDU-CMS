@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import static com.vzard.mycms.database.Tables.COURSE;
 
@@ -28,6 +29,15 @@ public class CourseRepository {
                 .where(COURSE.NUMBER.eq(num))
                 .fetchOneInto(ICourse.class);
     }
+
+    public List<ICourse> getCourseByNum(){
+
+        return dsl.select()
+                .from(COURSE)
+                //.where(COURSE.NUMBER.eq(num))
+                .fetchInto(ICourse.class);
+    }
+
 
 
 
