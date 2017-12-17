@@ -1,4 +1,4 @@
-package com.vzard.mycms.configuartion;
+package com.vzard.mycms.configuration;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;

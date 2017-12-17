@@ -1,4 +1,4 @@
-package com.vzard.mycms.configuartion;
+package com.vzard.mycms.configuration;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.jooq.DSLContext;
