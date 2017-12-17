@@ -8,9 +8,13 @@ import com.vzard.mycms.error.ErrorException;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 
+
+@Service
 public class StudentCourseRepository {
 
 
@@ -20,7 +24,7 @@ public class StudentCourseRepository {
 
 
     //根据studentName 查找 course
-    public IStudentCourse getStudentCourseMap(Long studentNum){
+    public IStudentCourse getStudentCourseMap(String studentNum){
         if (null == studentNum){
             throw new ErrorException("param error",500);
         }
@@ -72,7 +76,7 @@ public class StudentCourseRepository {
         return iStudentCourse;
     }
 
-    public void deleteStudentCourseMap(Long studentNum,Long couserNum){
+    public void deleteStudentCourseMap(String studentNum,String couserNum){
         if (null == couserNum){
             throw new ErrorException("param error",500);
         }else if (!isStudentCourseMapExist(studentNum,couserNum)){
@@ -91,14 +95,14 @@ public class StudentCourseRepository {
 
 
     //=========util======//
-    private Boolean isStudentCourseMapExist(Long num){
+    private Boolean isStudentCourseMapExist(String num){
         if (null != getStudentCourseMap(num)){
             return true;
         }
         return false;
     }
 
-    private Boolean isStudentCourseMapExist(Long studentNum,Long courseNum){
+    private Boolean isStudentCourseMapExist(String studentNum,String courseNum){
         if (null == studentNum || null == courseNum){
             throw new ErrorException("param error",500);
         }

@@ -36,22 +36,22 @@ public interface ITeacherCourse extends Serializable {
     /**
      * Setter for <code>my-cms.teacher_course.teacher_num</code>. 教师工号
      */
-    public ITeacherCourse setTeacherNum(Long value);
+    public ITeacherCourse setTeacherNum(String value);
 
     /**
      * Getter for <code>my-cms.teacher_course.teacher_num</code>. 教师工号
      */
-    public Long getTeacherNum();
+    public String getTeacherNum();
 
     /**
      * Setter for <code>my-cms.teacher_course.course_num</code>. 课程号
      */
-    public ITeacherCourse setCourseNum(Long value);
+    public ITeacherCourse setCourseNum(String value);
 
     /**
      * Getter for <code>my-cms.teacher_course.course_num</code>. 课程号
      */
-    public Long getCourseNum();
+    public String getCourseNum();
 
     /**
      * Setter for <code>my-cms.teacher_course.created_at</code>. 创建时间

@@ -24,11 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Grade implements IGrade {
 
-    private static final long serialVersionUID = 2061099389;
+    private static final long serialVersionUID = 763720283;
 
     private Long      id;
-    private Long      studentNum;
-    private Long      courseNum;
+    private String    studentNum;
+    private String    courseNum;
     private String    pacificGrade;
     private String    paperGrade;
     private String    overallGrade;
@@ -50,8 +50,8 @@ public class Grade implements IGrade {
 
     public Grade(
         Long      id,
-        Long      studentNum,
-        Long      courseNum,
+        String    studentNum,
+        String    courseNum,
         String    pacificGrade,
         String    paperGrade,
         String    overallGrade,
@@ -80,23 +80,23 @@ public class Grade implements IGrade {
     }
 
     @Override
-    public Long getStudentNum() {
+    public String getStudentNum() {
         return this.studentNum;
     }
 
     @Override
-    public Grade setStudentNum(Long studentNum) {
+    public Grade setStudentNum(String studentNum) {
         this.studentNum = studentNum;
         return this;
     }
 
     @Override
-    public Long getCourseNum() {
+    public String getCourseNum() {
         return this.courseNum;
     }
 
     @Override
-    public Grade setCourseNum(Long courseNum) {
+    public Grade setCourseNum(String courseNum) {
         this.courseNum = courseNum;
         return this;
     }

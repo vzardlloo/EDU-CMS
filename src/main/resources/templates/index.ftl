@@ -28,18 +28,18 @@
         <div class="layui-tab-item layui-show">
          <div class="login">
          <h1>学生登录入口</h1>
-        <form class="layui-form">
+        <form class="layui-form" action="/student/main" method="post">
             <div class="layui-form-item">
-                <input class="layui-input" name="username" placeholder="用户名" value="admin" lay-verify="required" type="text" autocomplete="off">
+                <input class="layui-input" name="number" placeholder="学号"  lay-verify="required" type="text" autocomplete="off">
             </div>
             <div class="layui-form-item">
-                <input class="layui-input" name="password" placeholder="密码" value="admin"  lay-verify="required" type="password" autocomplete="off">
+                <input class="layui-input" name="password" placeholder="密码"  lay-verify="required" type="password" autocomplete="off">
             </div>
             <div class="layui-form-item form_code">
-                <input class="layui-input" style="width: 140px;" name="captcha" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">
+                <input class="layui-input" style="width: 140px;" name="verifycode" placeholder="验证码"  lay-verify="required" type="text" autocomplete="off">
                 <div class="code"><img id="captcha" src="/captcha" width="116" height="36" onclick="this.src='/captcha.html?'+Math.random();"  cursor:pointer;" alt="captcha"></div>
             </div>
-            <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
+            <button type="submit" class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
         </form>
         </div>
         </div>
@@ -48,13 +48,13 @@
                 <h1>教师登录入口</h1>
                 <form class="layui-form">
                     <div class="layui-form-item">
-                        <input class="layui-input" name="username" placeholder="用户名" value="admin" lay-verify="required" type="text" autocomplete="off">
+                        <input class="layui-input" name="number" placeholder="工号"  lay-verify="required" type="text" autocomplete="off">
                     </div>
                     <div class="layui-form-item">
-                        <input class="layui-input" name="password" placeholder="密码" value="admin"  lay-verify="required" type="password" autocomplete="off">
+                        <input class="layui-input" name="password" placeholder="密码"   lay-verify="required" type="password" autocomplete="off">
                     </div>
                     <div class="layui-form-item form_code">
-                        <input class="layui-input" style="width: 140px;" name="captcha" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">
+                        <input class="layui-input" style="width: 140px;" name="verifycode" placeholder="验证码"  lay-verify="required" type="text" autocomplete="off">
                         <div class="code"><img id="captcha" src="/captcha.html" width="116" height="36" onclick="this.src='/captcha.html?'+Math.random();"  cursor:pointer;" alt="captcha"></div>
                     </div>
                     <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
@@ -66,13 +66,13 @@
                 <h1>管理员登录入口</h1>
                 <form class="layui-form">
                     <div class="layui-form-item">
-                        <input class="layui-input" name="username" placeholder="用户名" value="admin" lay-verify="required" type="text" autocomplete="off">
+                        <input class="layui-input" name="number" placeholder="帐号"  lay-verify="required" type="text" autocomplete="off">
                     </div>
                     <div class="layui-form-item">
-                        <input class="layui-input" name="password" placeholder="密码" value="admin"  lay-verify="required" type="password" autocomplete="off">
+                        <input class="layui-input" name="password" placeholder="密码"   lay-verify="required" type="password" autocomplete="off">
                     </div>
                     <div class="layui-form-item form_code">
-                        <input class="layui-input" style="width: 140px;" name="captcha" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">
+                        <input class="layui-input" style="width: 140px;" id = "verifycode" name="verifycode" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">
                         <div class="code"><img id="captcha" src="/captcha.html" width="116" height="36" onclick="this.src='/captcha.html?'+Math.random();"  cursor:pointer;" alt="captcha"></div>
                     </div>
                     <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
@@ -92,6 +92,14 @@
         console.assert(element)
         //…
     });
+    
+    
+    function verifyCodeCheck() {
+
+
+    }
+    
+    
 </script>
 
 

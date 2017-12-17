@@ -8,12 +8,15 @@ import com.vzard.mycms.error.ErrorException;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 import static com.vzard.mycms.database.Tables.GRADE;
 
+@Service
 public class GradeRepository {
 
     @Autowired
@@ -30,7 +33,7 @@ public class GradeRepository {
                 .fetchOneInto(IGrade.class);
     }
 
-    public IGrade getGrageByUniqueKey(Long studentNum,Long courseNum){
+    public IGrade getGrageByUniqueKey(String studentNum,String courseNum){
         if (null == studentNum || null == courseNum){
             throw new ErrorException("param error",500);
         }
@@ -42,11 +45,11 @@ public class GradeRepository {
         return iGrade;
     }
 
-    public List<IGrade> getGradeList(Long courseNum){
+    public List<IGrade> getGradeList(String courseNum){
 
         return dsl.select()
                 .from(GRADE)
-                .where(Tables.GRADE.ID.eq(courseNum))
+                .where(Tables.GRADE.COURSE_NUM.eq(courseNum))
                 .fetchInto(IGrade.class);
     }
 
@@ -119,7 +122,7 @@ public class GradeRepository {
         return false;
     }
 
-    private Boolean isGradeExist(Long studentNum,Long courseNum){
+    private Boolean isGradeExist(String studentNum,String courseNum){
         IGrade iGrade = getGrageByUniqueKey(studentNum,courseNum);
         if (null != iGrade){
             return true;

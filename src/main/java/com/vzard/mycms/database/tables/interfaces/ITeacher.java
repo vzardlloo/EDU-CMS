@@ -24,14 +24,24 @@ import javax.annotation.Generated;
 public interface ITeacher extends Serializable {
 
     /**
+     * Setter for <code>my-cms.teacher.id</code>. id
+     */
+    public ITeacher setId(Integer value);
+
+    /**
+     * Getter for <code>my-cms.teacher.id</code>. id
+     */
+    public Integer getId();
+
+    /**
      * Setter for <code>my-cms.teacher.number</code>. 工号
      */
-    public ITeacher setNumber(Long value);
+    public ITeacher setNumber(String value);
 
     /**
      * Getter for <code>my-cms.teacher.number</code>. 工号
      */
-    public Long getNumber();
+    public String getNumber();
 
     /**
      * Setter for <code>my-cms.teacher.name</code>. 姓名

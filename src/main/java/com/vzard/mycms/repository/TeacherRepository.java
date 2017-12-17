@@ -8,6 +8,7 @@ import com.vzard.mycms.error.ErrorException;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -21,7 +22,7 @@ public class TeacherRepository {
     DSLContext dsl;
 
 
-    public ITeacher getTeacherByNumber(Long num){
+    public ITeacher getTeacherByNumber(String num){
         if (null != num){
             throw new ErrorException("param error",500);
         }
@@ -88,7 +89,7 @@ public class TeacherRepository {
 
 
 
-    public void deleteTeacherInfo(Long num){
+    public void deleteTeacherInfo(String num){
         if (null == num){
             throw new ErrorException("param error",500);
         }else if(!isTeacherExist(num)){
@@ -107,7 +108,7 @@ public class TeacherRepository {
 
 
     //=======util======
-    private Boolean isTeacherExist(Long num){
+    private Boolean isTeacherExist(String num){
 
         if (null != getTeacherByNumber(num)){
             return true;

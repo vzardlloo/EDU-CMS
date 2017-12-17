@@ -24,9 +24,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student implements IStudent {
 
-    private static final long serialVersionUID = 1488324672;
+    private static final long serialVersionUID = -487360410;
 
-    private Long      number;
+    private Integer   id;
+    private String    number;
     private String    name;
     private String    password;
     private String    gender;
@@ -39,6 +40,7 @@ public class Student implements IStudent {
     public Student() {}
 
     public Student(Student value) {
+        this.id = value.id;
         this.number = value.number;
         this.name = value.name;
         this.password = value.password;
@@ -51,7 +53,8 @@ public class Student implements IStudent {
     }
 
     public Student(
-        Long      number,
+        Integer   id,
+        String    number,
         String    name,
         String    password,
         String    gender,
@@ -61,6 +64,7 @@ public class Student implements IStudent {
         Timestamp createdAt,
         Timestamp updatedAt
     ) {
+        this.id = id;
         this.number = number;
         this.name = name;
         this.password = password;
@@ -73,12 +77,23 @@ public class Student implements IStudent {
     }
 
     @Override
-    public Long getNumber() {
+    public Integer getId() {
+        return this.id;
+    }
+
+    @Override
+    public Student setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
+    public String getNumber() {
         return this.number;
     }
 
     @Override
-    public Student setNumber(Long number) {
+    public Student setNumber(String number) {
         this.number = number;
         return this;
     }
@@ -175,7 +190,8 @@ public class Student implements IStudent {
     public String toString() {
         StringBuilder sb = new StringBuilder("Student (");
 
-        sb.append(number);
+        sb.append(id);
+        sb.append(", ").append(number);
         sb.append(", ").append(name);
         sb.append(", ").append(password);
         sb.append(", ").append(gender);
@@ -198,6 +214,7 @@ public class Student implements IStudent {
      */
     @Override
     public void from(IStudent from) {
+        setId(from.getId());
         setNumber(from.getNumber());
         setName(from.getName());
         setPassword(from.getPassword());

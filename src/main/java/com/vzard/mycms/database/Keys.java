@@ -44,8 +44,11 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<CourseRecord, Integer> IDENTITY_COURSE = Identities0.IDENTITY_COURSE;
     public static final Identity<GradeRecord, Long> IDENTITY_GRADE = Identities0.IDENTITY_GRADE;
+    public static final Identity<StudentRecord, Integer> IDENTITY_STUDENT = Identities0.IDENTITY_STUDENT;
     public static final Identity<StudentCourseRecord, Long> IDENTITY_STUDENT_COURSE = Identities0.IDENTITY_STUDENT_COURSE;
+    public static final Identity<TeacherRecord, Integer> IDENTITY_TEACHER = Identities0.IDENTITY_TEACHER;
     public static final Identity<TeacherCourseRecord, Long> IDENTITY_TEACHER_COURSE = Identities0.IDENTITY_TEACHER_COURSE;
 
     // -------------------------------------------------------------------------
@@ -55,6 +58,7 @@ public class Keys {
     public static final UniqueKey<AdminRecord> KEY_ADMIN_PRIMARY = UniqueKeys0.KEY_ADMIN_PRIMARY;
     public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = UniqueKeys0.KEY_COURSE_PRIMARY;
     public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = UniqueKeys0.KEY_GRADE_PRIMARY;
+    public static final UniqueKey<GradeRecord> KEY_GRADE_STUDENT_COURSE_IDX = UniqueKeys0.KEY_GRADE_STUDENT_COURSE_IDX;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
     public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = UniqueKeys0.KEY_STUDENT_COURSE_PRIMARY;
     public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_STU_COURSE = UniqueKeys0.KEY_STUDENT_COURSE_STU_COURSE;
@@ -72,19 +76,23 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
+        public static Identity<CourseRecord, Integer> IDENTITY_COURSE = createIdentity(Course.COURSE, Course.COURSE.ID);
         public static Identity<GradeRecord, Long> IDENTITY_GRADE = createIdentity(Grade.GRADE, Grade.GRADE.ID);
+        public static Identity<StudentRecord, Integer> IDENTITY_STUDENT = createIdentity(Student.STUDENT, Student.STUDENT.ID);
         public static Identity<StudentCourseRecord, Long> IDENTITY_STUDENT_COURSE = createIdentity(StudentCourse.STUDENT_COURSE, StudentCourse.STUDENT_COURSE.ID);
+        public static Identity<TeacherRecord, Integer> IDENTITY_TEACHER = createIdentity(Teacher.TEACHER, Teacher.TEACHER.ID);
         public static Identity<TeacherCourseRecord, Long> IDENTITY_TEACHER_COURSE = createIdentity(TeacherCourse.TEACHER_COURSE, TeacherCourse.TEACHER_COURSE.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
-        public static final UniqueKey<AdminRecord> KEY_ADMIN_PRIMARY = createUniqueKey(Admin.ADMIN, "KEY_admin_PRIMARY", Admin.ADMIN.NUMBER);
-        public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = createUniqueKey(Course.COURSE, "KEY_course_PRIMARY", Course.COURSE.NUMBER);
+        public static final UniqueKey<AdminRecord> KEY_ADMIN_PRIMARY = createUniqueKey(Admin.ADMIN, "KEY_admin_PRIMARY", Admin.ADMIN.ID);
+        public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = createUniqueKey(Course.COURSE, "KEY_course_PRIMARY", Course.COURSE.ID);
         public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = createUniqueKey(Grade.GRADE, "KEY_grade_PRIMARY", Grade.GRADE.ID);
-        public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.NUMBER);
+        public static final UniqueKey<GradeRecord> KEY_GRADE_STUDENT_COURSE_IDX = createUniqueKey(Grade.GRADE, "KEY_grade_student_course_idx", Grade.GRADE.STUDENT_NUM, Grade.GRADE.COURSE_NUM);
+        public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.ID);
         public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = createUniqueKey(StudentCourse.STUDENT_COURSE, "KEY_student_course_PRIMARY", StudentCourse.STUDENT_COURSE.ID);
         public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_STU_COURSE = createUniqueKey(StudentCourse.STUDENT_COURSE, "KEY_student_course_stu_course", StudentCourse.STUDENT_COURSE.STUDENT_NUM, StudentCourse.STUDENT_COURSE.COURSE_NUM);
-        public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.NUMBER);
+        public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.ID);
         public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_PRIMARY = createUniqueKey(TeacherCourse.TEACHER_COURSE, "KEY_teacher_course_PRIMARY", TeacherCourse.TEACHER_COURSE.ID);
         public static final UniqueKey<TeacherCourseRecord> KEY_TEACHER_COURSE_TEACHER_COURSE = createUniqueKey(TeacherCourse.TEACHER_COURSE, "KEY_teacher_course_teacher_course", TeacherCourse.TEACHER_COURSE.TEACHER_NUM, TeacherCourse.TEACHER_COURSE.COURSE_NUM);
     }

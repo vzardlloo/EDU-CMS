@@ -24,9 +24,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Admin implements IAdmin {
 
-    private static final long serialVersionUID = -2104631217;
+    private static final long serialVersionUID = -755672689;
 
-    private Long      number;
+    private Integer   id;
+    private String    number;
     private String    name;
     private String    password;
     private Timestamp createdAt;
@@ -35,6 +36,7 @@ public class Admin implements IAdmin {
     public Admin() {}
 
     public Admin(Admin value) {
+        this.id = value.id;
         this.number = value.number;
         this.name = value.name;
         this.password = value.password;
@@ -43,12 +45,14 @@ public class Admin implements IAdmin {
     }
 
     public Admin(
-        Long      number,
+        Integer   id,
+        String    number,
         String    name,
         String    password,
         Timestamp createdAt,
         Timestamp updatedAt
     ) {
+        this.id = id;
         this.number = number;
         this.name = name;
         this.password = password;
@@ -57,12 +61,23 @@ public class Admin implements IAdmin {
     }
 
     @Override
-    public Long getNumber() {
+    public Integer getId() {
+        return this.id;
+    }
+
+    @Override
+    public Admin setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
+    public String getNumber() {
         return this.number;
     }
 
     @Override
-    public Admin setNumber(Long number) {
+    public Admin setNumber(String number) {
         this.number = number;
         return this;
     }
@@ -115,7 +130,8 @@ public class Admin implements IAdmin {
     public String toString() {
         StringBuilder sb = new StringBuilder("Admin (");
 
-        sb.append(number);
+        sb.append(id);
+        sb.append(", ").append(number);
         sb.append(", ").append(name);
         sb.append(", ").append(password);
         sb.append(", ").append(createdAt);
@@ -134,6 +150,7 @@ public class Admin implements IAdmin {
      */
     @Override
     public void from(IAdmin from) {
+        setId(from.getId());
         setNumber(from.getNumber());
         setName(from.getName());
         setPassword(from.getPassword());

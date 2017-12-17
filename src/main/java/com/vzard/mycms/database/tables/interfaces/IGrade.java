@@ -36,22 +36,22 @@ public interface IGrade extends Serializable {
     /**
      * Setter for <code>my-cms.grade.student_num</code>. 学号
      */
-    public IGrade setStudentNum(Long value);
+    public IGrade setStudentNum(String value);
 
     /**
      * Getter for <code>my-cms.grade.student_num</code>. 学号
      */
-    public Long getStudentNum();
+    public String getStudentNum();
 
     /**
      * Setter for <code>my-cms.grade.course_num</code>. 课程号
      */
-    public IGrade setCourseNum(Long value);
+    public IGrade setCourseNum(String value);
 
     /**
      * Getter for <code>my-cms.grade.course_num</code>. 课程号
      */
-    public Long getCourseNum();
+    public String getCourseNum();
 
     /**
      * Setter for <code>my-cms.grade.pacific_grade</code>. 平时成绩

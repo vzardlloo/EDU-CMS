@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CourseWithGradeDto {
 
-    private Long      number;
+    private String    number;
     private String    name;
     private String    credit;
     private String    period;

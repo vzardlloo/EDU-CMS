@@ -24,14 +24,24 @@ import javax.annotation.Generated;
 public interface ICourse extends Serializable {
 
     /**
+     * Setter for <code>my-cms.course.id</code>.
+     */
+    public ICourse setId(Integer value);
+
+    /**
+     * Getter for <code>my-cms.course.id</code>.
+     */
+    public Integer getId();
+
+    /**
      * Setter for <code>my-cms.course.number</code>. 课程号
      */
-    public ICourse setNumber(Long value);
+    public ICourse setNumber(String value);
 
     /**
      * Getter for <code>my-cms.course.number</code>. 课程号
      */
-    public Long getNumber();
+    public String getNumber();
 
     /**
      * Setter for <code>my-cms.course.name</code>. 课程名称

@@ -24,14 +24,24 @@ import javax.annotation.Generated;
 public interface IAdmin extends Serializable {
 
     /**
+     * Setter for <code>my-cms.admin.id</code>.
+     */
+    public IAdmin setId(Integer value);
+
+    /**
+     * Getter for <code>my-cms.admin.id</code>.
+     */
+    public Integer getId();
+
+    /**
      * Setter for <code>my-cms.admin.number</code>. 编号
      */
-    public IAdmin setNumber(Long value);
+    public IAdmin setNumber(String value);
 
     /**
      * Getter for <code>my-cms.admin.number</code>. 编号
      */
-    public Long getNumber();
+    public String getNumber();
 
     /**
      * Setter for <code>my-cms.admin.name</code>. 姓名

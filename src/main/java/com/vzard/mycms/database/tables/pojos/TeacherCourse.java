@@ -24,11 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TeacherCourse implements ITeacherCourse {
 
-    private static final long serialVersionUID = -896832632;
+    private static final long serialVersionUID = 2097257382;
 
     private Long      id;
-    private Long      teacherNum;
-    private Long      courseNum;
+    private String    teacherNum;
+    private String    courseNum;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
@@ -44,8 +44,8 @@ public class TeacherCourse implements ITeacherCourse {
 
     public TeacherCourse(
         Long      id,
-        Long      teacherNum,
-        Long      courseNum,
+        String    teacherNum,
+        String    courseNum,
         Timestamp createdAt,
         Timestamp updatedAt
     ) {
@@ -68,23 +68,23 @@ public class TeacherCourse implements ITeacherCourse {
     }
 
     @Override
-    public Long getTeacherNum() {
+    public String getTeacherNum() {
         return this.teacherNum;
     }
 
     @Override
-    public TeacherCourse setTeacherNum(Long teacherNum) {
+    public TeacherCourse setTeacherNum(String teacherNum) {
         this.teacherNum = teacherNum;
         return this;
     }
 
     @Override
-    public Long getCourseNum() {
+    public String getCourseNum() {
         return this.courseNum;
     }
 
     @Override
-    public TeacherCourse setCourseNum(Long courseNum) {
+    public TeacherCourse setCourseNum(String courseNum) {
         this.courseNum = courseNum;
         return this;
     }

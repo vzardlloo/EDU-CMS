@@ -35,7 +35,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Admin extends TableImpl<AdminRecord> {
 
-    private static final long serialVersionUID = 635295727;
+    private static final long serialVersionUID = -1105775708;
 
     /**
      * The reference instance of <code>my-cms.admin</code>
@@ -51,9 +51,14 @@ public class Admin extends TableImpl<AdminRecord> {
     }
 
     /**
+     * The column <code>my-cms.admin.id</code>.
+     */
+    public final TableField<AdminRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>my-cms.admin.number</code>. 编号
      */
-    public final TableField<AdminRecord, Long> NUMBER = createField("number", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "编号");
+    public final TableField<AdminRecord, String> NUMBER = createField("number", org.jooq.impl.SQLDataType.VARCHAR.length(20), this, "编号");
 
     /**
      * The column <code>my-cms.admin.name</code>. 姓名

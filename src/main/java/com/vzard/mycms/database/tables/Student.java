@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Student extends TableImpl<StudentRecord> {
 
-    private static final long serialVersionUID = 1259458567;
+    private static final long serialVersionUID = -679400569;
 
     /**
      * The reference instance of <code>my-cms.student</code>
@@ -51,9 +52,14 @@ public class Student extends TableImpl<StudentRecord> {
     }
 
     /**
+     * The column <code>my-cms.student.id</code>.
+     */
+    public final TableField<StudentRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * The column <code>my-cms.student.number</code>. 学号
      */
-    public final TableField<StudentRecord, Long> NUMBER = createField("number", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "学号");
+    public final TableField<StudentRecord, String> NUMBER = createField("number", org.jooq.impl.SQLDataType.VARCHAR.length(20), this, "学号");
 
     /**
      * The column <code>my-cms.student.name</code>. 姓名
@@ -123,6 +129,14 @@ public class Student extends TableImpl<StudentRecord> {
     @Override
     public Schema getSchema() {
         return MyCms.MY_CMS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<StudentRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_STUDENT;
     }
 
     /**

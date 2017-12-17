@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StudentCourse extends TableImpl<StudentCourseRecord> {
 
-    private static final long serialVersionUID = 3803999;
+    private static final long serialVersionUID = -1172700289;
 
     /**
      * The reference instance of <code>my-cms.student_course</code>
@@ -59,12 +59,12 @@ public class StudentCourse extends TableImpl<StudentCourseRecord> {
     /**
      * The column <code>my-cms.student_course.student_num</code>. 学号
      */
-    public final TableField<StudentCourseRecord, Long> STUDENT_NUM = createField("student_num", org.jooq.impl.SQLDataType.BIGINT, this, "学号");
+    public final TableField<StudentCourseRecord, String> STUDENT_NUM = createField("student_num", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "学号");
 
     /**
      * The column <code>my-cms.student_course.course_num</code>. 课程号
      */
-    public final TableField<StudentCourseRecord, Long> COURSE_NUM = createField("course_num", org.jooq.impl.SQLDataType.BIGINT, this, "课程号");
+    public final TableField<StudentCourseRecord, String> COURSE_NUM = createField("course_num", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "课程号");
 
     /**
      * The column <code>my-cms.student_course.created_at</code>. 创建时间

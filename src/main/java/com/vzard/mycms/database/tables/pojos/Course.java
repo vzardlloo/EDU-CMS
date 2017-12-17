@@ -24,9 +24,10 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Course implements ICourse {
 
-    private static final long serialVersionUID = -1840981044;
+    private static final long serialVersionUID = 646405362;
 
-    private Long      number;
+    private Integer   id;
+    private String    number;
     private String    name;
     private String    credit;
     private String    period;
@@ -41,6 +42,7 @@ public class Course implements ICourse {
     public Course() {}
 
     public Course(Course value) {
+        this.id = value.id;
         this.number = value.number;
         this.name = value.name;
         this.credit = value.credit;
@@ -55,7 +57,8 @@ public class Course implements ICourse {
     }
 
     public Course(
-        Long      number,
+        Integer   id,
+        String    number,
         String    name,
         String    credit,
         String    period,
@@ -67,6 +70,7 @@ public class Course implements ICourse {
         Timestamp createdAt,
         Timestamp updatedAt
     ) {
+        this.id = id;
         this.number = number;
         this.name = name;
         this.credit = credit;
@@ -81,12 +85,23 @@ public class Course implements ICourse {
     }
 
     @Override
-    public Long getNumber() {
+    public Integer getId() {
+        return this.id;
+    }
+
+    @Override
+    public Course setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
+    public String getNumber() {
         return this.number;
     }
 
     @Override
-    public Course setNumber(Long number) {
+    public Course setNumber(String number) {
         this.number = number;
         return this;
     }
@@ -205,7 +220,8 @@ public class Course implements ICourse {
     public String toString() {
         StringBuilder sb = new StringBuilder("Course (");
 
-        sb.append(number);
+        sb.append(id);
+        sb.append(", ").append(number);
         sb.append(", ").append(name);
         sb.append(", ").append(credit);
         sb.append(", ").append(period);
@@ -230,6 +246,7 @@ public class Course implements ICourse {
      */
     @Override
     public void from(ICourse from) {
+        setId(from.getId());
         setNumber(from.getNumber());
         setName(from.getName());
         setCredit(from.getCredit());

@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Grade extends TableImpl<GradeRecord> {
 
-    private static final long serialVersionUID = 1642161894;
+    private static final long serialVersionUID = 1319297727;
 
     /**
      * The reference instance of <code>my-cms.grade</code>
@@ -59,12 +59,12 @@ public class Grade extends TableImpl<GradeRecord> {
     /**
      * The column <code>my-cms.grade.student_num</code>. 学号
      */
-    public final TableField<GradeRecord, Long> STUDENT_NUM = createField("student_num", org.jooq.impl.SQLDataType.BIGINT, this, "学号");
+    public final TableField<GradeRecord, String> STUDENT_NUM = createField("student_num", org.jooq.impl.SQLDataType.VARCHAR.length(20), this, "学号");
 
     /**
      * The column <code>my-cms.grade.course_num</code>. 课程号
      */
-    public final TableField<GradeRecord, Long> COURSE_NUM = createField("course_num", org.jooq.impl.SQLDataType.BIGINT, this, "课程号");
+    public final TableField<GradeRecord, String> COURSE_NUM = createField("course_num", org.jooq.impl.SQLDataType.VARCHAR.length(20), this, "课程号");
 
     /**
      * The column <code>my-cms.grade.pacific_grade</code>. 平时成绩
@@ -142,7 +142,7 @@ public class Grade extends TableImpl<GradeRecord> {
      */
     @Override
     public List<UniqueKey<GradeRecord>> getKeys() {
-        return Arrays.<UniqueKey<GradeRecord>>asList(Keys.KEY_GRADE_PRIMARY);
+        return Arrays.<UniqueKey<GradeRecord>>asList(Keys.KEY_GRADE_PRIMARY, Keys.KEY_GRADE_STUDENT_COURSE_IDX);
     }
 
     /**

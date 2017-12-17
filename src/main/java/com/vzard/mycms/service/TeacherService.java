@@ -11,10 +11,13 @@ import com.vzard.mycms.mapper.GradeMapper;
 import com.vzard.mycms.repository.CourseRepository;
 import com.vzard.mycms.repository.GradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@Service
 public class TeacherService {
 
     @Autowired
@@ -57,7 +60,7 @@ public class TeacherService {
      * 删除一条课程
      * @param num
      */
-   public void deleteCourse(Long num){
+   public void deleteCourse(String num){
        courseRepository.deleteCourse(num);
    }
 
@@ -66,8 +69,8 @@ public class TeacherService {
      * @param courseNum
      * @return
      */
-    public List<Grade> getGradeList(Long courseNum){
-       return gradeRepository.getGradeList(courseNum).stream()
+    public List<Grade> getGradeList(String courseNum){
+       return gradeRepository.getGradeList(courseNum.toString()).stream()
                .map(t-> GradeMapper.mapToVo(t))
                .collect(Collectors.toList());
     }

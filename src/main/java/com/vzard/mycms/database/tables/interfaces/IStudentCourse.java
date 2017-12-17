@@ -36,22 +36,22 @@ public interface IStudentCourse extends Serializable {
     /**
      * Setter for <code>my-cms.student_course.student_num</code>. 学号
      */
-    public IStudentCourse setStudentNum(Long value);
+    public IStudentCourse setStudentNum(String value);
 
     /**
      * Getter for <code>my-cms.student_course.student_num</code>. 学号
      */
-    public Long getStudentNum();
+    public String getStudentNum();
 
     /**
      * Setter for <code>my-cms.student_course.course_num</code>. 课程号
      */
-    public IStudentCourse setCourseNum(Long value);
+    public IStudentCourse setCourseNum(String value);
 
     /**
      * Getter for <code>my-cms.student_course.course_num</code>. 课程号
      */
-    public Long getCourseNum();
+    public String getCourseNum();
 
     /**
      * Setter for <code>my-cms.student_course.created_at</code>. 创建时间

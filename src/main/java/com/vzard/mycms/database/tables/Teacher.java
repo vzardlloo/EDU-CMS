@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -35,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Teacher extends TableImpl<TeacherRecord> {
 
-    private static final long serialVersionUID = 1514203773;
+    private static final long serialVersionUID = 1054645819;
 
     /**
      * The reference instance of <code>my-cms.teacher</code>
@@ -51,9 +52,14 @@ public class Teacher extends TableImpl<TeacherRecord> {
     }
 
     /**
+     * The column <code>my-cms.teacher.id</code>. id
+     */
+    public final TableField<TeacherRecord, Integer> ID = createField("id", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "id");
+
+    /**
      * The column <code>my-cms.teacher.number</code>. 工号
      */
-    public final TableField<TeacherRecord, Long> NUMBER = createField("number", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "工号");
+    public final TableField<TeacherRecord, String> NUMBER = createField("number", org.jooq.impl.SQLDataType.VARCHAR.length(20), this, "工号");
 
     /**
      * The column <code>my-cms.teacher.name</code>. 姓名
@@ -118,6 +124,14 @@ public class Teacher extends TableImpl<TeacherRecord> {
     @Override
     public Schema getSchema() {
         return MyCms.MY_CMS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<TeacherRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_TEACHER;
     }
 
     /**

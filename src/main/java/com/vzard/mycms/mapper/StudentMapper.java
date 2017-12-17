@@ -10,9 +10,16 @@ public class StudentMapper {
 
 
     public static Student mapToVo(IStudent iStudent){
-        if (null != iStudent) return null;
+        if (null == iStudent) return null;
         Student student = new Student();
-        BeanUtils.copyProperties(iStudent,student);
+        student.setName(iStudent.getName());
+        student.setNumber(iStudent.getNumber());
+        student.setGender(iStudent.getGender());
+        student.setBirthday(iStudent.getBirthday());
+        student.setClbum(iStudent.getClbum());
+        student.setAcademy(iStudent.getAcademy());
+        student.setCreatedAt(iStudent.getCreatedAt());
+        student.setUpdatedAt(iStudent.getUpdatedAt());
         return student;
     }
 

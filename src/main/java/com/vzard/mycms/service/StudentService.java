@@ -10,15 +10,31 @@ import com.vzard.mycms.model.dto.CourseWithGradeDto;
 import com.vzard.mycms.repository.StudentCourseRepository;
 import com.vzard.mycms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service
 public class StudentService {
 
     @Autowired
     StudentRepository studentRepository;
     @Autowired
     StudentCourseRepository studentCourseRepository;
+
+
+    /**
+     * 根据学号查找一个学生
+     * @param num
+     * @return
+     */
+    public Student getStudentByNumber(String num){
+
+        return StudentMapper.mapToVo(studentRepository.getStudentByNumber(num));
+
+    }
+
 
     /**
      * 修改个人信息
@@ -46,7 +62,7 @@ public class StudentService {
      * @param studentNum
      * @param courseNum
      */
-    public void deleteCourse(Long studentNum,Long courseNum){
+    public void deleteCourse(String studentNum,String courseNum){
         studentCourseRepository.deleteStudentCourseMap(studentNum,courseNum);
     }
 
@@ -57,7 +73,7 @@ public class StudentService {
      * @param offset
      * @return
      */
-    public List<CourseWithGradeDto> getChoosedCourse(Long studentNum, int start, int offset){
+    public List<CourseWithGradeDto> getChoosedCourse(String studentNum, int start, int offset){
 
       return studentRepository.getChoosedCourse(studentNum,start,offset);
 

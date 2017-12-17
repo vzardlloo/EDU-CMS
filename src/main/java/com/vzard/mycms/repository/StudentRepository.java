@@ -12,6 +12,7 @@ import org.jooq.Record10;
 import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -28,14 +29,18 @@ public class StudentRepository {
     @Qualifier("mycms")
     DSLContext dsl;
 
-    public IStudent getStudentByNumber(Long number){
-        if (null != number){
+    public IStudent getStudentByNumber(String number){
+        if (null == number){
             throw new ErrorException("param error",500);
         }
 
-        return dsl.select().from(Tables.STUDENT)
-                .where(Tables.STUDENT.NUMBER.eq(number))
-                .fetchOneInto(IStudent.class);
+        IStudent iStudent = dsl.select().from(Tables.STUDENT)
+                        .where(Tables.STUDENT.NUMBER.eq(number))
+                        .fetchOneInto(IStudent.class);
+        if (null == iStudent){
+            throw new ErrorException("not found",404);
+        }
+        return iStudent;
     }
 
     public List<IStudent> getStudentList(){
@@ -93,7 +98,7 @@ public class StudentRepository {
     }
 
 
-    public void deleteStudentInfo(Long num){
+    public void deleteStudentInfo(String num){
         if (null != num) {
             throw new ErrorException("param error", 500);
         }else if(!isStudentExist(num)){
@@ -118,10 +123,10 @@ public class StudentRepository {
      * @param offset
      * @return
      */
-    public List<CourseWithGradeDto> getChoosedCourse(Long studentNum,int start,int offset){
+    public List<CourseWithGradeDto> getChoosedCourse(String studentNum,int start,int offset){
 
 
-        Result<Record10<Long,String,String,String,String,String,String,String,String,String>> results = dsl.select(COURSE.NUMBER, COURSE.NAME, COURSE.CREDIT
+        Result<Record10<String,String,String,String,String,String,String,String,String,String>> results = dsl.select(COURSE.NUMBER, COURSE.NAME, COURSE.CREDIT
                 , COURSE.PERIOD, COURSE.TEACHER, COURSE.TIME
                 , COURSE.CLASSROOM,Tables.GRADE.PAPER_GRADE,Tables.GRADE.PACIFIC_GRADE
                 ,Tables.GRADE.OVERALL_GRADE)
@@ -135,7 +140,7 @@ public class StudentRepository {
 
                 )).limit(start,offset).fetch();
         List<CourseWithGradeDto> courseWithGradeDtoList = new ArrayList<>();
-        for (Record10<Long,String,String,String,String,String,String,String,String,String> result : results){
+        for (Record10<String,String,String,String,String,String,String,String,String,String> result : results){
             CourseWithGradeDto course = new CourseWithGradeDto();
             course.setNumber(result.getValue(COURSE.NUMBER));
             course.setName(result.getValue(COURSE.NAME));
@@ -159,7 +164,7 @@ public class StudentRepository {
 
 
     //=======util=======
-    private Boolean isStudentExist(Long num){
+    private Boolean isStudentExist(String num){
 
         if (null != getStudentByNumber(num)){
             return true;

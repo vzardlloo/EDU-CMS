@@ -8,19 +8,23 @@ import com.vzard.mycms.error.ErrorException;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 import static com.vzard.mycms.database.Tables.COURSE;
 
+
+@Service
 public class CourseRepository {
 
     @Autowired
     @Qualifier("mycms")
     DSLContext dsl;
 
-    public ICourse getCourseByNum(Long num){
+    public ICourse getCourseByNum(String num){
         if (null == num){
             throw new ErrorException("param error",500);
         }
@@ -87,7 +91,7 @@ public class CourseRepository {
     }
 
 
-    public void deleteCourse(Long num){
+    public void deleteCourse(String num){
         if (null == num){
             throw new ErrorException("param error",500);
         }else if (!isCourseExist(num)){
@@ -106,7 +110,7 @@ public class CourseRepository {
 
 
     //=======util=====
-    private Boolean isCourseExist(Long num){
+    private Boolean isCourseExist(String num){
         if (null != getCourseByNum(num)){
             return true;
         }

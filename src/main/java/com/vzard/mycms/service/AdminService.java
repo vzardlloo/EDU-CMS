@@ -8,10 +8,12 @@ import com.vzard.mycms.mapper.TeacherMapper;
 import com.vzard.mycms.repository.StudentRepository;
 import com.vzard.mycms.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AdminService {
 
     @Autowired
@@ -52,7 +54,7 @@ public class AdminService {
      * 删除一个学生信息
      * @param num
      */
-    public void deleteStudentInfo(Long num){
+    public void deleteStudentInfo(String num){
          studentRepository.deleteStudentInfo(num);
     }
 
@@ -90,7 +92,7 @@ public class AdminService {
      * 删除一个学生信息
      * @param num
      */
-    public void deleteTeacherInfo(Long num){
+    public void deleteTeacherInfo(String num){
         teacherRepository.deleteTeacherInfo(num);
     }
 
