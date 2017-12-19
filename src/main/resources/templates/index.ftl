@@ -12,7 +12,7 @@
     <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="/layui.js" type="text/javascript"></script>
 </head>
-<body  class="layui-bg-cyan">
+<body  class="layui-bg-cyan" onload="refreshCode()">
 <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 <!--[if lt IE 9]>
 <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -92,11 +92,42 @@
         console.assert(element)
         //…
     });
-    
-    
-    function verifyCodeCheck() {
 
 
+
+
+
+//    layui.config({
+//        base: "js/"
+//    }).use(['form', 'layer'], function () {
+//        var form = layui.form(),
+//                layer = parent.layer === undefined ? layui.layer : parent.layer,
+//                $ = layui.jquery;
+//        //登录按钮事件
+//        form.on("submit(login)", function (data) {
+//            var datas = "number=" + data.field.number + "&password=" + data.field.password + "&captcha=" + data.field.verifycode
+//            $.ajax({
+//                type: "POST",
+//                url: "/student/main",
+//                data: datas,
+//                dataType: "json",
+//                success: function (result) {
+//                    if (result.code == 0) {//登录成功
+//                        //parent.location.href = '/index.html';
+//                    } else {
+//                        layer.msg(result.msg, {icon: 5});
+//                        refreshCode();
+//                    }
+//                }
+//            });
+//            return false;
+//        })
+//    });
+
+
+    function refreshCode() {
+        var verfiycode = document.getElementById("captcha")
+        verfiycode.src = '/captcha.html?'+Math.random();
     }
     
     

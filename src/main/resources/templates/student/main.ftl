@@ -12,14 +12,32 @@
     <script src="/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="/layui.js" type="text/javascript"></script>
 </head>
-<body  class="layui-bg-cyan">
+<body  class="layui-layout-body">
 <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
 <!--[if lt IE 9]>
 <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<h1>${student.getName()}</h1>
+
+<div class="layui-layout layui-layout-admin">
+
+    <#include "head.ftl">
+    <#include "side.ftl">
+    <#include "${page}.ftl">
+    <#include "foot.ftl">
+
+</div>
+
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+        console.assert(element)
+        //…
+    });
+</script>
 
 
 
