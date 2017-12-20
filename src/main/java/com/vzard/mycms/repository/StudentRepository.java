@@ -91,6 +91,7 @@ public class StudentRepository {
                 .set(Tables.STUDENT.ACADEMY,student.getAcademy())
                 .set(Tables.STUDENT.GENDER,student.getGender())
                 .set(Tables.STUDENT.UPDATED_AT,new Timestamp(System.currentTimeMillis()))
+                .where(Tables.STUDENT.NUMBER.eq(student.getNumber()))
                 .execute();
 
         return getStudentByNumber(student.getNumber());

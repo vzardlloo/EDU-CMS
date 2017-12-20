@@ -8,19 +8,9 @@
                     <dd><a href="personal">修改个人信息</a></dd>
                     <dd><a href="choose">选课/退课</a></dd>
                     <dd><a href="course">查看课程/成绩</a></dd>
-                    <dd><a href="">超链接</a></dd>
+
                 </dl>
             </li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">解决方案</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="javascript:;">列表一</a></dd>
-                    <dd><a href="javascript:;">列表二</a></dd>
-                    <dd><a href="">超链接</a></dd>
-                </dl>
-            </li>
-            <li class="layui-nav-item"><a href="">云市场</a></li>
-            <li class="layui-nav-item"><a href="">发布商品</a></li>
         </ul>
     </div>
 </div>

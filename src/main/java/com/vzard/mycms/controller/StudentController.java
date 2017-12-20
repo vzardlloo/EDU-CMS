@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,6 +88,16 @@ public class StudentController {
       modelAndView.clear();
       modelAndView.setViewName("redirect:/");
       return modelAndView;
+  }
+
+
+  @RequestMapping(value = "/update",method = RequestMethod.POST)
+  @ResponseBody
+  public Student updatePersonalInfo(@RequestBody Student student){
+      logger.info(student.getClbum());
+      Student student1 = studentService.modifyPersonInfo(student);
+      return student1;
+
   }
 
 

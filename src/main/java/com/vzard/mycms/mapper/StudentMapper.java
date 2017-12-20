@@ -3,6 +3,7 @@ package com.vzard.mycms.mapper;
 
 import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.pojos.Student;
+import com.vzard.mycms.model.dto.StudentDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.method.annotation.ModelFactory;
 
@@ -21,6 +22,13 @@ public class StudentMapper {
         student.setCreatedAt(iStudent.getCreatedAt());
         student.setUpdatedAt(iStudent.getUpdatedAt());
         return student;
+    }
+
+
+    public static Student mapToDao(StudentDto studentDto){
+
+
+        return null;
     }
 
 
