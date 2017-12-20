@@ -78,21 +78,22 @@
         });
         
         form.on('submit(*)',function (data) {
-            layer.msg(JSON.stringify(data.field),{
-                title:"提交的数据！"
-            })
             $.ajax({
                 type:'POST',
                 url:"/student/update",
                 data:JSON.stringify(data.field),
                 dataType:'json',
                 contentType:"application/json",
-                success:function (data) {
-                    layer.msg("修改成功！")
+                success:function () {
+                    layer.msg("修改成功！",{icon:6})
+                },
+                error:function () {
+                    layer.msg("修改失败！",{icon:5})
                 }
+
             });
 
-
+            return false;
         });
         
         
