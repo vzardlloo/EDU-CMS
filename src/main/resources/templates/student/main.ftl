@@ -38,12 +38,16 @@
         //…
     });
 
+
+
+
     //======personal Js============//
-    layui.use(['form', 'layedit', 'laydate'], function(){
+    layui.use(['form', 'layedit', 'laydate','jquery'], function(){
         var form = layui.form
                 ,layer = layui.layer
                 ,layedit = layui.layedit
                 ,laydate = layui.laydate;
+        var $ = layui.jquery
 
         //日期
         laydate.render({
@@ -67,6 +71,18 @@
             ,content: function(value){
                 layedit.sync(editIndex);
             }
+            ,regPwd: function (value) {
+                var pwd = $("#password").val();
+                var regPwd = $("#password2").val();
+                if(pwd != regPwd){
+                   return "两次密码输入不一致!"
+                }
+            }
+
+            
+
+
+
         });
 
         //监听指定开关
@@ -76,25 +92,27 @@
             });
             layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
         });
-        
+
         form.on('submit(*)',function (data) {
-            $.ajax({
-                type:'POST',
-                url:"/student/update",
-                data:JSON.stringify(data.field),
-                dataType:'json',
-                contentType:"application/json",
-                success:function () {
-                    layer.msg("修改成功！",{icon:6})
-                },
-                error:function () {
-                    layer.msg("修改失败！",{icon:5})
-                }
+                $.ajax({
+                    type: 'POST',
+                    url: "/student/update",
+                    data: JSON.stringify(data.field),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function () {
+                        layer.msg("修改成功！", {icon: 6})
+                    },
+                    error: function () {
+                        layer.msg("修改失败！", {icon: 5})
+                    }
+
 
             });
 
             return false;
-        });
+
+    });
         
         
         
@@ -105,7 +123,50 @@
    });
 
     
+    //======choose Js==============//
+    layui.use('table', function(){
+        var table = layui.table;
+        //监听表格复选框选择
+        table.on('checkbox(demo)', function(obj){
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(demo)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                layer.msg('ID：'+ data.id + ' 的查看操作');
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除行么', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            }
+        });
 
+        var $ = layui.$, active = {
+            getCheckData: function(){ //获取选中数据
+                var checkStatus = table.checkStatus('idTest')
+                        ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            ,getCheckLength: function(){ //获取选中数目
+                var checkStatus = table.checkStatus('idTest')
+                        ,data = checkStatus.data;
+                layer.msg('选中了：'+ data.length + ' 个');
+            }
+            ,isAll: function(){ //验证是否全选
+                var checkStatus = table.checkStatus('idTest');
+                layer.msg(checkStatus.isAll ? '全选': '未全选')
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
 
 
 

@@ -1,7 +1,7 @@
 <div class="layui-body">
     <form class="layui-form"  style="padding: 15px">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
-            <legend>${student.getName()}的个人信息</legend>
+            <legend>修改${student.getName()}的个人信息</legend>
         </fieldset>
         <div class="layui-form-item">
             <div class="layui-inline">
@@ -24,14 +24,14 @@
             <div class="layui-inline">
                 <label class="layui-form-label">密码</label>
                 <div class="layui-input-inline">
-                    <input type="password" name="password" autocomplete="off" class="layui-input" >
+                    <input type="password" id="password" lay-verify="pass" name="password" autocomplete="off" class="layui-input" >
                 </div>
             </div>
 
             <div class="layui-inline">
                 <label class="layui-form-label">重输密码</label>
                 <div class="layui-input-inline">
-                    <input type="password"  autocomplete="off" class="layui-input">
+                    <input type="password" id="password2" lay-verify="regPwd"  autocomplete="off" class="layui-input">
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
             <div class="layui-inline">
                 <label class="layui-form-label">生日</label>
                 <div class="layui-input-block">
-                    <input type="text"  name="birthday" id="date1" autocomplete="off" class="layui-input">
+                    <input type="text" value="${student.getBirthday()}" name="birthday" id="date1" autocomplete="off" class="layui-input">
                 </div>
             </div>
 

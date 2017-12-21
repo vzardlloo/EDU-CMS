@@ -2,17 +2,21 @@ package com.vzard.mycms.service;
 
 
 import com.vzard.mycms.database.tables.interfaces.IStudentCourse;
+import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.StudentCourse;
+import com.vzard.mycms.mapper.CourseMapper;
 import com.vzard.mycms.mapper.StudentCourseMapper;
 import com.vzard.mycms.mapper.StudentMapper;
 import com.vzard.mycms.model.dto.CourseWithGradeDto;
+import com.vzard.mycms.repository.CourseRepository;
 import com.vzard.mycms.repository.StudentCourseRepository;
 import com.vzard.mycms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -22,7 +26,8 @@ public class StudentService {
     StudentRepository studentRepository;
     @Autowired
     StudentCourseRepository studentCourseRepository;
-
+    @Autowired
+    CourseRepository courseRepository;
 
     /**
      * 根据学号查找一个学生
@@ -44,6 +49,14 @@ public class StudentService {
     public Student modifyPersonInfo(Student student){
 
         return StudentMapper.mapToVo(studentRepository.updateStudentInfo(student));
+    }
+
+
+    public List<Course> getCourseList(){
+
+        return courseRepository.getCourseList()
+                .stream().map(t-> CourseMapper.mapToVo(t))
+                .collect(Collectors.toList());
     }
 
     /**

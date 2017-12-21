@@ -42,6 +42,13 @@ public class CourseRepository {
                 .fetchInto(ICourse.class);
     }
 
+    public List<ICourse> getCourseList(){
+        return dsl.select()
+                .from(COURSE)
+                //.limit(page, limit)
+                .fetchInto(ICourse.class);
+    }
+
 
 
 

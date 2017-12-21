@@ -2,7 +2,11 @@ package com.vzard.mycms.controller;
 
 
 
+
+import com.sun.deploy.net.HttpResponse;
+import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
+import com.vzard.mycms.model.ResponseModel;
 import com.vzard.mycms.model.dto.LoginParam;
 import com.vzard.mycms.service.StudentService;
 import org.slf4j.Logger;
@@ -17,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @RequestMapping(path = "student")
@@ -98,6 +103,19 @@ public class StudentController {
       Student student1 = studentService.modifyPersonInfo(student);
       return student1;
 
+  }
+
+
+  @RequestMapping(value = "/courselist",method = RequestMethod.GET)
+  @ResponseBody
+  public ResponseModel<List<Course>> getCourseList(){
+      List<Course> courseList = studentService.getCourseList();
+      return ResponseModel.builder()
+              .code(0)
+              .message("")
+              .count(new Long(courseList.size()))
+              .data(courseList)
+              .build();
   }
 
 

@@ -2,18 +2,18 @@ package com.vzard.mycms.model;
 
 
 import com.vzard.mycms.database.tables.pojos.Student;
-import io.swagger.models.Response;
-import io.swagger.models.auth.In;
 
 public class ResponseModel<T> {
 
     private Integer code;
-    private String message;
+    private String msg;
+    private Long count;
     private T data;
 
     public static class ResponseModelBuilder<T>{
         private Integer code;
-        private String message;
+        private String msg;
+        private Long count;
         private T data;
 
         public ResponseModelBuilder code(Integer code){
@@ -22,7 +22,12 @@ public class ResponseModel<T> {
         }
 
         public ResponseModelBuilder message(String message){
-            this.message = message;
+            this.msg = message;
+            return this;
+        }
+
+        public ResponseModelBuilder count(Long count){
+            this.count = count;
             return this;
         }
 
@@ -43,7 +48,8 @@ public class ResponseModel<T> {
 
     public ResponseModel(ResponseModelBuilder<T> builder){
         this.code = builder.code;
-        this.message = builder.message;
+        this.msg = builder.msg;
+        this.count = builder.count;
         this.data = builder.data;
 
     }
@@ -55,8 +61,12 @@ public class ResponseModel<T> {
         return code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
+    }
+
+    public Long getCount() {
+        return count;
     }
 
     public T getData() {
@@ -68,7 +78,7 @@ public class ResponseModel<T> {
 
         return "ReponseModel{ \n"+
                 "code: "+code+",\n"
-                +"message: "+message+",\n"
+                +"msg: "+ msg +",\n"
                 +"data: "+data+"\n"
                 +"}";
 
@@ -77,7 +87,7 @@ public class ResponseModel<T> {
     //test and use example
     public static void main(String[] args) {
 
-        ResponseModel model = ResponseModel.builder().code(200).message("message").data(new Student()).build();
+        ResponseModel model = ResponseModel.builder().code(200).message("msg").data(new Student()).build();
         System.out.println(model);
 
     }
