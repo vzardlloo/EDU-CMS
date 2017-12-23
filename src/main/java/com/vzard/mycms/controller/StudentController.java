@@ -6,20 +6,20 @@ package com.vzard.mycms.controller;
 import com.sun.deploy.net.HttpResponse;
 import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
+import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.model.ResponseModel;
+import com.vzard.mycms.model.dto.CourseWithCurrentStudentNumber;
 import com.vzard.mycms.model.dto.LoginParam;
 import com.vzard.mycms.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -106,10 +106,10 @@ public class StudentController {
   }
 
 
-  @RequestMapping(value = "/courselist",method = RequestMethod.GET)
+  @RequestMapping(value = "/courselist/{num}",method = RequestMethod.GET)
   @ResponseBody
-  public ResponseModel<List<Course>> getCourseList(){
-      List<Course> courseList = studentService.getCourseList();
+  public ResponseModel<List<CourseWithCurrentStudentNumber>> getCourseList(@PathVariable(value = "num") String num){
+      List<CourseWithCurrentStudentNumber> courseList = studentService.getCourseList(num);
       return ResponseModel.builder()
               .code(0)
               .message("")
@@ -117,6 +117,22 @@ public class StudentController {
               .data(courseList)
               .build();
   }
+
+  @RequestMapping(value = "/course",method = RequestMethod.POST)
+  @ResponseBody
+  public StudentCourse chooseCourse(@RequestBody StudentCourse studentCourse){
+      logger.info(studentCourse.getStudentNum());
+      return studentService.chooseCourse(studentCourse);
+  }
+
+    @RequestMapping(value = "/course",method = RequestMethod.DELETE)
+    @ResponseBody
+    public int deleteCourse(@RequestBody StudentCourse studentCourse, HttpServletResponse response){
+        logger.info(studentCourse.getStudentNum());
+        studentService.deleteCourse(studentCourse.getStudentNum(),studentCourse.getCourseNum());
+        return response.getStatus();
+    }
+
 
 
 

@@ -3,7 +3,7 @@ package com.vzard.mycms.model.dto;
 import lombok.Data;
 
 @Data
-public class CourseWithGradeDto {
+public class CourseWithGrade {
 
     private String    number;
     private String    name;

@@ -1,10 +1,6 @@
 <div class="layui-body">
-    <div class="layui-btn-group demoTable">
-        <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-        <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-        <button class="layui-btn" data-type="isAll">验证是否全选</button>
-    </div>
-    <table class="layui-table" lay-data="{height: 'full-200', url:'/student/courselist', page:true, id:'idTest'}" lay-filter="demo">
+
+    <table class="layui-table" lay-data="{height: 'full-200', url:'/student/courselist/${student.getNumber()}', page:true, id:'course'}" lay-filter="demo">
         <thead>
         <tr>
             <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
@@ -24,9 +20,15 @@
     </table>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a id = "choose" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">选课</a>
+        <!--a class="layui-btn layui-btn-xs" lay-event="edit">选课</a-->
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
+
+
+    <div class="layui-btn-group demoTable">
+    <button class="layui-btn" data-type="getCheckData">确定选课</button>
+
+    </div>
 
 </div>

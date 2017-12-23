@@ -111,15 +111,8 @@
             });
 
             return false;
-
     });
-        
-        
-        
-        
-        
-        
-        
+
    });
 
     
@@ -134,30 +127,76 @@
         table.on('tool(demo)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.id + ' 的查看操作');
+                //layer.msg('ID：'+ data.id + ' 的查看操作');
+                var data2 = {"courseNum":data.number,"studentNum":data.studentNumber}
+                $.ajax({
+                    type:'POST',
+                    url:'/student/course',
+                    data:JSON.stringify(data2),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function () {
+                        layer.msg("选课成功！", {icon: 6})
+                        //$.("#choose").disable()
+                    },
+                    error: function () {
+                        layer.msg("选课失败！", {icon: 5})
+                    }
+                })
+
             } else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
+                layer.confirm("确定退课？", function(index){
+                    var data2 = {"courseNum":data.number,"studentNum":data.studentNumber}
+                    $.ajax({
+                        type:'DELETE',
+                        url:'/student/course',
+                        data:JSON.stringify(data2),
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function () {
+                            layer.msg("退课成功！", {icon: 6})
+
+                        },
+                        error: function () {
+                            layer.msg("退课失败！", {icon: 5})
+                        }
+                    })
                 });
             } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                layer.alert('编辑行：<br>'+ JSON.stringify(data.name))
             }
         });
 
         var $ = layui.$, active = {
             getCheckData: function(){ //获取选中数据
-                var checkStatus = table.checkStatus('idTest')
+                var checkStatus = table.checkStatus('course')
                         ,data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+                //layer.alert(JSON.stringify(data[0].number+"::"+data[0].studentNumber));
+                var data2 = {"courseNum":data[0].number,"studentNum":data[0].studentNumber}
+                $.ajax({
+                    type:'POST',
+                    url:'/student/course',
+                    data:JSON.stringify(data2),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function () {
+                        layer.msg("选课成功！", {icon: 6})
+                    },
+                    error: function () {
+                        layer.msg("选课失败！", {icon: 5})
+                    }
+
+
+                })
+
             }
             ,getCheckLength: function(){ //获取选中数目
-                var checkStatus = table.checkStatus('idTest')
+                var checkStatus = table.checkStatus('course')
                         ,data = checkStatus.data;
                 layer.msg('选中了：'+ data.length + ' 个');
             }
             ,isAll: function(){ //验证是否全选
-                var checkStatus = table.checkStatus('idTest');
+                var checkStatus = table.checkStatus('course');
                 layer.msg(checkStatus.isAll ? '全选': '未全选')
             }
         };
@@ -167,7 +206,6 @@
             active[type] ? active[type].call(this) : '';
         });
     });
-
 
 
 

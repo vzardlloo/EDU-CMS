@@ -5,14 +5,12 @@ import com.vzard.mycms.database.Tables;
 import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.error.ErrorException;
-import com.vzard.mycms.model.dto.CourseWithGradeDto;
-import javafx.scene.control.Tab;
+import com.vzard.mycms.model.dto.CourseWithGrade;
 import org.jooq.DSLContext;
 import org.jooq.Record10;
 import org.jooq.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -124,7 +122,7 @@ public class StudentRepository {
      * @param offset
      * @return
      */
-    public List<CourseWithGradeDto> getChoosedCourse(String studentNum,int start,int offset){
+    public List<CourseWithGrade> getChoosedCourse(String studentNum, int start, int offset){
 
 
         Result<Record10<String,String,String,String,String,String,String,String,String,String>> results = dsl.select(COURSE.NUMBER, COURSE.NAME, COURSE.CREDIT
@@ -140,9 +138,9 @@ public class StudentRepository {
                         .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
 
                 )).limit(start,offset).fetch();
-        List<CourseWithGradeDto> courseWithGradeDtoList = new ArrayList<>();
+        List<CourseWithGrade> courseWithGradeDtoList = new ArrayList<>();
         for (Record10<String,String,String,String,String,String,String,String,String,String> result : results){
-            CourseWithGradeDto course = new CourseWithGradeDto();
+            CourseWithGrade course = new CourseWithGrade();
             course.setNumber(result.getValue(COURSE.NUMBER));
             course.setName(result.getValue(COURSE.NAME));
             course.setCredit(result.getValue(COURSE.CREDIT));

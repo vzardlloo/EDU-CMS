@@ -26,7 +26,7 @@ public class StudentCourseRepository {
     //根据studentName 查找 course
     public IStudentCourse getStudentCourseMap(String studentNum){
         if (null == studentNum){
-            throw new ErrorException("param error",500);
+            throw new ErrorException("param error",400);
         }
 
         return dsl.select()
@@ -36,8 +36,8 @@ public class StudentCourseRepository {
     }
 
     public IStudentCourse addStudentCourseMap(StudentCourse studentCourse){
-        if (null != studentCourse){
-            throw new ErrorException("param error",500);
+        if (null == studentCourse){
+            throw new ErrorException("param error",400);
         }else if (isStudentCourseMapExist(studentCourse.getStudentNum())){
             throw new ErrorException("already exist",500);
         }
@@ -104,7 +104,7 @@ public class StudentCourseRepository {
 
     private Boolean isStudentCourseMapExist(String studentNum,String courseNum){
         if (null == studentNum || null == courseNum){
-            throw new ErrorException("param error",500);
+            throw new ErrorException("param error",400);
         }
         IStudentCourse iStudentCourse = dsl.select()
                                         .from(Tables.STUDENT_COURSE)

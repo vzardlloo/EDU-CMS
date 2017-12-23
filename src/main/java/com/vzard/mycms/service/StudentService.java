@@ -1,6 +1,7 @@
 package com.vzard.mycms.service;
 
 
+import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.interfaces.IStudentCourse;
 import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
@@ -8,7 +9,8 @@ import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.mapper.CourseMapper;
 import com.vzard.mycms.mapper.StudentCourseMapper;
 import com.vzard.mycms.mapper.StudentMapper;
-import com.vzard.mycms.model.dto.CourseWithGradeDto;
+import com.vzard.mycms.model.dto.CourseWithCurrentStudentNumber;
+import com.vzard.mycms.model.dto.CourseWithGrade;
 import com.vzard.mycms.repository.CourseRepository;
 import com.vzard.mycms.repository.StudentCourseRepository;
 import com.vzard.mycms.repository.StudentRepository;
@@ -52,10 +54,11 @@ public class StudentService {
     }
 
 
-    public List<Course> getCourseList(){
+    public List<CourseWithCurrentStudentNumber> getCourseList(String num){
 
+        IStudent iStudent = studentRepository.getStudentByNumber(num);
         return courseRepository.getCourseList()
-                .stream().map(t-> CourseMapper.mapToVo(t))
+                .stream().map(t-> CourseMapper.mapToDto(t,iStudent))
                 .collect(Collectors.toList());
     }
 
@@ -86,7 +89,7 @@ public class StudentService {
      * @param offset
      * @return
      */
-    public List<CourseWithGradeDto> getChoosedCourse(String studentNum, int start, int offset){
+    public List<CourseWithGrade> getChoosedCourse(String studentNum, int start, int offset){
 
       return studentRepository.getChoosedCourse(studentNum,start,offset);
 
