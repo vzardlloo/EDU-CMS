@@ -3,12 +3,14 @@ package com.vzard.mycms.repository;
 
 import com.vzard.mycms.database.Tables;
 import com.vzard.mycms.database.tables.interfaces.IStudent;
+import com.vzard.mycms.database.tables.pojos.Course;
+import com.vzard.mycms.database.tables.pojos.Grade;
 import com.vzard.mycms.database.tables.pojos.Student;
+import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.error.ErrorException;
 import com.vzard.mycms.model.dto.CourseWithGrade;
-import org.jooq.DSLContext;
-import org.jooq.Record10;
-import org.jooq.Result;
+import org.jooq.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import static com.vzard.mycms.database.Tables.COURSE;
 import static com.vzard.mycms.database.Tables.GRADE;
+import static com.vzard.mycms.database.Tables.STUDENT_COURSE;
 
 @Service
 public class StudentRepository {
@@ -124,40 +127,90 @@ public class StudentRepository {
      */
     public List<CourseWithGrade> getChoosedCourse(String studentNum, int start, int offset){
 
+//        Result<Record10<String,String,String,String,String,String,String,String,String,String>> results = dsl.select(COURSE.NUMBER, COURSE.NAME, COURSE.CREDIT
+//                , COURSE.PERIOD, COURSE.TEACHER, COURSE.TIME
+//                , COURSE.CLASSROOM,Tables.GRADE.PAPER_GRADE,Tables.GRADE.PACIFIC_GRADE
+//                ,Tables.GRADE.OVERALL_GRADE)
+//                .from(COURSE)
+//                .leftJoin(Tables.GRADE)
+//                .on(COURSE.NUMBER.eq(Tables.STUDENT_COURSE.COURSE_NUM))
+//                .where(COURSE.NUMBER.in(
+//                        dsl.select(Tables.STUDENT_COURSE.COURSE_NUM)
+//                        .from(Tables.STUDENT_COURSE)
+//                        .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
+//
+//                )).fetch();
+//        List<CourseWithGrade> courseWithGradeDtoList = new ArrayList<>();
+//        for (Record10<String,String,String,String,String,String,String,String,String,String> result : results){
+//            CourseWithGrade course = new CourseWithGrade();
+//            course.setNumber(result.getValue(COURSE.NUMBER));
+//            course.setName(result.getValue(COURSE.NAME));
+//            course.setCredit(result.getValue(COURSE.CREDIT));
+//            course.setTime(result.getValue(COURSE.TIME));
+//            course.setClassroom(result.getValue(COURSE.CLASSROOM));
+//            course.setTeacher(result.getValue(COURSE.TEACHER));
+//            course.setPeriod(result.getValue(COURSE.PERIOD));
+//            course.setPaperGrade(result.getValue(GRADE.PAPER_GRADE));
+//            course.setPacificGrade(result.getValue(GRADE.PACIFIC_GRADE));
+//            course.setOverallGrade(result.getValue(GRADE.OVERALL_GRADE));
+//
+//            courseWithGradeDtoList.add(course);
 
-        Result<Record10<String,String,String,String,String,String,String,String,String,String>> results = dsl.select(COURSE.NUMBER, COURSE.NAME, COURSE.CREDIT
-                , COURSE.PERIOD, COURSE.TEACHER, COURSE.TIME
-                , COURSE.CLASSROOM,Tables.GRADE.PAPER_GRADE,Tables.GRADE.PACIFIC_GRADE
-                ,Tables.GRADE.OVERALL_GRADE)
-                .from(COURSE)
-                .leftJoin(Tables.GRADE)
-                .on(COURSE.NUMBER.eq(Tables.STUDENT_COURSE.COURSE_NUM))
-                .where(COURSE.NUMBER.in(
-                        dsl.select(Tables.STUDENT_COURSE.COURSE_NUM)
-                        .from(Tables.STUDENT_COURSE)
-                        .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
-
-                )).limit(start,offset).fetch();
-        List<CourseWithGrade> courseWithGradeDtoList = new ArrayList<>();
-        for (Record10<String,String,String,String,String,String,String,String,String,String> result : results){
-            CourseWithGrade course = new CourseWithGrade();
-            course.setNumber(result.getValue(COURSE.NUMBER));
-            course.setName(result.getValue(COURSE.NAME));
-            course.setCredit(result.getValue(COURSE.CREDIT));
-            course.setTime(result.getValue(COURSE.TIME));
-            course.setClassroom(result.getValue(COURSE.CLASSROOM));
-            course.setTeacher(result.getValue(COURSE.TEACHER));
-            course.setPeriod(result.getValue(COURSE.PERIOD));
-            course.setPaperGrade(result.getValue(GRADE.PAPER_GRADE));
-            course.setPacificGrade(result.getValue(GRADE.PACIFIC_GRADE));
-            course.setOverallGrade(result.getValue(GRADE.OVERALL_GRADE));
-
-            courseWithGradeDtoList.add(course);
-
-        }
+//        return null;
+//
+//        }
+//
+//
+//        return courseWithGradeDtoList;
 
 
-        return courseWithGradeDtoList;
+       List<CourseWithGrade> courseWithGradeList = new ArrayList<>();
+
+        //某学生所选的课程号列表
+       List<String> courseNumList = dsl.select(STUDENT_COURSE.COURSE_NUM)
+               .from(STUDENT_COURSE)
+               .where(STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
+               .fetchInto(String.class);
+
+       for (String currentCourseNum : courseNumList){
+
+           Course course = dsl.select()
+                   .from(COURSE)
+                   .where(COURSE.NUMBER.eq(currentCourseNum))
+                   .fetchOneInto(Course.class);
+
+
+           Grade grade = dsl.select()
+                   .from(GRADE)
+                   .where(GRADE.COURSE_NUM.eq(currentCourseNum).and(GRADE.STUDENT_NUM.eq(studentNum)))
+                   .fetchOneInto(Grade.class);
+
+
+           CourseWithGrade courseWithGrade = new CourseWithGrade();
+
+           courseWithGrade.setName(course.getName());
+           courseWithGrade.setNumber(course.getNumber());
+           courseWithGrade.setCredit(course.getCredit());
+           courseWithGrade.setPeriod(course.getPeriod());
+           courseWithGrade.setClassroom(course.getClassroom());
+           courseWithGrade.setTime(course.getTime());
+           courseWithGrade.setTeacher(course.getTeacher());
+           if (null != grade) {
+               courseWithGrade.setPacificGrade(grade.getPacificGrade());
+               courseWithGrade.setPaperGrade(grade.getPaperGrade());
+               courseWithGrade.setOverallGrade(grade.getOverallGrade());
+           }else {
+               courseWithGrade.setPacificGrade("成绩未公布");
+               courseWithGrade.setPaperGrade("成绩未公布");
+               courseWithGrade.setOverallGrade("成绩未公布");
+           }
+           courseWithGradeList.add(courseWithGrade);
+
+       }
+
+
+
+       return courseWithGradeList;
 
     }
 

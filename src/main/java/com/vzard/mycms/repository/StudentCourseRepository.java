@@ -40,15 +40,16 @@ public class StudentCourseRepository {
             throw new ErrorException("param error",400);
         }else if (isStudentCourseMapExist(studentCourse.getStudentNum())){
             throw new ErrorException("already exist",500);
-        }
+        }else {
 
-        dsl.insertInto(Tables.STUDENT_COURSE)
-                .columns(Tables.STUDENT_COURSE.STUDENT_NUM,Tables.STUDENT_COURSE.COURSE_NUM,
-                        Tables.STUDENT_COURSE.CREATED_AT,Tables.STUDENT_COURSE.UPDATED_AT)
-                .values(studentCourse.getStudentNum(),studentCourse.getCourseNum(),
-                        new Timestamp(System.currentTimeMillis()),
-                        new Timestamp(System.currentTimeMillis()))
-                .execute();
+            dsl.insertInto(Tables.STUDENT_COURSE)
+                    .columns(Tables.STUDENT_COURSE.STUDENT_NUM, Tables.STUDENT_COURSE.COURSE_NUM,
+                            Tables.STUDENT_COURSE.CREATED_AT, Tables.STUDENT_COURSE.UPDATED_AT)
+                    .values(studentCourse.getStudentNum(), studentCourse.getCourseNum(),
+                            new Timestamp(System.currentTimeMillis()),
+                            new Timestamp(System.currentTimeMillis()))
+                    .execute();
+        }
         IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum());
         if (null == iStudentCourse){
             throw new ErrorException("insert error",500);

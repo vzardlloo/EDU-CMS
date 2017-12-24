@@ -43,10 +43,10 @@
         </form>
         </div>
         </div>
-        <div class="layui-tab-item">
+        <div class="layui-tab-item" onload="refreshCode()">
             <div class="login">
                 <h1>教师登录入口</h1>
-                <form class="layui-form">
+                <form class="layui-form" action="/teacher/main" method="post">
                     <div class="layui-form-item">
                         <input class="layui-input" name="number" placeholder="工号"  lay-verify="required" type="text" autocomplete="off">
                     </div>

@@ -9,6 +9,7 @@ import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.model.ResponseModel;
 import com.vzard.mycms.model.dto.CourseWithCurrentStudentNumber;
+import com.vzard.mycms.model.dto.CourseWithGrade;
 import com.vzard.mycms.model.dto.LoginParam;
 import com.vzard.mycms.service.StudentService;
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class StudentController {
         //logger.info(student.getName());
         String verifyCode = (String)request.getSession().getAttribute("verifyCode");
         logger.info(verifyCode);
-        if (null != student && verifyCode.equals(loginParam.getVerifycode())){
+        if (null != student && verifyCode.equals(loginParam.getVerifycode()) && student.getPassword().equals(loginParam.getPassword())){
             logger.info(student.getName());
             logger.info(request.getContextPath());
             String sessionId = request.getSession().getId();
@@ -132,6 +133,23 @@ public class StudentController {
         studentService.deleteCourse(studentCourse.getStudentNum(),studentCourse.getCourseNum());
         return response.getStatus();
     }
+
+
+
+    @RequestMapping(value = "/course/{num}",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseModel<List<CourseWithGrade>> getChoosedCourse(@PathVariable String num,int page,int limit){
+        List<CourseWithGrade> courseWithGradeList = studentService.getChoosedCourse(num, page, limit);
+        return ResponseModel.builder()
+                .code(0)
+                .count(new Long(courseWithGradeList.size()))
+                .message("")
+                .data(courseWithGradeList)
+                .build();
+    }
+
+
+
 
 
 

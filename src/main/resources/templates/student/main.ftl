@@ -137,7 +137,7 @@
                     contentType: "application/json",
                     success: function () {
                         layer.msg("选课成功！", {icon: 6})
-                        //$.("#choose").disable()
+                        obj.del();
                     },
                     error: function () {
                         layer.msg("选课失败！", {icon: 5})

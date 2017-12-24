@@ -1,15 +1,17 @@
 package com.vzard.mycms.service;
 
 
-import com.vzard.mycms.database.tables.Teacher;
 import com.vzard.mycms.database.tables.interfaces.ICourse;
 import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Grade;
+import com.vzard.mycms.database.tables.pojos.Teacher;
 import com.vzard.mycms.mapper.CourseMapper;
 import com.vzard.mycms.mapper.GradeMapper;
+import com.vzard.mycms.mapper.TeacherMapper;
 import com.vzard.mycms.repository.CourseRepository;
 import com.vzard.mycms.repository.GradeRepository;
+import com.vzard.mycms.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,17 @@ public class TeacherService {
     CourseRepository courseRepository;
     @Autowired
     GradeRepository gradeRepository;
+    @Autowired
+    TeacherRepository teacherRepository;
+
+
+
+
+    public Teacher getTeacherByNumber(String number){
+
+        return TeacherMapper.mapToVo(teacherRepository.getTeacherByNumber(number));
+    }
+
 
     /**
      * 获取自己教授的课程列表

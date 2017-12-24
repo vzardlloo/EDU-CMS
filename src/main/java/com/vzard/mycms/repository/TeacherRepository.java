@@ -23,7 +23,7 @@ public class TeacherRepository {
 
 
     public ITeacher getTeacherByNumber(String num){
-        if (null != num){
+        if (null == num){
             throw new ErrorException("param error",500);
         }
 
