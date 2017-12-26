@@ -6,9 +6,10 @@ import com.vzard.mycms.database.tables.interfaces.IStudentCourse;
 import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.error.ErrorException;
 import org.jooq.DSLContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -22,9 +23,11 @@ public class StudentCourseRepository {
     @Qualifier("mycms")
     DSLContext dsl;
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //根据studentName 查找 course
     public IStudentCourse getStudentCourseMap(String studentNum){
+        logger.info(studentNum.toString());
         if (null == studentNum){
             throw new ErrorException("param error",400);
         }
@@ -36,11 +39,10 @@ public class StudentCourseRepository {
     }
 
     public IStudentCourse addStudentCourseMap(StudentCourse studentCourse){
+        logger.info(studentCourse.getStudentNum().toString());
         if (null == studentCourse){
             throw new ErrorException("param error",400);
-        }else if (isStudentCourseMapExist(studentCourse.getStudentNum())){
-            throw new ErrorException("already exist",500);
-        }else {
+        }
 
             dsl.insertInto(Tables.STUDENT_COURSE)
                     .columns(Tables.STUDENT_COURSE.STUDENT_NUM, Tables.STUDENT_COURSE.COURSE_NUM,
@@ -49,8 +51,9 @@ public class StudentCourseRepository {
                             new Timestamp(System.currentTimeMillis()),
                             new Timestamp(System.currentTimeMillis()))
                     .execute();
-        }
+
         IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum());
+        logger.info(iStudentCourse.toString());
         if (null == iStudentCourse){
             throw new ErrorException("insert error",500);
         }
@@ -97,10 +100,10 @@ public class StudentCourseRepository {
 
     //=========util======//
     private Boolean isStudentCourseMapExist(String num){
-        if (null != getStudentCourseMap(num)){
-            return true;
+        if (null == getStudentCourseMap(num)) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     private Boolean isStudentCourseMapExist(String studentNum,String courseNum){

@@ -6,11 +6,9 @@ import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Grade;
 import com.vzard.mycms.database.tables.pojos.Student;
-import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.error.ErrorException;
 import com.vzard.mycms.model.dto.CourseWithGrade;
-import org.jooq.*;
-import org.springframework.beans.BeanUtils;
+import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -19,9 +17,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.vzard.mycms.database.Tables.COURSE;
-import static com.vzard.mycms.database.Tables.GRADE;
-import static com.vzard.mycms.database.Tables.STUDENT_COURSE;
+import static com.vzard.mycms.database.Tables.*;
 
 @Service
 public class StudentRepository {
@@ -38,9 +34,11 @@ public class StudentRepository {
         IStudent iStudent = dsl.select().from(Tables.STUDENT)
                         .where(Tables.STUDENT.NUMBER.eq(number))
                         .fetchOneInto(IStudent.class);
+
         if (null == iStudent){
             throw new ErrorException("not found",404);
         }
+
         return iStudent;
     }
 
@@ -188,13 +186,16 @@ public class StudentRepository {
 
            CourseWithGrade courseWithGrade = new CourseWithGrade();
 
-           courseWithGrade.setName(course.getName());
-           courseWithGrade.setNumber(course.getNumber());
-           courseWithGrade.setCredit(course.getCredit());
-           courseWithGrade.setPeriod(course.getPeriod());
-           courseWithGrade.setClassroom(course.getClassroom());
-           courseWithGrade.setTime(course.getTime());
-           courseWithGrade.setTeacher(course.getTeacher());
+           if (null != course) {
+               courseWithGrade.setName(course.getName());
+               courseWithGrade.setNumber(course.getNumber());
+               courseWithGrade.setCredit(course.getCredit());
+               courseWithGrade.setPeriod(course.getPeriod());
+               courseWithGrade.setClassroom(course.getClassroom());
+               courseWithGrade.setTime(course.getTime());
+               courseWithGrade.setTeacher(course.getTeacher());
+           }
+
            if (null != grade) {
                courseWithGrade.setPacificGrade(grade.getPacificGrade());
                courseWithGrade.setPaperGrade(grade.getPaperGrade());

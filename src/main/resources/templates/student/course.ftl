@@ -1,4 +1,7 @@
 <div class="layui-body">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
+        <legend>查看成绩</legend>
+    </fieldset>
     <table class="layui-table" lay-data="{height: 'full-200', url:'/student/course/${student.getNumber()}', page:true, id:'course'}" lay-filter="demo">
         <thead>
         <tr>

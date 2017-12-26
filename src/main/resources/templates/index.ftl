@@ -30,10 +30,12 @@
          <h1>学生登录入口</h1>
         <form class="layui-form" action="/student/main" method="post">
             <div class="layui-form-item">
-                <input class="layui-input" name="number" placeholder="学号"  lay-verify="required" type="text" autocomplete="off">
+                <input class="layui-input" name="number" value="0001" placeholder="学号" lay-verify="required" type="text"
+                       autocomplete="off">
             </div>
             <div class="layui-form-item">
-                <input class="layui-input" name="password" placeholder="密码"  lay-verify="required" type="password" autocomplete="off">
+                <input class="layui-input" name="password" value="123456" placeholder="密码" lay-verify="required"
+                       type="password" autocomplete="off">
             </div>
             <div class="layui-form-item form_code">
                 <input class="layui-input" style="width: 140px;" name="verifycode" placeholder="验证码"  lay-verify="required" type="text" autocomplete="off">

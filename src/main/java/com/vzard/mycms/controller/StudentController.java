@@ -1,10 +1,6 @@
 package com.vzard.mycms.controller;
 
 
-
-
-import com.sun.deploy.net.HttpResponse;
-import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.model.ResponseModel;
@@ -39,11 +35,13 @@ public class StudentController {
     @RequestMapping(value = "/main",method = RequestMethod.POST)
   public ModelAndView login(HttpServletRequest request, LoginParam loginParam){
 
-        logger.info(loginParam.getNumber());
+        //logger.info(loginParam.getNumber());
         Student student = studentService.getStudentByNumber(loginParam.getNumber());
+        logger.info(student.toString());
         //logger.info(student.getName());
         String verifyCode = (String)request.getSession().getAttribute("verifyCode");
-        logger.info(verifyCode);
+        //logger.info(student.getPassword());
+        //logger.info(verifyCode);
         if (null != student && verifyCode.equals(loginParam.getVerifycode()) && student.getPassword().equals(loginParam.getPassword())){
             logger.info(student.getName());
             logger.info(request.getContextPath());
@@ -122,7 +120,7 @@ public class StudentController {
   @RequestMapping(value = "/course",method = RequestMethod.POST)
   @ResponseBody
   public StudentCourse chooseCourse(@RequestBody StudentCourse studentCourse){
-      logger.info(studentCourse.getStudentNum());
+      // logger.info(studentCourse.getStudentNum());
       return studentService.chooseCourse(studentCourse);
   }
 

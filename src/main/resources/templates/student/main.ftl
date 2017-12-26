@@ -137,10 +137,10 @@
                     contentType: "application/json",
                     success: function () {
                         layer.msg("选课成功！", {icon: 6})
-                        obj.del();
+
                     },
                     error: function () {
-                        layer.msg("选课失败！", {icon: 5})
+                        layer.msg("已选过该课程！", {icon: 5})
                     }
                 })
 

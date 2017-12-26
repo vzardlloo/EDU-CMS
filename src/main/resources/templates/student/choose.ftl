@@ -1,5 +1,7 @@
 <div class="layui-body">
-
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px">
+        <legend>选课/退课</legend>
+    </fieldset>
     <table class="layui-table" lay-data="{height: 'full-200', url:'/student/courselist/${student.getNumber()}', page:true, id:'course'}" lay-filter="demo">
         <thead>
         <tr>
@@ -26,9 +28,6 @@
     </script>
 
 
-    <div class="layui-btn-group demoTable">
-    <button class="layui-btn" data-type="getCheckData">确定选课</button>
 
-    </div>
 
 </div>
