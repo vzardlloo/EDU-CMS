@@ -1,6 +1,7 @@
 package com.vzard.mycms.controller;
 
 
+
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.Teacher;
 import com.vzard.mycms.model.dto.LoginParam;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @RequestMapping(path = "teacher")
@@ -53,6 +55,31 @@ public class TeacherController {
             modelAndView.setViewName("redirect:/");
         }
 
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/post-course")
+    public ModelAndView postCourse(){
+        modelAndView.addObject("page",new String("postCourse"));
+        modelAndView.setViewName("teacher/main");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/post-grade")
+    public ModelAndView postGrade(){
+        modelAndView.addObject("page",new String("postGrade"));
+        modelAndView.setViewName("teacher/main");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.invalidate();
+        modelAndView.clear();
+        modelAndView.setViewName("redirect:/teacher");
         return modelAndView;
     }
 

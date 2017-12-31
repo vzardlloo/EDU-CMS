@@ -18,71 +18,26 @@
 <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
 <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<div class="layui-tab">
-    <ul class="layui-tab-title">
-        <li class="layui-this">学生登录</li>
-        <li>教师登录</li>
-        <li>管理员</li>
-    </ul>
-    <div class="layui-tab-content">
-        <div class="layui-tab-item layui-show">
-         <div class="login">
-         <h1>学生登录入口</h1>
-        <form class="layui-form" action="/student/main" method="post">
-            <div class="layui-form-item">
-                <input class="layui-input" name="number" value="0001" placeholder="学号" lay-verify="required" type="text"
-                       autocomplete="off">
-            </div>
-            <div class="layui-form-item">
-                <input class="layui-input" name="password" value="123456" placeholder="密码" lay-verify="required"
-                       type="password" autocomplete="off">
-            </div>
-            <div class="layui-form-item form_code">
-                <input class="layui-input" style="width: 140px;" name="verifycode" placeholder="验证码"  lay-verify="required" type="text" autocomplete="off">
-                <div class="code"><img id="captcha" src="/captcha" width="116" height="36" onclick="this.src='/captcha.html?'+Math.random();"  cursor:pointer;" alt="captcha"></div>
-            </div>
-            <button type="submit" class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
-        </form>
-        </div>
-        </div>
-        <div class="layui-tab-item" onload="refreshCode()">
-            <div class="login">
-                <h1>教师登录入口</h1>
-                <form class="layui-form" action="/teacher/main" method="post">
-                    <div class="layui-form-item">
-                        <input class="layui-input" name="number" placeholder="工号"  lay-verify="required" type="text" autocomplete="off">
-                    </div>
-                    <div class="layui-form-item">
-                        <input class="layui-input" name="password" placeholder="密码"   lay-verify="required" type="password" autocomplete="off">
-                    </div>
-                    <div class="layui-form-item form_code">
-                        <input class="layui-input" style="width: 140px;" name="verifycode" placeholder="验证码"  lay-verify="required" type="text" autocomplete="off">
-                        <div class="code"><img id="captcha" src="/captcha.html" width="116" height="36" onclick="this.src='/captcha.html?'+Math.random();"  cursor:pointer;" alt="captcha"></div>
-                    </div>
-                    <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
-                </form>
-            </div>
-        </div>
-        <div class="layui-tab-item">
-            <div class="login">
-                <h1>管理员登录入口</h1>
-                <form class="layui-form">
-                    <div class="layui-form-item">
-                        <input class="layui-input" name="number" placeholder="帐号"  lay-verify="required" type="text" autocomplete="off">
-                    </div>
-                    <div class="layui-form-item">
-                        <input class="layui-input" name="password" placeholder="密码"   lay-verify="required" type="password" autocomplete="off">
-                    </div>
-                    <div class="layui-form-item form_code">
-                        <input class="layui-input" style="width: 140px;" id = "verifycode" name="verifycode" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">
-                        <div class="code"><img id="captcha" src="/captcha.html" width="116" height="36" onclick="this.src='/captcha.html?'+Math.random();"  cursor:pointer;" alt="captcha"></div>
-                    </div>
-                    <button class="layui-btn login_btn" lay-submit="" lay-filter="login">登录</button>
-                </form>
-            </div>
-        </div>
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo layui-hide-xs">MY-CMS</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item"><a href="/student">学生登录</a></li>
+            <li class="layui-nav-item"><a href="/teacher">教师登录</a></li>
+            <li class="layui-nav-item"><a href="/admin">管理员登录</a></li>
+        </ul>
     </div>
+    <div class="layui-body" style="left: 0px">
+            <#include "${page}.ftl">
     </div>
+
+
+
+</div>
 
 
 
@@ -94,8 +49,6 @@
         console.assert(element)
         //…
     });
-
-
 
 
 
@@ -131,8 +84,8 @@
         var verfiycode = document.getElementById("captcha")
         verfiycode.src = '/captcha.html?'+Math.random();
     }
-    
-    
+
+
 </script>
 
 

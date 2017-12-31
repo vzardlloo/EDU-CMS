@@ -85,14 +85,7 @@ public class StudentController {
       return modelAndView;
   }
 
-  @RequestMapping(value = "/logout",method = RequestMethod.GET)
-  public ModelAndView logout(HttpServletRequest request){
-      HttpSession session = request.getSession();
-      session.invalidate();
-      modelAndView.clear();
-      modelAndView.setViewName("redirect:/");
-      return modelAndView;
-  }
+
 
 
   @RequestMapping(value = "/update",method = RequestMethod.POST)

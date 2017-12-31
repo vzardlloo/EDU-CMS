@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -22,13 +23,17 @@ public class IndexController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private ModelAndView modelAndView = new ModelAndView();
+
     @Autowired
     DefaultKaptcha defaultKaptcha;
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String index(){
-
-        return "index";
+    public ModelAndView index(){
+        String page = new String("st_login");
+        modelAndView.addObject("page",page);
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
 
@@ -63,6 +68,34 @@ public class IndexController {
         responseOutputStream.close();
 
     }
+
+
+    @RequestMapping(value = "/student",method = RequestMethod.GET)
+    public ModelAndView studentLogin(){
+        String page = new String("st_login");
+        modelAndView.addObject("page",page);
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/teacher",method = RequestMethod.GET)
+    public ModelAndView teacherLogin(){
+        String page = new String("th_login");
+        modelAndView.addObject("page",page);
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin",method = RequestMethod.GET)
+    public ModelAndView adminLogin(){
+        String page = new String("ad_login");
+        modelAndView.addObject("page",page);
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+
+
 
 
 }

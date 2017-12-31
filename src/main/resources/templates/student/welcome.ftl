@@ -1,4 +1,8 @@
-<div class="layui-body">
+<div class="layui-body layui-bg-blue"">
     <!-- 内容主体区域 -->
-    <div style="padding: 15pal" class="icon-align-center">welcome</div>
+
+
+
+    <div style="align-content: center"><h2>Welcome,${student.getName()}</h2></div>
+
 </div>

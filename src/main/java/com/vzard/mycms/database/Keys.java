@@ -57,6 +57,7 @@ public class Keys {
 
     public static final UniqueKey<AdminRecord> KEY_ADMIN_PRIMARY = UniqueKeys0.KEY_ADMIN_PRIMARY;
     public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = UniqueKeys0.KEY_COURSE_PRIMARY;
+    public static final UniqueKey<CourseRecord> KEY_COURSE_NUMBER = UniqueKeys0.KEY_COURSE_NUMBER;
     public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = UniqueKeys0.KEY_GRADE_PRIMARY;
     public static final UniqueKey<GradeRecord> KEY_GRADE_STUDENT_COURSE_IDX = UniqueKeys0.KEY_GRADE_STUDENT_COURSE_IDX;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
@@ -87,6 +88,7 @@ public class Keys {
     private static class UniqueKeys0 extends AbstractKeys {
         public static final UniqueKey<AdminRecord> KEY_ADMIN_PRIMARY = createUniqueKey(Admin.ADMIN, "KEY_admin_PRIMARY", Admin.ADMIN.ID);
         public static final UniqueKey<CourseRecord> KEY_COURSE_PRIMARY = createUniqueKey(Course.COURSE, "KEY_course_PRIMARY", Course.COURSE.ID);
+        public static final UniqueKey<CourseRecord> KEY_COURSE_NUMBER = createUniqueKey(Course.COURSE, "KEY_course_number", Course.COURSE.NUMBER);
         public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = createUniqueKey(Grade.GRADE, "KEY_grade_PRIMARY", Grade.GRADE.ID);
         public static final UniqueKey<GradeRecord> KEY_GRADE_STUDENT_COURSE_IDX = createUniqueKey(Grade.GRADE, "KEY_grade_student_course_idx", Grade.GRADE.STUDENT_NUM, Grade.GRADE.COURSE_NUM);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.ID);
