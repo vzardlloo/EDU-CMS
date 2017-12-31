@@ -6,6 +6,8 @@ import com.vzard.mycms.database.tables.interfaces.ICourse;
 import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.error.ErrorException;
 import org.jooq.DSLContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,7 @@ import static com.vzard.mycms.database.Tables.COURSE;
 
 @Service
 public class CourseRepository {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     @Qualifier("mycms")
@@ -53,10 +56,9 @@ public class CourseRepository {
 
 
     public ICourse addCourse(Course course){
+        logger.info(course.toString());
         if(null == course){
             throw new ErrorException("param error",500);
-        }else if (isCourseExist(course.getNumber())){
-            throw new ErrorException("already exist",500);
         }
 
         dsl.insertInto(COURSE)

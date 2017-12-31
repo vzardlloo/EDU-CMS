@@ -93,18 +93,18 @@
             layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
         });
 
-        form.on('submit(*)',function (data) {
+        form.on('submit(course)',function (data) {
                 $.ajax({
                     type: 'POST',
-                    url: "/student/update",
+                    url: "/teacher/course",
                     data: JSON.stringify(data.field),
                     dataType: 'json',
                     contentType: "application/json",
                     success: function () {
-                        layer.msg("修改成功！", {icon: 6})
+                        layer.msg("发布成功！", {icon: 6})
                     },
                     error: function () {
-                        layer.msg("修改失败！", {icon: 5})
+                        layer.msg("发布失败！", {icon: 5})
                     }
 
 
@@ -116,96 +116,8 @@
    });
 
     
-    //======choose Js==============//
-    layui.use('table', function(){
-        var table = layui.table;
-        //监听表格复选框选择
-        table.on('checkbox(demo)', function(obj){
-            console.log(obj)
-        });
-        //监听工具条
-        table.on('tool(demo)', function(obj){
-            var data = obj.data;
-            if(obj.event === 'detail'){
-                //layer.msg('ID：'+ data.id + ' 的查看操作');
-                var data2 = {"courseNum":data.number,"studentNum":data.studentNumber}
-                $.ajax({
-                    type:'POST',
-                    url:'/student/course',
-                    data:JSON.stringify(data2),
-                    dataType: 'json',
-                    contentType: "application/json",
-                    success: function () {
-                        layer.msg("选课成功！", {icon: 6})
-                        obj.del();
-                    },
-                    error: function () {
-                        layer.msg("选课失败！", {icon: 5})
-                    }
-                })
-
-            } else if(obj.event === 'del'){
-                layer.confirm("确定退课？", function(index){
-                    var data2 = {"courseNum":data.number,"studentNum":data.studentNumber}
-                    $.ajax({
-                        type:'DELETE',
-                        url:'/student/course',
-                        data:JSON.stringify(data2),
-                        dataType: 'json',
-                        contentType: "application/json",
-                        success: function () {
-                            layer.msg("退课成功！", {icon: 6})
-
-                        },
-                        error: function () {
-                            layer.msg("退课失败！", {icon: 5})
-                        }
-                    })
-                });
-            } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data.name))
-            }
-        });
-
-        var $ = layui.$, active = {
-            getCheckData: function(){ //获取选中数据
-                var checkStatus = table.checkStatus('course')
-                        ,data = checkStatus.data;
-                //layer.alert(JSON.stringify(data[0].number+"::"+data[0].studentNumber));
-                var data2 = {"courseNum":data[0].number,"studentNum":data[0].studentNumber}
-                $.ajax({
-                    type:'POST',
-                    url:'/student/course',
-                    data:JSON.stringify(data2),
-                    dataType: 'json',
-                    contentType: "application/json",
-                    success: function () {
-                        layer.msg("选课成功！", {icon: 6})
-                    },
-                    error: function () {
-                        layer.msg("选课失败！", {icon: 5})
-                    }
 
 
-                })
-
-            }
-            ,getCheckLength: function(){ //获取选中数目
-                var checkStatus = table.checkStatus('course')
-                        ,data = checkStatus.data;
-                layer.msg('选中了：'+ data.length + ' 个');
-            }
-            ,isAll: function(){ //验证是否全选
-                var checkStatus = table.checkStatus('course');
-                layer.msg(checkStatus.isAll ? '全选': '未全选')
-            }
-        };
-
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-    });
 
 
 

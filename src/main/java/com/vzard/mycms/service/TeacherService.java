@@ -12,6 +12,8 @@ import com.vzard.mycms.mapper.TeacherMapper;
 import com.vzard.mycms.repository.CourseRepository;
 import com.vzard.mycms.repository.GradeRepository;
 import com.vzard.mycms.repository.TeacherRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 @Service
 public class TeacherService {
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     CourseRepository courseRepository;
     @Autowired
@@ -30,8 +34,11 @@ public class TeacherService {
     TeacherRepository teacherRepository;
 
 
-
-
+    /**
+     * 根据工号获取教师信息
+     * @param number
+     * @return
+     */
     public Teacher getTeacherByNumber(String number){
 
         return TeacherMapper.mapToVo(teacherRepository.getTeacherByNumber(number));
@@ -55,8 +62,10 @@ public class TeacherService {
      * @return
      */
    public Course addCourse(Course c){
-
+       logger.info(c.toString());
+       c.setHasChoosed(0L);
        ICourse  course = courseRepository.addCourse(c);
+
        return CourseMapper.mapToVo(course);
    }
 
@@ -113,6 +122,16 @@ public class TeacherService {
     public void deleteGradeInfo(Long id){
         gradeRepository.deleteGradeInfo(id);
     }
+
+
+    private synchronized Long addHasChoosed(String num){
+        ICourse iCourse = courseRepository.getCourseByNum(num);
+        Long haschoosed = iCourse.getHasChoosed();
+        haschoosed++;
+        return haschoosed;
+    }
+
+
 
 
 

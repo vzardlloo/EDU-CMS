@@ -2,8 +2,10 @@ package com.vzard.mycms.controller;
 
 
 
+import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.Teacher;
+import com.vzard.mycms.model.ResponseModel;
 import com.vzard.mycms.model.dto.LoginParam;
 import com.vzard.mycms.service.StudentService;
 import com.vzard.mycms.service.TeacherService;
@@ -11,8 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,8 @@ public class TeacherController {
 
     @Autowired
     TeacherService teacherService;
+
+
 
     private ModelAndView modelAndView = new ModelAndView();
 
@@ -52,7 +55,7 @@ public class TeacherController {
         }else {
             logger.info("not login...");
             request.getSession().invalidate();
-            modelAndView.setViewName("redirect:/");
+            modelAndView.setViewName("redirect:/teacher");
         }
 
         return modelAndView;
@@ -81,6 +84,18 @@ public class TeacherController {
         modelAndView.clear();
         modelAndView.setViewName("redirect:/teacher");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/course",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel<Course> postCourse(@RequestBody Course course){
+        logger.info(course.toString());
+        Course course1 = teacherService.addCourse(course);
+        return ResponseModel.builder()
+                .code(0)
+                .data(course1)
+                .message("")
+                .build();
     }
 
 
