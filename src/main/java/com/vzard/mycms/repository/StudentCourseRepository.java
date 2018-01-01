@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 
@@ -26,15 +27,12 @@ public class StudentCourseRepository {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //根据studentName 查找 course
-    public IStudentCourse getStudentCourseMap(String studentNum){
-        logger.info(studentNum.toString());
-        if (null == studentNum){
-            throw new ErrorException("param error",400);
-        }
+    public IStudentCourse getStudentCourseMap(@NotNull String studentNum) {
+
 
         return dsl.select()
                 .from(Tables.STUDENT_COURSE)
-                .where(Tables.STUDENT_COURSE.COURSE_NUM.eq(studentNum))
+                .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
                 .fetchOneInto(IStudentCourse.class);
     }
 
@@ -53,6 +51,7 @@ public class StudentCourseRepository {
                     .execute();
 
         IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum());
+        logger.info(studentCourse.getStudentNum());
         logger.info(iStudentCourse.toString());
         if (null == iStudentCourse){
             throw new ErrorException("insert error",500);
@@ -80,12 +79,13 @@ public class StudentCourseRepository {
         return iStudentCourse;
     }
 
-    public void deleteStudentCourseMap(String studentNum,String couserNum){
-        if (null == couserNum){
-            throw new ErrorException("param error",500);
-        }else if (!isStudentCourseMapExist(studentNum,couserNum)){
-            throw new ErrorException("not exist",500);
+    public void deleteStudentCourseMap(@NotNull String studentNum, String couserNum) {
+
+        if (!isStudentCourseMapExist(studentNum, couserNum)) {
+            throw new ErrorException("未选择该课程！", 500);
+
         }
+
         dsl.delete(Tables.STUDENT_COURSE)
                 .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum)
                 .and(Tables.STUDENT_COURSE.COURSE_NUM.eq(couserNum)))
@@ -106,21 +106,19 @@ public class StudentCourseRepository {
         return true;
     }
 
-    private Boolean isStudentCourseMapExist(String studentNum,String courseNum){
-        if (null == studentNum || null == courseNum){
-            throw new ErrorException("param error",400);
-        }
+    private Boolean isStudentCourseMapExist(@NotNull String studentNum, @NotNull String courseNum) {
+
         IStudentCourse iStudentCourse = dsl.select()
                                         .from(Tables.STUDENT_COURSE)
                                         .where(Tables.STUDENT_COURSE.STUDENT_NUM
                                         .eq(studentNum)
                                         .and(Tables.STUDENT_COURSE.COURSE_NUM.eq(courseNum)))
                                         .fetchOneInto(IStudentCourse.class);
-
-        if (null != iStudentCourse){
-            return true;
+        //logger.info(iStudentCourse.toString());
+        if (null == iStudentCourse) {
+            return false;
         }
-        return false;
+        return true;
     }
 
 

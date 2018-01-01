@@ -4,10 +4,9 @@
 package com.vzard.mycms.database.tables.interfaces;
 
 
+import javax.annotation.Generated;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
-import javax.annotation.Generated;
 
 
 /**
@@ -72,6 +71,16 @@ public interface ICourse extends Serializable {
      * Getter for <code>my-cms.course.period</code>. 学时
      */
     public String getPeriod();
+
+    /**
+     * Setter for <code>my-cms.course.techer_num</code>. 教师工号
+     */
+    public ICourse setTecherNum(String value);
+
+    /**
+     * Getter for <code>my-cms.course.techer_num</code>. 教师工号
+     */
+    public String getTecherNum();
 
     /**
      * Setter for <code>my-cms.course.teacher</code>. 任课教师

@@ -4,10 +4,9 @@
 package com.vzard.mycms.database.tables.interfaces;
 
 
+import javax.annotation.Generated;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
-import javax.annotation.Generated;
 
 
 /**
@@ -52,6 +51,16 @@ public interface IGrade extends Serializable {
      * Getter for <code>my-cms.grade.course_num</code>. 课程号
      */
     public String getCourseNum();
+
+    /**
+     * Setter for <code>my-cms.grade.course_name</code>. 课程名
+     */
+    public IGrade setCourseName(String value);
+
+    /**
+     * Getter for <code>my-cms.grade.course_name</code>. 课程名
+     */
+    public String getCourseName();
 
     /**
      * Setter for <code>my-cms.grade.pacific_grade</code>. 平时成绩

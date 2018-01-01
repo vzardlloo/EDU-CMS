@@ -1,9 +1,9 @@
 package com.vzard.mycms.service;
 
 
+import com.vzard.mycms.database.tables.interfaces.ICourse;
 import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.interfaces.IStudentCourse;
-import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.mapper.CourseMapper;
@@ -68,7 +68,7 @@ public class StudentService {
      * @return
      */
     public StudentCourse chooseCourse(StudentCourse studentCourse){
-
+        courseRepository.updateHasChoosed(studentCourse.getCourseNum(), addHasChoosed(studentCourse.getCourseNum()));
         IStudentCourse iStudentCourse = studentCourseRepository.addStudentCourseMap(studentCourse);
         return StudentCourseMapper.mapToVo(iStudentCourse);
     }
@@ -79,6 +79,7 @@ public class StudentService {
      * @param courseNum
      */
     public void deleteCourse(String studentNum,String courseNum){
+        courseRepository.updateHasChoosed(courseNum, minusHasChoosed(courseNum));
         studentCourseRepository.deleteStudentCourseMap(studentNum,courseNum);
     }
 
@@ -93,6 +94,23 @@ public class StudentService {
 
       return studentRepository.getChoosedCourse(studentNum,start,offset);
 
+    }
+
+    private synchronized Long addHasChoosed(String num) {
+        ICourse iCourse = courseRepository.getCourseByNum(num);
+        Long haschoosed = iCourse.getHasChoosed();
+        haschoosed++;
+        return haschoosed;
+    }
+
+    private synchronized Long minusHasChoosed(String num) {
+        ICourse iCourse = courseRepository.getCourseByNum(num);
+        Long haschoosed = iCourse.getHasChoosed();
+        if (haschoosed == 0) {
+            return 0L;
+        }
+        haschoosed--;
+        return haschoosed;
     }
 
 

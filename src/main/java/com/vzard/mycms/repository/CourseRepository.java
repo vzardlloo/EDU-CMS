@@ -1,7 +1,6 @@
 package com.vzard.mycms.repository;
 
 
-import com.vzard.mycms.database.Tables;
 import com.vzard.mycms.database.tables.interfaces.ICourse;
 import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.error.ErrorException;
@@ -10,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -63,10 +61,10 @@ public class CourseRepository {
 
         dsl.insertInto(COURSE)
                 .columns(COURSE.NUMBER,COURSE.NAME,COURSE.CREDIT,COURSE.PERIOD,COURSE.TIME,
-                        COURSE.TEACHER,COURSE.CLASSROOM,COURSE.MAX_CHOOSED,COURSE.HAS_CHOOSED,
+                        COURSE.TECHER_NUM, COURSE.TEACHER, COURSE.CLASSROOM, COURSE.MAX_CHOOSED, COURSE.HAS_CHOOSED,
                         COURSE.CREATED_AT,COURSE.UPDATED_AT)
                 .values(course.getNumber(),course.getName(),course.getCredit(),course.getPeriod(),course.getTime(),
-                        course.getTeacher(),course.getClassroom(),course.getMaxChoosed(),course.getHasChoosed(),
+                        course.getTecherNum(), course.getTeacher(), course.getClassroom(), course.getMaxChoosed(), course.getHasChoosed(),
                         new Timestamp(System.currentTimeMillis()),new Timestamp(System.currentTimeMillis()))
                 .execute();
 
@@ -97,6 +95,18 @@ public class CourseRepository {
                 .set(COURSE.UPDATED_AT,course.getUpdatedAt())
                 .execute();
         return getCourseByNum(course.getNumber());
+    }
+
+    /**
+     * 更新某个课程的已选人数
+     *
+     * @param courseNum
+     */
+    public void updateHasChoosed(String courseNum, Long hasChoosed) {
+        dsl.update(COURSE)
+                .set(COURSE.HAS_CHOOSED, hasChoosed)
+                .where(COURSE.NUMBER.eq(courseNum))
+                .execute();
     }
 
 

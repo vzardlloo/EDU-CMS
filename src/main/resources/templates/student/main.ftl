@@ -155,10 +155,9 @@
                         contentType: "application/json",
                         success: function () {
                             layer.msg("退课成功！", {icon: 6})
-
                         },
-                        error: function () {
-                            layer.msg("退课失败！", {icon: 5})
+                        error: function (res) {
+                            layer.msg(res.responseJSON.message, {icon: 5})
                         }
                     })
                 });

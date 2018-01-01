@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 public class ErrorResponseModel<T> {
 
-    private int code;
+    private int httpStatus;
     private String message;
     private T data;
     private String url;

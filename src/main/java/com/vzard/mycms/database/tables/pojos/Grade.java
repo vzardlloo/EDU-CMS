@@ -6,9 +6,8 @@ package com.vzard.mycms.database.tables.pojos;
 
 import com.vzard.mycms.database.tables.interfaces.IGrade;
 
-import java.sql.Timestamp;
-
 import javax.annotation.Generated;
+import java.sql.Timestamp;
 
 
 /**
@@ -24,11 +23,12 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Grade implements IGrade {
 
-    private static final long serialVersionUID = 763720283;
+    private static final long serialVersionUID = -2141532506;
 
     private Long      id;
     private String    studentNum;
     private String    courseNum;
+    private String courseName;
     private String    pacificGrade;
     private String    paperGrade;
     private String    overallGrade;
@@ -41,6 +41,7 @@ public class Grade implements IGrade {
         this.id = value.id;
         this.studentNum = value.studentNum;
         this.courseNum = value.courseNum;
+        this.courseName = value.courseName;
         this.pacificGrade = value.pacificGrade;
         this.paperGrade = value.paperGrade;
         this.overallGrade = value.overallGrade;
@@ -49,18 +50,20 @@ public class Grade implements IGrade {
     }
 
     public Grade(
-        Long      id,
-        String    studentNum,
-        String    courseNum,
-        String    pacificGrade,
-        String    paperGrade,
-        String    overallGrade,
-        Timestamp createdAt,
-        Timestamp updatedAt
+            Long      id,
+            String    studentNum,
+            String    courseNum,
+            String courseName,
+            String    pacificGrade,
+            String    paperGrade,
+            String    overallGrade,
+            Timestamp createdAt,
+            Timestamp updatedAt
     ) {
         this.id = id;
         this.studentNum = studentNum;
         this.courseNum = courseNum;
+        this.courseName = courseName;
         this.pacificGrade = pacificGrade;
         this.paperGrade = paperGrade;
         this.overallGrade = overallGrade;
@@ -98,6 +101,17 @@ public class Grade implements IGrade {
     @Override
     public Grade setCourseNum(String courseNum) {
         this.courseNum = courseNum;
+        return this;
+    }
+
+    @Override
+    public String getCourseName() {
+        return this.courseName;
+    }
+
+    @Override
+    public Grade setCourseName(String courseName) {
+        this.courseName = courseName;
         return this;
     }
 
@@ -163,6 +177,7 @@ public class Grade implements IGrade {
         sb.append(id);
         sb.append(", ").append(studentNum);
         sb.append(", ").append(courseNum);
+        sb.append(", ").append(courseName);
         sb.append(", ").append(pacificGrade);
         sb.append(", ").append(paperGrade);
         sb.append(", ").append(overallGrade);
@@ -185,6 +200,7 @@ public class Grade implements IGrade {
         setId(from.getId());
         setStudentNum(from.getStudentNum());
         setCourseNum(from.getCourseNum());
+        setCourseName(from.getCourseName());
         setPacificGrade(from.getPacificGrade());
         setPaperGrade(from.getPaperGrade());
         setOverallGrade(from.getOverallGrade());

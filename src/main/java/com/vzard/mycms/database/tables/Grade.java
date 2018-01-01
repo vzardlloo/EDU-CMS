@@ -7,20 +7,13 @@ package com.vzard.mycms.database.tables;
 import com.vzard.mycms.database.Keys;
 import com.vzard.mycms.database.MyCms;
 import com.vzard.mycms.database.tables.records.GradeRecord;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
+import javax.annotation.Generated;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Identity;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
 
 
 /**
@@ -36,7 +29,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Grade extends TableImpl<GradeRecord> {
 
-    private static final long serialVersionUID = 1319297727;
+    private static final long serialVersionUID = 1224473884;
 
     /**
      * The reference instance of <code>my-cms.grade</code>
@@ -65,6 +58,11 @@ public class Grade extends TableImpl<GradeRecord> {
      * The column <code>my-cms.grade.course_num</code>. 课程号
      */
     public final TableField<GradeRecord, String> COURSE_NUM = createField("course_num", org.jooq.impl.SQLDataType.VARCHAR.length(20), this, "课程号");
+
+    /**
+     * The column <code>my-cms.grade.course_name</code>. 课程名
+     */
+    public final TableField<GradeRecord, String> COURSE_NAME = createField("course_name", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "课程名");
 
     /**
      * The column <code>my-cms.grade.pacific_grade</code>. 平时成绩

@@ -58,13 +58,19 @@
                     <input type="text" value="${teacher.getName()}" name="teacher"  autocomplete="off" class="layui-input" disabled="">
                 </div>
             </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="hidden" value="${teacher.getNumber()}" name="techerNum" autocomplete="off"
+                           class="layui-input" disabled="">
+                </div>
+            </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">上课时间</label>
                 <div class="layui-input-inline" >
-                    <select name="period" lay-verify="required" lay-search="">
+                    <select name="time" lay-verify="required" lay-search="">
                         <option value="">直接选择或搜索选择</option>
                         <option value="周一|一二节">周一|一二节</option>
                         <option value="周一|三四节">周一|三四节</option>

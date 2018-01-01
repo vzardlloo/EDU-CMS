@@ -5,14 +5,21 @@ import com.vzard.mycms.database.Tables;
 import com.vzard.mycms.database.tables.interfaces.ITeacher;
 import com.vzard.mycms.database.tables.pojos.Teacher;
 import com.vzard.mycms.error.ErrorException;
+import com.vzard.mycms.model.dto.StudentWithGrade;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.vzard.mycms.database.Tables.GRADE;
+import static com.vzard.mycms.database.Tables.STUDENT;
 
 @Service
 public class TeacherRepository {
@@ -102,6 +109,110 @@ public class TeacherRepository {
             throw new ErrorException("delete error",500);
         }
     }
+
+
+    public List<StudentWithGrade> getStudentWithGrade(@NotNull String num) {
+        List<StudentWithGrade> studentWithGrades = new ArrayList<>();
+        //获取该教师发布的所有课程编号
+        List<String> courseNumList = getCourseNumListByTeacherNum(num);
+        //选择某门课的所有学生学号
+        List<List<String>> studentNumLists = new ArrayList<>();
+        for (String courseNum : courseNumList) {
+            List<String> studentNums = getStudentNumListByCourseNum(courseNum);
+            studentNumLists.add(studentNums);
+        }
+
+        List<String> studentNumList = studentNumLists.stream().flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        List<StudentWithGrade> studentWithGradeList = new ArrayList<>();
+        for (String studentNum : studentNumList) {
+            StudentWithGrade studentWithGrade = getStudentWithGradeByStudentNum(studentNum);
+            studentWithGradeList.add(studentWithGrade);
+        }
+
+        return studentWithGradeList;
+
+    }
+
+
+    /**
+     * 根据学号获取StudentWithGrade
+     *
+     * @param num
+     * @return
+     */
+    private StudentWithGrade getStudentWithGradeByStudentNum(@NotNull String num) {
+        StudentWithGrade studentWithGrade = dsl.select(STUDENT.NUMBER, STUDENT.NAME, GRADE.COURSE_NAME,
+                GRADE.PAPER_GRADE, GRADE.PACIFIC_GRADE, GRADE.OVERALL_GRADE)
+                .from(STUDENT)
+                .leftJoin(GRADE)
+                .on(STUDENT.NUMBER.eq(GRADE.STUDENT_NUM))
+                .where(STUDENT.NUMBER.eq(num))
+                .fetchOneInto(StudentWithGrade.class);
+        if (null == studentWithGrade) {
+            throw new ErrorException("not found", 404);
+        }
+        return studentWithGrade;
+    }
+
+    /**
+     * 根据课程号获取选择选择该课程的学生编号列表
+     *
+     * @param num
+     * @return
+     */
+    private List<String> getStudentNumListByCourseNum(@NotNull String num) {
+        List<String> studentNumList = dsl.select(STUDENT.NUMBER)
+                .from(Tables.STUDENT_COURSE)
+                .where(Tables.STUDENT_COURSE.COURSE_NUM.eq(num))
+                .fetchInto(String.class);
+        if (null == studentNumList) {
+            throw new ErrorException("not found", 404);
+        }
+        return studentNumList;
+    }
+
+    /**
+     * 根据老师工号获取该老师发布所有课程编号
+     *
+     * @param num
+     * @return
+     */
+    private List<String> getCourseNumListByTeacherNum(@NotNull String num) {
+        List<String> courseNumList = dsl.select(Tables.COURSE.NUMBER)
+                .from(Tables.COURSE)
+                .where(Tables.COURSE.NUMBER.eq(num))
+                .fetchInto(String.class);
+        if (null == courseNumList) {
+            throw new ErrorException("not found", 404);
+        }
+        return courseNumList;
+    }
+
+    /**
+     * 根据教师工号获取教师姓名
+     *
+     * @param num
+     * @return
+     */
+    private String getTeacherNameByNum(@NotNull String num) {
+
+        ITeacher iTeacher = dsl.select()
+                .from(Tables.TEACHER)
+                .where(Tables.TEACHER.NAME.eq(num))
+                .fetchOneInto(ITeacher.class);
+        if (null == iTeacher) {
+            throw new ErrorException("not found", 404);
+        }
+
+        return iTeacher.getName();
+    }
+
+
+
+
+
 
 
 

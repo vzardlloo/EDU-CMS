@@ -3,20 +3,21 @@ package com.vzard.mycms.error;
 
 public class ErrorException extends RuntimeException {
 
-    private Integer code;
+    private int httpStatus;
     public ErrorException(String msg){}
-    public ErrorException(String msg,Integer code){
+
+    public ErrorException(String msg, int httpStatus) {
         super(msg);
-        this.code=code;
+        this.httpStatus = httpStatus;
 
     }
 
     public Integer getCode(){
-        return code;
+        return httpStatus;
     }
 
-    public void setCode(Integer code){
-        this.code = code;
+    public void setCode(int httpStatus) {
+        this.httpStatus = httpStatus;
     }
 
 }

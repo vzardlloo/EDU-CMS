@@ -6,9 +6,8 @@ package com.vzard.mycms.database.tables.pojos;
 
 import com.vzard.mycms.database.tables.interfaces.ICourse;
 
-import java.sql.Timestamp;
-
 import javax.annotation.Generated;
+import java.sql.Timestamp;
 
 
 /**
@@ -24,13 +23,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Course implements ICourse {
 
-    private static final long serialVersionUID = 646405362;
+    private static final long serialVersionUID = -2115548172;
 
     private Integer   id;
     private String    number;
     private String    name;
     private String    credit;
     private String    period;
+    private String techerNum;
     private String    teacher;
     private String    time;
     private String    classroom;
@@ -47,6 +47,7 @@ public class Course implements ICourse {
         this.name = value.name;
         this.credit = value.credit;
         this.period = value.period;
+        this.techerNum = value.techerNum;
         this.teacher = value.teacher;
         this.time = value.time;
         this.classroom = value.classroom;
@@ -57,24 +58,26 @@ public class Course implements ICourse {
     }
 
     public Course(
-        Integer   id,
-        String    number,
-        String    name,
-        String    credit,
-        String    period,
-        String    teacher,
-        String    time,
-        String    classroom,
-        Long      maxChoosed,
-        Long      hasChoosed,
-        Timestamp createdAt,
-        Timestamp updatedAt
+            Integer   id,
+            String    number,
+            String    name,
+            String    credit,
+            String    period,
+            String techerNum,
+            String    teacher,
+            String    time,
+            String    classroom,
+            Long      maxChoosed,
+            Long      hasChoosed,
+            Timestamp createdAt,
+            Timestamp updatedAt
     ) {
         this.id = id;
         this.number = number;
         this.name = name;
         this.credit = credit;
         this.period = period;
+        this.techerNum = techerNum;
         this.teacher = teacher;
         this.time = time;
         this.classroom = classroom;
@@ -136,6 +139,17 @@ public class Course implements ICourse {
     @Override
     public Course setPeriod(String period) {
         this.period = period;
+        return this;
+    }
+
+    @Override
+    public String getTecherNum() {
+        return this.techerNum;
+    }
+
+    @Override
+    public Course setTecherNum(String techerNum) {
+        this.techerNum = techerNum;
         return this;
     }
 
@@ -225,6 +239,7 @@ public class Course implements ICourse {
         sb.append(", ").append(name);
         sb.append(", ").append(credit);
         sb.append(", ").append(period);
+        sb.append(", ").append(techerNum);
         sb.append(", ").append(teacher);
         sb.append(", ").append(time);
         sb.append(", ").append(classroom);
@@ -251,6 +266,7 @@ public class Course implements ICourse {
         setName(from.getName());
         setCredit(from.getCredit());
         setPeriod(from.getPeriod());
+        setTecherNum(from.getTecherNum());
         setTeacher(from.getTeacher());
         setTime(from.getTime());
         setClassroom(from.getClassroom());

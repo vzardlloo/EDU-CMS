@@ -2,7 +2,6 @@ package com.vzard.mycms.service;
 
 
 import com.vzard.mycms.database.tables.interfaces.ICourse;
-import com.vzard.mycms.database.tables.interfaces.IStudent;
 import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Grade;
 import com.vzard.mycms.database.tables.pojos.Teacher;
@@ -124,12 +123,6 @@ public class TeacherService {
     }
 
 
-    private synchronized Long addHasChoosed(String num){
-        ICourse iCourse = courseRepository.getCourseByNum(num);
-        Long haschoosed = iCourse.getHasChoosed();
-        haschoosed++;
-        return haschoosed;
-    }
 
 
 

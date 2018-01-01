@@ -7,20 +7,13 @@ package com.vzard.mycms.database.tables;
 import com.vzard.mycms.database.Keys;
 import com.vzard.mycms.database.MyCms;
 import com.vzard.mycms.database.tables.records.CourseRecord;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
+import javax.annotation.Generated;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Identity;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
 
 
 /**
@@ -36,7 +29,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Course extends TableImpl<CourseRecord> {
 
-    private static final long serialVersionUID = 1559038517;
+    private static final long serialVersionUID = 1497848416;
 
     /**
      * The reference instance of <code>my-cms.course</code>
@@ -77,6 +70,11 @@ public class Course extends TableImpl<CourseRecord> {
     public final TableField<CourseRecord, String> PERIOD = createField("period", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "学时");
 
     /**
+     * The column <code>my-cms.course.techer_num</code>. 教师工号
+     */
+    public final TableField<CourseRecord, String> TECHER_NUM = createField("techer_num", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "教师工号");
+
+    /**
      * The column <code>my-cms.course.teacher</code>. 任课教师
      */
     public final TableField<CourseRecord, String> TEACHER = createField("teacher", org.jooq.impl.SQLDataType.VARCHAR.length(50), this, "任课教师");
@@ -99,7 +97,7 @@ public class Course extends TableImpl<CourseRecord> {
     /**
      * The column <code>my-cms.course.has_choosed</code>. 已选人数
      */
-    public final TableField<CourseRecord, Long> HAS_CHOOSED = createField("has_choosed", org.jooq.impl.SQLDataType.BIGINT, this, "已选人数");
+    public final TableField<CourseRecord, Long> HAS_CHOOSED = createField("has_choosed", org.jooq.impl.SQLDataType.BIGINT.defaultValue(org.jooq.impl.DSL.inline("0", org.jooq.impl.SQLDataType.BIGINT)), this, "已选人数");
 
     /**
      * The column <code>my-cms.course.created_at</code>. 创建时间

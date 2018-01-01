@@ -1,6 +1,7 @@
 package com.vzard.mycms.controller;
 
 
+import com.vzard.mycms.database.tables.pojos.Course;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.StudentCourse;
 import com.vzard.mycms.model.ResponseModel;
@@ -59,6 +60,15 @@ public class StudentController {
 
         return modelAndView;
   }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        modelAndView.clear();
+        modelAndView.setViewName("redirect:/");
+        return modelAndView;
+    }
 
 
   @RequestMapping(value = "/choose",method = RequestMethod.GET)
@@ -119,10 +129,15 @@ public class StudentController {
 
     @RequestMapping(value = "/course",method = RequestMethod.DELETE)
     @ResponseBody
-    public int deleteCourse(@RequestBody StudentCourse studentCourse, HttpServletResponse response){
+    public ResponseModel<Course> deleteCourse(@RequestBody StudentCourse studentCourse, HttpServletResponse response) {
         logger.info(studentCourse.getStudentNum());
         studentService.deleteCourse(studentCourse.getStudentNum(),studentCourse.getCourseNum());
-        return response.getStatus();
+
+        return ResponseModel.builder()
+                .code(response.getStatus())
+                .message("Success")
+                .data(null)
+                .build();
     }
 
 
