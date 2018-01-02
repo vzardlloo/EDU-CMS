@@ -3,11 +3,11 @@ package com.vzard.mycms.controller;
 
 
 import com.vzard.mycms.database.tables.pojos.Course;
-import com.vzard.mycms.database.tables.pojos.Student;
+import com.vzard.mycms.database.tables.pojos.Grade;
 import com.vzard.mycms.database.tables.pojos.Teacher;
 import com.vzard.mycms.model.ResponseModel;
 import com.vzard.mycms.model.dto.LoginParam;
-import com.vzard.mycms.service.StudentService;
+import com.vzard.mycms.model.dto.StudentWithGrade;
 import com.vzard.mycms.service.TeacherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @RequestMapping(path = "teacher")
@@ -94,6 +95,30 @@ public class TeacherController {
         return ResponseModel.builder()
                 .code(0)
                 .data(course1)
+                .message("")
+                .build();
+    }
+
+    @RequestMapping(value = "/grade/{teacherNum}",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseModel<List<StudentWithGrade>> getStudentWithGrade(@PathVariable(value = "teacherNum") String teacherNum){
+        logger.info(teacherNum);
+        List<StudentWithGrade> studentWithGradeList = teacherService.getStudnetWithGrade(teacherNum);
+        return ResponseModel.builder()
+                .code(0)
+                .data(studentWithGradeList)
+                .message("")
+                .count( new Long(studentWithGradeList.size()))
+                .build();
+    }
+
+    @RequestMapping(value = "/grade",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel<Grade> postGrade(@RequestBody StudentWithGrade grade){
+        Grade grade1 = teacherService.postGrade(grade);
+        return ResponseModel.builder()
+                .code(0)
+                .data(grade1)
                 .message("")
                 .build();
     }

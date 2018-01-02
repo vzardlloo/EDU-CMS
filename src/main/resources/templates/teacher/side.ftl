@@ -6,7 +6,7 @@
                 <a class="" href="javascript:;">个人中心</a>
                 <dl class="layui-nav-child">
                     <dd href=""><a href="post-course">发布课程</a></dd>
-                    <dd><a href="post-grade">课程打分</a></dd>
+                    <dd><a href="post-grade">发布成绩</a></dd>
                 </dl>
             </li>
         </ul>

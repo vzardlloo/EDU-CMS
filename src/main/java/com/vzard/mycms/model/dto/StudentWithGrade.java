@@ -9,8 +9,10 @@ import lombok.Data;
 @Data
 public class StudentWithGrade {
 
-    private String studentNumber;
-    private String studentName;
+    //这里要保持和jooq对应字段名称一致
+    private String number;
+    private String name;
+    private String courseNum;
     private String courseName;
     private String pacificGrade;
     private String paperGrade;

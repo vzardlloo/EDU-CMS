@@ -7,6 +7,8 @@ import com.vzard.mycms.database.tables.pojos.Teacher;
 import com.vzard.mycms.error.ErrorException;
 import com.vzard.mycms.model.dto.StudentWithGrade;
 import org.jooq.DSLContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 
 import static com.vzard.mycms.database.Tables.GRADE;
 import static com.vzard.mycms.database.Tables.STUDENT;
+import static com.vzard.mycms.database.Tables.STUDENT_COURSE;
 
 @Service
 public class TeacherRepository {
@@ -28,6 +31,7 @@ public class TeacherRepository {
     @Qualifier("mycms")
     DSLContext dsl;
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public ITeacher getTeacherByNumber(String num){
         if (null == num){
@@ -111,26 +115,33 @@ public class TeacherRepository {
     }
 
 
-    public List<StudentWithGrade> getStudentWithGrade(@NotNull String num) {
+    public List<StudentWithGrade> getStudentWithGrade(@NotNull String teacherNum) {
+        logger.info(teacherNum);
         List<StudentWithGrade> studentWithGrades = new ArrayList<>();
         //获取该教师发布的所有课程编号
-        List<String> courseNumList = getCourseNumListByTeacherNum(num);
+        List<String> courseNumList = getCourseNumListByTeacherNum(teacherNum);
+        logger.info(courseNumList.toString());
         //选择某门课的所有学生学号
         List<List<String>> studentNumLists = new ArrayList<>();
         for (String courseNum : courseNumList) {
             List<String> studentNums = getStudentNumListByCourseNum(courseNum);
-            studentNumLists.add(studentNums);
+            if (null != studentNums) {
+                studentNumLists.add(studentNums);
+            }
         }
 
         List<String> studentNumList = studentNumLists.stream().flatMap(Collection::stream)
                 .collect(Collectors.toList());
+        logger.info(studentNumList.toString());
 
         List<StudentWithGrade> studentWithGradeList = new ArrayList<>();
         for (String studentNum : studentNumList) {
             StudentWithGrade studentWithGrade = getStudentWithGradeByStudentNum(studentNum);
-            studentWithGradeList.add(studentWithGrade);
+            if (null != studentWithGrade) {
+                studentWithGradeList.add(studentWithGrade);
+            }
         }
-
+        logger.info(studentWithGradeList.toString());
         return studentWithGradeList;
 
     }
@@ -143,7 +154,7 @@ public class TeacherRepository {
      * @return
      */
     private StudentWithGrade getStudentWithGradeByStudentNum(@NotNull String num) {
-        StudentWithGrade studentWithGrade = dsl.select(STUDENT.NUMBER, STUDENT.NAME, GRADE.COURSE_NAME,
+        StudentWithGrade studentWithGrade = dsl.select(STUDENT.NUMBER, STUDENT.NAME,GRADE.COURSE_NUM,GRADE.COURSE_NAME,
                 GRADE.PAPER_GRADE, GRADE.PACIFIC_GRADE, GRADE.OVERALL_GRADE)
                 .from(STUDENT)
                 .leftJoin(GRADE)
@@ -153,6 +164,7 @@ public class TeacherRepository {
         if (null == studentWithGrade) {
             throw new ErrorException("not found", 404);
         }
+        logger.info(studentWithGrade.toString());
         return studentWithGrade;
     }
 
@@ -163,7 +175,7 @@ public class TeacherRepository {
      * @return
      */
     private List<String> getStudentNumListByCourseNum(@NotNull String num) {
-        List<String> studentNumList = dsl.select(STUDENT.NUMBER)
+        List<String> studentNumList = dsl.select(STUDENT_COURSE.STUDENT_NUM)
                 .from(Tables.STUDENT_COURSE)
                 .where(Tables.STUDENT_COURSE.COURSE_NUM.eq(num))
                 .fetchInto(String.class);
@@ -182,7 +194,7 @@ public class TeacherRepository {
     private List<String> getCourseNumListByTeacherNum(@NotNull String num) {
         List<String> courseNumList = dsl.select(Tables.COURSE.NUMBER)
                 .from(Tables.COURSE)
-                .where(Tables.COURSE.NUMBER.eq(num))
+                .where(Tables.COURSE.TECHER_NUM.eq(num))
                 .fetchInto(String.class);
         if (null == courseNumList) {
             throw new ErrorException("not found", 404);

@@ -8,6 +8,7 @@ import com.vzard.mycms.database.tables.pojos.Teacher;
 import com.vzard.mycms.mapper.CourseMapper;
 import com.vzard.mycms.mapper.GradeMapper;
 import com.vzard.mycms.mapper.TeacherMapper;
+import com.vzard.mycms.model.dto.StudentWithGrade;
 import com.vzard.mycms.repository.CourseRepository;
 import com.vzard.mycms.repository.GradeRepository;
 import com.vzard.mycms.repository.TeacherRepository;
@@ -41,6 +42,25 @@ public class TeacherService {
     public Teacher getTeacherByNumber(String number){
 
         return TeacherMapper.mapToVo(teacherRepository.getTeacherByNumber(number));
+    }
+
+    /**
+     * 发布一个成绩
+     * @param grade
+     * @return
+     */
+    public Grade postGrade(StudentWithGrade grade){
+        return GradeMapper.mapToVo(gradeRepository.updateGradeInfo(grade));
+    }
+
+    /**
+     * 获取学生-成绩
+     * @param num
+     * @return
+     */
+    public List<StudentWithGrade> getStudnetWithGrade(String num){
+        logger.info(num);
+        return teacherRepository.getStudentWithGrade(num);
     }
 
 
@@ -105,14 +125,7 @@ public class TeacherService {
         return GradeMapper.mapToVo(gradeRepository.addGradeInfo(grade));
     }
 
-    /**
-     * 更新一条成绩信息
-     * @param grade
-     * @return
-     */
-    public Grade updateGradeInfo(Grade grade){
-        return GradeMapper.mapToVo(gradeRepository.updateGradeInfo(grade));
-    }
+
 
     /**
      * 删除一条成绩信息

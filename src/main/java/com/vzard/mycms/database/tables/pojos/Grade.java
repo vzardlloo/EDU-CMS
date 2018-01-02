@@ -28,7 +28,7 @@ public class Grade implements IGrade {
     private Long      id;
     private String    studentNum;
     private String    courseNum;
-    private String courseName;
+    private String    courseName;
     private String    pacificGrade;
     private String    paperGrade;
     private String    overallGrade;

@@ -5,10 +5,10 @@ import com.vzard.mycms.database.Tables;
 import com.vzard.mycms.database.tables.interfaces.IGrade;
 import com.vzard.mycms.database.tables.pojos.Grade;
 import com.vzard.mycms.error.ErrorException;
+import com.vzard.mycms.model.dto.StudentWithGrade;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -76,23 +76,23 @@ public class GradeRepository {
         return iGrade;
     }
 
-    public IGrade updateGradeInfo(Grade grade){
+    public IGrade updateGradeInfo(StudentWithGrade grade){
         if (null == grade){
             throw new ErrorException("param error",500);
-        }else if (!isGradeExist(grade.getStudentNum(),grade.getCourseNum())){
+        }else if (!isGradeExist(grade.getNumber(),grade.getCourseNum())){
             throw new ErrorException("not exist",500);
         }
 
         dsl.update(GRADE)
-                .set(GRADE.STUDENT_NUM,grade.getStudentNum())
-                .set(GRADE.COURSE_NUM,grade.getCourseNum())
                 .set(GRADE.PAPER_GRADE,grade.getPaperGrade())
                 .set(GRADE.PACIFIC_GRADE,grade.getPacificGrade())
                 .set(GRADE.OVERALL_GRADE,grade.getOverallGrade())
                 .set(GRADE.UPDATED_AT,new Timestamp(System.currentTimeMillis()))
+                .where(GRADE.STUDENT_NUM.eq(grade.getNumber()))
+                .and(GRADE.COURSE_NUM.eq(grade.getCourseNum()))
                 .execute();
 
-        return getGrageByUniqueKey(grade.getStudentNum(),grade.getCourseNum());
+        return getGrageByUniqueKey(grade.getNumber(),grade.getCourseNum());
 
     }
 
