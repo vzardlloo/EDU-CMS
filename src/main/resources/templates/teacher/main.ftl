@@ -94,7 +94,6 @@
                    }
 
                })
-
            }else if (obj.event === 'reset'){
                data.pacificGrade = 0;
                data.paperGrade = 0;

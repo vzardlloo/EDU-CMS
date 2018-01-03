@@ -65,14 +65,14 @@ public class TeacherController {
 
     @RequestMapping(value = "/post-course")
     public ModelAndView postCourse(){
-        modelAndView.addObject("page",new String("postCourse"));
+        modelAndView.addObject("page",new String("post_course"));
         modelAndView.setViewName("teacher/main");
         return modelAndView;
     }
 
     @RequestMapping(value = "/post-grade")
     public ModelAndView postGrade(){
-        modelAndView.addObject("page",new String("postGrade"));
+        modelAndView.addObject("page",new String("post_grade"));
         modelAndView.setViewName("teacher/main");
         return modelAndView;
     }

@@ -88,6 +88,7 @@ public class TeacherRepository {
                 .set(Tables.TEACHER.OFFICE,teacher.getOffice())
                 .set(Tables.TEACHER.ACADEMY,teacher.getAcademy())
                 .set(Tables.TEACHER.UPDATE_AT,new Timestamp(System.currentTimeMillis()))
+                .where(Tables.TEACHER.NUMBER.eq(teacher.getNumber()))
                 .execute();
 
 

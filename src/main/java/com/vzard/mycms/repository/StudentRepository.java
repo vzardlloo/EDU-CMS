@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,6 @@ public class StudentRepository {
                         .where(Tables.STUDENT.NUMBER.eq(number))
                         .fetchOneInto(IStudent.class);
 
-        if (null == iStudent){
-            throw new ErrorException("not found",404);
-        }
 
         return iStudent;
     }
@@ -98,10 +96,8 @@ public class StudentRepository {
     }
 
 
-    public void deleteStudentInfo(String num){
-        if (null != num) {
-            throw new ErrorException("param error", 500);
-        }else if(!isStudentExist(num)){
+    public void deleteStudentInfo(@NotNull String num){
+        if(!isStudentExist(num)){
             throw new ErrorException("not exist!",404);
         }
 
@@ -124,43 +120,6 @@ public class StudentRepository {
      * @return
      */
     public List<CourseWithGrade> getChoosedCourse(String studentNum, int start, int offset){
-
-//        Result<Record10<String,String,String,String,String,String,String,String,String,String>> results = dsl.select(COURSE.NUMBER, COURSE.NAME, COURSE.CREDIT
-//                , COURSE.PERIOD, COURSE.TEACHER, COURSE.TIME
-//                , COURSE.CLASSROOM,Tables.GRADE.PAPER_GRADE,Tables.GRADE.PACIFIC_GRADE
-//                ,Tables.GRADE.OVERALL_GRADE)
-//                .from(COURSE)
-//                .leftJoin(Tables.GRADE)
-//                .on(COURSE.NUMBER.eq(Tables.STUDENT_COURSE.COURSE_NUM))
-//                .where(COURSE.NUMBER.in(
-//                        dsl.select(Tables.STUDENT_COURSE.COURSE_NUM)
-//                        .from(Tables.STUDENT_COURSE)
-//                        .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
-//
-//                )).fetch();
-//        List<CourseWithGrade> courseWithGradeDtoList = new ArrayList<>();
-//        for (Record10<String,String,String,String,String,String,String,String,String,String> result : results){
-//            CourseWithGrade course = new CourseWithGrade();
-//            course.setNumber(result.getValue(COURSE.NUMBER));
-//            course.setName(result.getValue(COURSE.NAME));
-//            course.setCredit(result.getValue(COURSE.CREDIT));
-//            course.setTime(result.getValue(COURSE.TIME));
-//            course.setClassroom(result.getValue(COURSE.CLASSROOM));
-//            course.setTeacher(result.getValue(COURSE.TEACHER));
-//            course.setPeriod(result.getValue(COURSE.PERIOD));
-//            course.setPaperGrade(result.getValue(GRADE.PAPER_GRADE));
-//            course.setPacificGrade(result.getValue(GRADE.PACIFIC_GRADE));
-//            course.setOverallGrade(result.getValue(GRADE.OVERALL_GRADE));
-//
-//            courseWithGradeDtoList.add(course);
-
-//        return null;
-//
-//        }
-//
-//
-//        return courseWithGradeDtoList;
-
 
        List<CourseWithGrade> courseWithGradeList = new ArrayList<>();
 

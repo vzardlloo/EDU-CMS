@@ -1,6 +1,6 @@
     <div class="login">
         <h1>管理员登录入口</h1>
-        <form class="layui-form">
+        <form class="layui-form" action="/admin/main" method="post">
             <div class="layui-form-item">
                 <input class="layui-input" name="number" placeholder="帐号"  lay-verify="required" type="text" autocomplete="off">
             </div>

@@ -1,15 +1,19 @@
 package com.vzard.mycms.service;
 
 
+import com.vzard.mycms.database.tables.pojos.Admin;
 import com.vzard.mycms.database.tables.pojos.Student;
 import com.vzard.mycms.database.tables.pojos.Teacher;
+import com.vzard.mycms.mapper.AdminMapper;
 import com.vzard.mycms.mapper.StudentMapper;
 import com.vzard.mycms.mapper.TeacherMapper;
+import com.vzard.mycms.repository.AdminRepository;
 import com.vzard.mycms.repository.StudentRepository;
 import com.vzard.mycms.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,13 +24,20 @@ public class AdminService {
     StudentRepository studentRepository;
     @Autowired
     TeacherRepository teacherRepository;
+    @Autowired
+    AdminRepository adminRepository;
+
+
+    public Admin getAdminByNumber(@NotNull String number){
+        return AdminMapper.mapToVo(adminRepository.getAdminByNumber(number));
+    }
 
     /**
      * 查看学生列表
-     * @param student
+     * @param
      * @return
      */
-    public List<Student> getStudentInfo(Student student){
+    public List<Student> getStudentList(){
         return studentRepository.getStudentList().stream()
                 .map(t->StudentMapper.mapToVo(t))
                 .collect(Collectors.toList());
@@ -89,7 +100,7 @@ public class AdminService {
     }
 
     /**
-     * 删除一个学生信息
+     * 删除一个教师信息
      * @param num
      */
     public void deleteTeacherInfo(String num){

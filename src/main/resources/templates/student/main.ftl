@@ -34,8 +34,7 @@
     //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
     layui.use('element', function(){
         var element = layui.element;
-        console.assert(element)
-        //…
+
     });
 
 
@@ -96,7 +95,7 @@
         form.on('submit(*)',function (data) {
                 $.ajax({
                     type: 'POST',
-                    url: "/student/update",
+                    url: "/student/personal",
                     data: JSON.stringify(data.field),
                     dataType: 'json',
                     contentType: "application/json",
@@ -189,23 +188,12 @@
                 })
 
             }
-            ,getCheckLength: function(){ //获取选中数目
-                var checkStatus = table.checkStatus('course')
-                        ,data = checkStatus.data;
-                layer.msg('选中了：'+ data.length + ' 个');
-            }
-            ,isAll: function(){ //验证是否全选
-                var checkStatus = table.checkStatus('course');
-                layer.msg(checkStatus.isAll ? '全选': '未全选')
-            }
+
+
         };
 
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-    });
 
+    });
 
 
 </script>

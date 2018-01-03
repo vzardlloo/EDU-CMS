@@ -36,13 +36,9 @@ public class StudentController {
     @RequestMapping(value = "/main",method = RequestMethod.POST)
   public ModelAndView login(HttpServletRequest request, LoginParam loginParam){
 
-        //logger.info(loginParam.getNumber());
         Student student = studentService.getStudentByNumber(loginParam.getNumber());
         logger.info(student.toString());
-        //logger.info(student.getName());
         String verifyCode = (String)request.getSession().getAttribute("verifyCode");
-        //logger.info(student.getPassword());
-        //logger.info(verifyCode);
         if (null != student && verifyCode.equals(loginParam.getVerifycode()) && student.getPassword().equals(loginParam.getPassword())){
             logger.info(student.getName());
             logger.info(request.getContextPath());
@@ -98,7 +94,7 @@ public class StudentController {
 
 
 
-  @RequestMapping(value = "/update",method = RequestMethod.POST)
+  @RequestMapping(value = "/personal",method = RequestMethod.POST)
   @ResponseBody
   public Student updatePersonalInfo(@RequestBody Student student){
       logger.info(student.getClbum());
