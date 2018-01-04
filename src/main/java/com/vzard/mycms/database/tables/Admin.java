@@ -7,19 +7,13 @@ package com.vzard.mycms.database.tables;
 import com.vzard.mycms.database.Keys;
 import com.vzard.mycms.database.MyCms;
 import com.vzard.mycms.database.tables.records.AdminRecord;
+import org.jooq.*;
+import org.jooq.impl.TableImpl;
 
+import javax.annotation.Generated;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.Generated;
-
-import org.jooq.Field;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
-import org.jooq.impl.TableImpl;
 
 
 /**
@@ -35,7 +29,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Admin extends TableImpl<AdminRecord> {
 
-    private static final long serialVersionUID = -1105775708;
+    private static final long serialVersionUID = -1114531025;
 
     /**
      * The reference instance of <code>my-cms.admin</code>
@@ -108,6 +102,14 @@ public class Admin extends TableImpl<AdminRecord> {
     @Override
     public Schema getSchema() {
         return MyCms.MY_CMS;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<AdminRecord, Integer> getIdentity() {
+        return Keys.IDENTITY_ADMIN;
     }
 
     /**

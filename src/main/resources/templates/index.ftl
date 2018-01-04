@@ -32,7 +32,7 @@
         </ul>
     </div>
     <div class="layui-body" style="left: 0px">
-            <#include "${page}.ftl">
+    <#include "${role}.ftl">
     </div>
 
 

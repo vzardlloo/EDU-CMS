@@ -20,9 +20,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.vzard.mycms.database.Tables.GRADE;
-import static com.vzard.mycms.database.Tables.STUDENT;
-import static com.vzard.mycms.database.Tables.STUDENT_COURSE;
+import static com.vzard.mycms.database.Tables.*;
 
 @Service
 public class TeacherRepository {
@@ -118,6 +116,7 @@ public class TeacherRepository {
 
     public List<StudentWithGrade> getStudentWithGrade(@NotNull String teacherNum) {
         logger.info(teacherNum);
+        //studentWithGrade 的列表
         List<StudentWithGrade> studentWithGrades = new ArrayList<>();
         //获取该教师发布的所有课程编号
         List<String> courseNumList = getCourseNumListByTeacherNum(teacherNum);
@@ -137,13 +136,16 @@ public class TeacherRepository {
 
         List<StudentWithGrade> studentWithGradeList = new ArrayList<>();
         for (String studentNum : studentNumList) {
-            StudentWithGrade studentWithGrade = getStudentWithGradeByStudentNum(studentNum);
-            if (null != studentWithGrade) {
-                studentWithGradeList.add(studentWithGrade);
+            for (String courseNum : courseNumList) {
+                StudentWithGrade studentWithGrade = getStudentWithGradeByStudentNum(studentNum, courseNum);
+
+                if (null != studentWithGrade) {
+                    studentWithGradeList.add(studentWithGrade);
+                }
             }
         }
-        logger.info(studentWithGradeList.toString());
-        return studentWithGradeList;
+
+        return studentWithGradeList.stream().distinct().collect(Collectors.toList());
 
     }
 
@@ -151,21 +153,19 @@ public class TeacherRepository {
     /**
      * 根据学号获取StudentWithGrade
      *
-     * @param num
+     * @param studentNum
      * @return
      */
-    private StudentWithGrade getStudentWithGradeByStudentNum(@NotNull String num) {
+    private StudentWithGrade getStudentWithGradeByStudentNum(@NotNull String studentNum, @NotNull String courseNum) {
         StudentWithGrade studentWithGrade = dsl.select(STUDENT.NUMBER, STUDENT.NAME,GRADE.COURSE_NUM,GRADE.COURSE_NAME,
                 GRADE.PAPER_GRADE, GRADE.PACIFIC_GRADE, GRADE.OVERALL_GRADE)
                 .from(STUDENT)
                 .leftJoin(GRADE)
                 .on(STUDENT.NUMBER.eq(GRADE.STUDENT_NUM))
-                .where(STUDENT.NUMBER.eq(num))
+                .where(STUDENT.NUMBER.eq(studentNum))
+                .and(GRADE.COURSE_NUM.eq(courseNum))
                 .fetchOneInto(StudentWithGrade.class);
-        if (null == studentWithGrade) {
-            throw new ErrorException("not found", 404);
-        }
-        logger.info(studentWithGrade.toString());
+
         return studentWithGrade;
     }
 

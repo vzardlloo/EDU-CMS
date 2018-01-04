@@ -11,6 +11,7 @@ import com.vzard.mycms.mapper.TeacherMapper;
 import com.vzard.mycms.model.dto.StudentWithGrade;
 import com.vzard.mycms.repository.CourseRepository;
 import com.vzard.mycms.repository.GradeRepository;
+import com.vzard.mycms.repository.TeacherCourseRepository;
 import com.vzard.mycms.repository.TeacherRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +33,8 @@ public class TeacherService {
     GradeRepository gradeRepository;
     @Autowired
     TeacherRepository teacherRepository;
-
+    @Autowired
+    TeacherCourseRepository teacherCourseRepository;
 
     /**
      * 根据工号获取教师信息
@@ -84,7 +86,7 @@ public class TeacherService {
        logger.info(c.toString());
        c.setHasChoosed(0L);
        ICourse  course = courseRepository.addCourse(c);
-
+       teacherCourseRepository.addTeacherCourseMap(c.getTecherNum(), c.getNumber());
        return CourseMapper.mapToVo(course);
    }
 

@@ -8,6 +8,7 @@ import com.vzard.mycms.model.ResponseModel;
 import com.vzard.mycms.model.dto.CourseWithCurrentStudentNumber;
 import com.vzard.mycms.model.dto.CourseWithGrade;
 import com.vzard.mycms.model.dto.LoginParam;
+import com.vzard.mycms.model.dto.StudentWithGrade;
 import com.vzard.mycms.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -118,9 +119,9 @@ public class StudentController {
 
   @RequestMapping(value = "/course",method = RequestMethod.POST)
   @ResponseBody
-  public StudentCourse chooseCourse(@RequestBody StudentCourse studentCourse){
+  public StudentCourse chooseCourse(@RequestBody StudentWithGrade studentWithGrade) {
       // logger.info(studentCourse.getStudentNum());
-      return studentService.chooseCourse(studentCourse);
+      return studentService.chooseCourse(studentWithGrade);
   }
 
     @RequestMapping(value = "/course",method = RequestMethod.DELETE)

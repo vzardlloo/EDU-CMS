@@ -4,26 +4,13 @@
 package com.vzard.mycms.database;
 
 
-import com.vzard.mycms.database.tables.Admin;
-import com.vzard.mycms.database.tables.Course;
-import com.vzard.mycms.database.tables.Grade;
-import com.vzard.mycms.database.tables.Student;
-import com.vzard.mycms.database.tables.StudentCourse;
-import com.vzard.mycms.database.tables.Teacher;
-import com.vzard.mycms.database.tables.TeacherCourse;
-import com.vzard.mycms.database.tables.records.AdminRecord;
-import com.vzard.mycms.database.tables.records.CourseRecord;
-import com.vzard.mycms.database.tables.records.GradeRecord;
-import com.vzard.mycms.database.tables.records.StudentCourseRecord;
-import com.vzard.mycms.database.tables.records.StudentRecord;
-import com.vzard.mycms.database.tables.records.TeacherCourseRecord;
-import com.vzard.mycms.database.tables.records.TeacherRecord;
-
-import javax.annotation.Generated;
-
+import com.vzard.mycms.database.tables.*;
+import com.vzard.mycms.database.tables.records.*;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
+
+import javax.annotation.Generated;
 
 
 /**
@@ -44,6 +31,7 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<AdminRecord, Integer> IDENTITY_ADMIN = Identities0.IDENTITY_ADMIN;
     public static final Identity<CourseRecord, Integer> IDENTITY_COURSE = Identities0.IDENTITY_COURSE;
     public static final Identity<GradeRecord, Long> IDENTITY_GRADE = Identities0.IDENTITY_GRADE;
     public static final Identity<StudentRecord, Integer> IDENTITY_STUDENT = Identities0.IDENTITY_STUDENT;
@@ -61,6 +49,7 @@ public class Keys {
     public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = UniqueKeys0.KEY_GRADE_PRIMARY;
     public static final UniqueKey<GradeRecord> KEY_GRADE_STUDENT_COURSE_IDX = UniqueKeys0.KEY_GRADE_STUDENT_COURSE_IDX;
     public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = UniqueKeys0.KEY_STUDENT_PRIMARY;
+    public static final UniqueKey<StudentRecord> KEY_STUDENT_NUMBER = UniqueKeys0.KEY_STUDENT_NUMBER;
     public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = UniqueKeys0.KEY_STUDENT_COURSE_PRIMARY;
     public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_STU_COURSE = UniqueKeys0.KEY_STUDENT_COURSE_STU_COURSE;
     public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = UniqueKeys0.KEY_TEACHER_PRIMARY;
@@ -77,6 +66,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 extends AbstractKeys {
+        public static Identity<AdminRecord, Integer> IDENTITY_ADMIN = createIdentity(Admin.ADMIN, Admin.ADMIN.ID);
         public static Identity<CourseRecord, Integer> IDENTITY_COURSE = createIdentity(Course.COURSE, Course.COURSE.ID);
         public static Identity<GradeRecord, Long> IDENTITY_GRADE = createIdentity(Grade.GRADE, Grade.GRADE.ID);
         public static Identity<StudentRecord, Integer> IDENTITY_STUDENT = createIdentity(Student.STUDENT, Student.STUDENT.ID);
@@ -92,6 +82,7 @@ public class Keys {
         public static final UniqueKey<GradeRecord> KEY_GRADE_PRIMARY = createUniqueKey(Grade.GRADE, "KEY_grade_PRIMARY", Grade.GRADE.ID);
         public static final UniqueKey<GradeRecord> KEY_GRADE_STUDENT_COURSE_IDX = createUniqueKey(Grade.GRADE, "KEY_grade_student_course_idx", Grade.GRADE.STUDENT_NUM, Grade.GRADE.COURSE_NUM);
         public static final UniqueKey<StudentRecord> KEY_STUDENT_PRIMARY = createUniqueKey(Student.STUDENT, "KEY_student_PRIMARY", Student.STUDENT.ID);
+        public static final UniqueKey<StudentRecord> KEY_STUDENT_NUMBER = createUniqueKey(Student.STUDENT, "KEY_student_number", Student.STUDENT.NUMBER);
         public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_PRIMARY = createUniqueKey(StudentCourse.STUDENT_COURSE, "KEY_student_course_PRIMARY", StudentCourse.STUDENT_COURSE.ID);
         public static final UniqueKey<StudentCourseRecord> KEY_STUDENT_COURSE_STU_COURSE = createUniqueKey(StudentCourse.STUDENT_COURSE, "KEY_student_course_stu_course", StudentCourse.STUDENT_COURSE.STUDENT_NUM, StudentCourse.STUDENT_COURSE.COURSE_NUM);
         public static final UniqueKey<TeacherRecord> KEY_TEACHER_PRIMARY = createUniqueKey(Teacher.TEACHER, "KEY_teacher_PRIMARY", Teacher.TEACHER.ID);

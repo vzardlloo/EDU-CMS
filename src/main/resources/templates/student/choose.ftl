@@ -5,7 +5,7 @@
     <table class="layui-table" lay-data="{height: 'full-200', url:'/student/courselist/${student.getNumber()}', page:true, id:'course'}" lay-filter="demo">
         <thead>
         <tr>
-            <!--th lay-data="{type:'checkbox', fixed: 'left'}"></th-->
+            <th id="checkbox" lay-data="{type:'checkbox', fixed: 'left'}"></th>
             <th lay-data="{field:'id', width:40, sort: true, fixed: true}">ID</th>
             <th lay-data="{field:'number', width:80}">课程号</th>
             <th lay-data="{field:'name', width:80}">课程名</th>
@@ -22,7 +22,7 @@
     </table>
 
     <script type="text/html" id="barDemo">
-        <a id = "choose" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">选课</a>
+        <a id="choose" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">选课</a>
         <!--a class="layui-btn layui-btn-xs" lay-event="edit">选课</a-->
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">退课</a>
     </script>

@@ -58,17 +58,17 @@ public class Course implements ICourse {
     }
 
     public Course(
-            Integer   id,
-            String    number,
-            String    name,
-            String    credit,
-            String    period,
+            Integer id,
+            String number,
+            String name,
+            String credit,
+            String period,
             String techerNum,
-            String    teacher,
-            String    time,
-            String    classroom,
-            Long      maxChoosed,
-            Long      hasChoosed,
+            String teacher,
+            String time,
+            String classroom,
+            Long maxChoosed,
+            Long hasChoosed,
             Timestamp createdAt,
             Timestamp updatedAt
     ) {

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -66,11 +67,32 @@ public class GradeRepository {
                         GRADE.PACIFIC_GRADE,GRADE.OVERALL_GRADE,GRADE.CREATED_AT,GRADE.UPDATED_AT)
                 .values(grade.getStudentNum(),grade.getCourseNum(),grade.getPaperGrade(),
                         grade.getPacificGrade(),grade.getOverallGrade(),new Timestamp(System.currentTimeMillis()),
-                        new Timestamp(System.currentTimeMillis())).execute();
+                        new Timestamp(System.currentTimeMillis()))
+                .execute();
 
         IGrade iGrade = getGrageByUniqueKey(grade.getStudentNum(),grade.getCourseNum());
         if (null == iGrade){
             throw new ErrorException("insert error",500);
+        }
+
+        return iGrade;
+    }
+
+    public IGrade addGradeInfo(@NotNull String courseNum, @NotNull String courseName, @NotNull String studentNum) {
+        if (isGradeExist(studentNum, courseNum)) {
+            throw new ErrorException("already exist", 500);
+        }
+
+        dsl.insertInto(GRADE)
+                .columns(GRADE.STUDENT_NUM, GRADE.COURSE_NUM, GRADE.COURSE_NAME,
+                        GRADE.CREATED_AT, GRADE.UPDATED_AT)
+                .values(studentNum, courseNum, courseName, new Timestamp(System.currentTimeMillis()),
+                        new Timestamp(System.currentTimeMillis()))
+                .execute();
+
+        IGrade iGrade = getGrageByUniqueKey(studentNum, courseNum);
+        if (null == iGrade) {
+            throw new ErrorException("insert error", 500);
         }
 
         return iGrade;
@@ -109,6 +131,16 @@ public class GradeRepository {
         if (isGradeExist(id)){
             throw new ErrorException("delete error",500);
         }
+    }
+
+    public void deleteGradeInfo(@NotNull String studentNumber, @NotNull String courseNumber) {
+
+
+        dsl.delete(GRADE)
+                .where(GRADE.STUDENT_NUM.eq(studentNumber))
+                .and(GRADE.COURSE_NUM.eq(courseNumber))
+                .execute();
+
     }
 
 

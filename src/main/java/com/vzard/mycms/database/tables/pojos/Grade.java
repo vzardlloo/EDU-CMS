@@ -50,13 +50,13 @@ public class Grade implements IGrade {
     }
 
     public Grade(
-            Long      id,
-            String    studentNum,
-            String    courseNum,
+            Long id,
+            String studentNum,
+            String courseNum,
             String courseName,
-            String    pacificGrade,
-            String    paperGrade,
-            String    overallGrade,
+            String pacificGrade,
+            String paperGrade,
+            String overallGrade,
             Timestamp createdAt,
             Timestamp updatedAt
     ) {

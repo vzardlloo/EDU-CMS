@@ -11,7 +11,9 @@ import com.vzard.mycms.mapper.StudentCourseMapper;
 import com.vzard.mycms.mapper.StudentMapper;
 import com.vzard.mycms.model.dto.CourseWithCurrentStudentNumber;
 import com.vzard.mycms.model.dto.CourseWithGrade;
+import com.vzard.mycms.model.dto.StudentWithGrade;
 import com.vzard.mycms.repository.CourseRepository;
+import com.vzard.mycms.repository.GradeRepository;
 import com.vzard.mycms.repository.StudentCourseRepository;
 import com.vzard.mycms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ public class StudentService {
     StudentCourseRepository studentCourseRepository;
     @Autowired
     CourseRepository courseRepository;
+    @Autowired
+    GradeRepository gradeRepository;
 
     /**
      * 根据学号查找一个学生
@@ -64,12 +68,13 @@ public class StudentService {
 
     /**
      * 选课
-     * @param studentCourse
+     * @param
      * @return
      */
-    public StudentCourse chooseCourse(StudentCourse studentCourse){
-        courseRepository.updateHasChoosed(studentCourse.getCourseNum(), addHasChoosed(studentCourse.getCourseNum()));
-        IStudentCourse iStudentCourse = studentCourseRepository.addStudentCourseMap(studentCourse);
+    public StudentCourse chooseCourse(StudentWithGrade studentWithGrade) {
+        courseRepository.updateHasChoosed(studentWithGrade.getCourseNum(), addHasChoosed(studentWithGrade.getCourseNum()));
+        IStudentCourse iStudentCourse = studentCourseRepository.addStudentCourseMap(studentWithGrade.getNumber(), studentWithGrade.getCourseNum());
+        gradeRepository.addGradeInfo(studentWithGrade.getCourseNum(), studentWithGrade.getCourseName(), studentWithGrade.getNumber());
         return StudentCourseMapper.mapToVo(iStudentCourse);
     }
 
@@ -80,6 +85,7 @@ public class StudentService {
      */
     public void deleteCourse(String studentNum,String courseNum){
         courseRepository.updateHasChoosed(courseNum, minusHasChoosed(courseNum));
+        gradeRepository.deleteGradeInfo(studentNum, courseNum);
         studentCourseRepository.deleteStudentCourseMap(studentNum,courseNum);
     }
 

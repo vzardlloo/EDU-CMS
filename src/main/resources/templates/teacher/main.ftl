@@ -57,7 +57,9 @@
                     dataType: 'json',
                     contentType: "application/json",
                     success: function () {
-                        layer.msg("发布成功！", {icon: 6})
+                        layer.msg("发布成功！", {icon: 6}, function () {
+                            refresh()
+                        })
                     },
                     error: function () {
                         layer.msg("发布失败！", {icon: 5})

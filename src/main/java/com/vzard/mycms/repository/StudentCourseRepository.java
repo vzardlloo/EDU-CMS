@@ -27,32 +27,29 @@ public class StudentCourseRepository {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     //根据studentName 查找 course
-    public IStudentCourse getStudentCourseMap(@NotNull String studentNum) {
+    public IStudentCourse getStudentCourseMap(@NotNull String studentNum, @NotNull String courseNum) {
 
-
-        return dsl.select()
+        IStudentCourse iStudentCourse = dsl.select()
                 .from(Tables.STUDENT_COURSE)
-                .where(Tables.STUDENT_COURSE.STUDENT_NUM.eq(studentNum))
+                .where(Tables.STUDENT_COURSE.STUDENT_NUM
+                        .eq(studentNum)
+                        .and(Tables.STUDENT_COURSE.COURSE_NUM.eq(courseNum)))
                 .fetchOneInto(IStudentCourse.class);
+        return iStudentCourse;
     }
 
-    public IStudentCourse addStudentCourseMap(StudentCourse studentCourse){
-        logger.info(studentCourse.getStudentNum().toString());
-        if (null == studentCourse){
-            throw new ErrorException("param error",400);
-        }
+    public IStudentCourse addStudentCourseMap(@NotNull String studentNumber, String courseNumber) {
 
             dsl.insertInto(Tables.STUDENT_COURSE)
                     .columns(Tables.STUDENT_COURSE.STUDENT_NUM, Tables.STUDENT_COURSE.COURSE_NUM,
                             Tables.STUDENT_COURSE.CREATED_AT, Tables.STUDENT_COURSE.UPDATED_AT)
-                    .values(studentCourse.getStudentNum(), studentCourse.getCourseNum(),
+                    .values(studentNumber, courseNumber,
                             new Timestamp(System.currentTimeMillis()),
                             new Timestamp(System.currentTimeMillis()))
                     .execute();
 
-        IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum());
-        logger.info(studentCourse.getStudentNum());
-        logger.info(iStudentCourse.toString());
+        IStudentCourse iStudentCourse = getStudentCourseMap(studentNumber, courseNumber);
+
         if (null == iStudentCourse){
             throw new ErrorException("insert error",500);
         }
@@ -64,7 +61,7 @@ public class StudentCourseRepository {
     public IStudentCourse updateStudentCourseMap(StudentCourse studentCourse){
         if (null != studentCourse){
             throw new ErrorException("param error",500);
-        }else if (!isStudentCourseMapExist(studentCourse.getStudentNum())){
+        } else if (!isStudentCourseMapExist(studentCourse.getStudentNum(), studentCourse.getCourseNum())) {
             throw new ErrorException("not exist",500);
         }
 
@@ -74,7 +71,7 @@ public class StudentCourseRepository {
                 .set(Tables.STUDENT_COURSE.UPDATED_AT,new Timestamp(System.currentTimeMillis()))
                 .execute();
 
-        IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum());
+        IStudentCourse iStudentCourse = getStudentCourseMap(studentCourse.getStudentNum(), studentCourse.getCourseNum());
 
         return iStudentCourse;
     }
@@ -99,12 +96,12 @@ public class StudentCourseRepository {
 
 
     //=========util======//
-    private Boolean isStudentCourseMapExist(String num){
-        if (null == getStudentCourseMap(num)) {
-            return false;
-        }
-        return true;
-    }
+//    private Boolean isStudentCourseMapExist(String num){
+//        if (null == getStudentCourseMap(num)) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     private Boolean isStudentCourseMapExist(@NotNull String studentNum, @NotNull String courseNum) {
 

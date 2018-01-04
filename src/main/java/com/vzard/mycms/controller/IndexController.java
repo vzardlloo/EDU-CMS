@@ -8,13 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.soap.Addressing;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
@@ -31,7 +29,7 @@ public class IndexController {
     @RequestMapping(value = "/",method = RequestMethod.GET)
     public ModelAndView index(){
         String page = new String("st_login");
-        modelAndView.addObject("page",page);
+        modelAndView.addObject("role", page);
         modelAndView.setViewName("index");
         return modelAndView;
     }
@@ -73,7 +71,7 @@ public class IndexController {
     @RequestMapping(value = "/student",method = RequestMethod.GET)
     public ModelAndView studentLogin(){
         String page = new String("st_login");
-        modelAndView.addObject("page",page);
+        modelAndView.addObject("role", page);
         modelAndView.setViewName("index");
         return modelAndView;
     }
@@ -81,7 +79,7 @@ public class IndexController {
     @RequestMapping(value = "/teacher",method = RequestMethod.GET)
     public ModelAndView teacherLogin(){
         String page = new String("th_login");
-        modelAndView.addObject("page",page);
+        modelAndView.addObject("role", page);
         modelAndView.setViewName("index");
         return modelAndView;
     }
@@ -89,7 +87,7 @@ public class IndexController {
     @RequestMapping(value = "/admin",method = RequestMethod.GET)
     public ModelAndView adminLogin(){
         String page = new String("ad_login");
-        modelAndView.addObject("page",page);
+        modelAndView.addObject("role", page);
         modelAndView.setViewName("index");
         return modelAndView;
     }
